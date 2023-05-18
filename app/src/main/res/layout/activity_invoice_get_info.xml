@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+
+        android:id="@+id/lvlHeaderViewID"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/blue_fb"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:id="@+id/rlvBackViewID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/open_sans_bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:background="@android:color/transparent">
+
+            <TextView
+
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Serarch Invoice Info"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:fontFamily="@font/open_sans_regular"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlvAddDEviceViewID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:visibility="invisible"
+            android:background="@android:color/transparent">
+
+            <ImageView
+
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imgaddDeviceIconID"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/ic_back"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/lvlHeaderViewID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_1sdp">
+
+       <!-- <TextView
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:id="@+id/txtInfoID"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="If you want to search multiple invoice information then you need to write invoice number with comma (,) sepration. \n\n Please check below example\n\nExample- 9866272,9556272,9756272"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp" />-->
+
+        <TextView
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:id="@+id/txtInfoID"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter invoice number."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
+
+        <RelativeLayout
+            android:layout_below="@+id/txtInfoID"
+            android:id="@+id/rlvInvoice1ID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtInvoice1ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:digits="0123456789,"
+                android:inputType="text"
+                android:hint="Enetr Invoice number"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn">
+
+
+            </EditText>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/txtInfoID"
+            android:id="@+id/rlvInvoice2ID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtInvoice2ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:digits="0123456789,"
+                android:inputType="text"
+                android:hint="Enetr Invoice number"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn">
+
+
+            </EditText>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/txtInfoID"
+            android:id="@+id/rlvInvoice3ID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtInvoice3ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:digits="0123456789,"
+                android:inputType="text"
+                android:hint="Enetr Invoice number"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn">
+
+
+            </EditText>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/txtInfoID"
+            android:id="@+id/rlvInvoice4ID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtInvoice4ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:digits="0123456789,"
+                android:inputType="text"
+                android:hint="Enetr Invoice number"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn">
+
+
+            </EditText>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/txtInfoID"
+            android:id="@+id/rlvInvoice5ID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtInvoice5ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:digits="0123456789,"
+                android:inputType="text"
+                android:hint="Enetr Invoice number"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn">
+
+
+            </EditText>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/txtInfoID"
+            android:id="@+id/rlvInvoice6ID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtInvoice6ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text=""
+                android:digits="0123456789,"
+                android:inputType="text"
+                android:hint="Enetr Invoice number"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn">
+
+
+            </EditText>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:visibility="gone"
+            android:layout_below="@+id/rlvLRnumberViewID"
+            android:id="@+id/rlvLRMobileViewID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/edt_background_shape">
+
+            <EditText
+                android:id="@+id/edtLrMobileID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@android:color/transparent"
+                android:digits="0123456789"
+                android:hint="Enetr LR Date"
+                android:inputType="number"
+                android:text=""
+                android:textColor="@color/blue_fb"
+                android:textColorHint="@color/gray_btn"
+                android:textSize="@dimen/_14ssp">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/txtOpenCalenderID"
+
+                android:background="@color/blue_fb"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                android:text="Date"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="@dimen/_12ssp"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/rlvLRMobileViewID"
+            android:id="@+id/rlvLRSubmitViewID"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:background="@drawable/btn_shape_rounded">
+
+            <TextView
+
+                android:id="@+id/txtLrSubmiteBTNID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="Submit"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/white"
+                >
+
+
+            </TextView>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

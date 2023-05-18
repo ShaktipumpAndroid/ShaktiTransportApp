@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="@dimen/space_large20"
+            android:layout_marginRight="@dimen/size_xlarge20"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/doc_date"
+                style="@style/under_line_et"
+                android:editable="false"
+                android:focusable="false"
+                android:inputType="number" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid10"
+                android:layout_marginRight="@dimen/space_mid10">
+
+
+                <ImageView
+                    android:id="@+id/loaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/get_installation_location" />
+
+                <ImageView
+                    android:id="@+id/geoIndigation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/space_mid10"
+                    android:src="@drawable/red_icn" />
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/wrap_text_medatory"
+                android:drawableRight="@null"
+                android:text="Document Submit Date"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/photo_6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_xxlarge50"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid6"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_large20"
+                android:background="@drawable/icn_box"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:drawableEnd="@drawable/red_icn"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_mid10"
+                android:singleLine="true"
+                android:text="Signature"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_xlarge20" />
+
+            <TextView
+                android:id="@+id/photo_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_xxlarge50"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid6"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_large20"
+                android:background="@drawable/icn_box"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:drawableEnd="@drawable/red_icn"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_mid10"
+                android:singleLine="true"
+                android:text="LR Copy"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_xlarge20" />
+
+            <TextView
+                android:id="@+id/photo_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_xxlarge50"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid6"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_large20"
+                android:background="@drawable/icn_box"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:drawableEnd="@drawable/red_icn"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_mid10"
+                android:singleLine="true"
+                android:text="Material Delivery Photo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_xlarge20" />
+
+            <TextView
+                android:id="@+id/photo_3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_xxlarge50"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid6"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_large20"
+                android:background="@drawable/icn_box"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:drawableEnd="@drawable/red_icn"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_mid10"
+                android:singleLine="true"
+                android:text="Customer Photo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_xlarge20" />
+
+            <TextView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:padding="5dp"
+                android:text="Signature Photo"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/photo_4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_xxlarge50"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid6"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_large20"
+                android:background="@drawable/icn_box"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:drawableEnd="@drawable/red_icn"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_mid10"
+                android:singleLine="true"
+                android:text="Signature Photo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_xlarge20" />
+
+            <TextView
+                android:id="@+id/photo_5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_xxlarge50"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_mid6"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_large20"
+                android:background="@drawable/icn_box"
+                android:drawableStart="@drawable/ic_mendotry"
+                android:drawableEnd="@drawable/red_icn"
+                android:gravity="center_vertical"
+                android:padding="@dimen/space_mid10"
+                android:singleLine="true"
+                android:text="Bill Photo"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_xlarge20" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:paddingTop="10dp"
+                android:textColorHint="@color/colorAccent">
+
+                <EditText
+                    android:id="@+id/sapno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:hint="RFQ Number"
+                    android:inputType="number"
+                    android:shadowColor="@color/colorAccent"
+                    android:singleLine="true"
+                    android:textColor="@color/colorAccent"
+                    android:textColorHighlight="@color/colorAccent"
+                    android:textColorHint="@color/colorAccent"
+                    android:textColorLink="@color/colorAccent"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/size_small15" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.kyanogen.signatureview.SignatureView xmlns:sign="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/signature_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_weight="1"
+                android:visibility="gone"
+                sign:backgroundColor="#ffffff"
+                sign:enableSignature="true"
+                sign:penColor="#000000"
+                sign:penSize="2dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/save_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="@dimen/space_mid10"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_xlarge22" />
+
+
+</LinearLayout>
+
+
+

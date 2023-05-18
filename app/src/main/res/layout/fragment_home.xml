@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="activity.HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_mid10"
+            android:layout_marginTop="@dimen/space_large20"
+            android:layout_marginRight="@dimen/space_mid10"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rfq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_large20"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_mid8">
+
+                <TextView
+                    android:id="@+id/textview_rfq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@layout/rounded_corner"
+                    android:drawableRight="@mipmap/survey"
+                    android:gravity="center"
+                    android:padding="@dimen/space_large20"
+                    android:singleLine="true"
+                    android:text="Request for Quotation"
+                    android:textColor="@color/header_color"
+                    android:textSize="@dimen/size_large17"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAssignedDeliveryList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_large20"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_mid8">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@layout/rounded_corner"
+                    android:drawableRight="@mipmap/survey"
+                    android:gravity="center"
+                    android:padding="@dimen/space_large20"
+                    android:singleLine="true"
+                    android:text="@string/assigned_delivery_list"
+                    android:textColor="@color/header_color"
+                    android:textSize="@dimen/size_large17"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAgreement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_large20"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_mid8"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@layout/rounded_corner"
+                    android:drawableRight="@mipmap/survey"
+                    android:gravity="center"
+                    android:padding="@dimen/space_large20"
+                    android:singleLine="true"
+                    android:text="Partial Load"
+                    android:textColor="@color/header_color"
+                    android:textSize="@dimen/size_large17"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/approve_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_large20"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_mid8">
+
+                <TextView
+                    android:id="@+id/textview_app_vehicle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@layout/rounded_corner"
+                    android:drawableRight="@drawable/vehicle"
+                    android:gravity="center"
+                    android:padding="@dimen/space_large20"
+                    android:singleLine="true"
+                    android:text="Approve Vehicles"
+                    android:textColor="@color/header_color"
+                    android:textSize="@dimen/size_large17"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cnfrm_vehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/space_mid10"
+                android:layout_marginTop="@dimen/space_large20"
+                android:layout_marginRight="@dimen/space_mid10"
+                android:layout_marginBottom="@dimen/space_mid8">
+
+                <TextView
+                    android:id="@+id/textview_cnfrm_vehicle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@layout/rounded_corner"
+                    android:drawableEnd="@drawable/vehicle"
+                    android:gravity="center"
+                    android:padding="@dimen/space_large20"
+                    android:singleLine="true"
+                    android:text="Confirm Vehicles"
+                    android:textColor="@color/header_color"
+                    android:textSize="@dimen/size_large17"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

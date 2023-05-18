@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Shakti Transport App</string>
+
+
+    <string name="hint_password">Password</string>
+    <string name="btn_save_dsr"> Save</string>
+    <string name="Please_select_start">Please Select Start Date</string>
+    <string name="Please_select_end">Please Select End Date</string>
+
+    <string name="err_msg_name">Enter User Name</string>
+    <string name="err_msg_mobile">Enter Mobile Number</string>
+    <string name="err_msg_mobile_invalid">Enter 10 digit Mobile Number</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+    <string name="crash_toast_text">Ooooops ! App crashed, a report will be sent to developer to fix the issue !</string>
+
+    <!-- material design-->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="pod_data">POD(Prof of delivery)</string>
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_offline_data">Offline Data</string>
+    <!--    <string name="nav_add_delivery_boy_form">Add Delivery Boy</string>-->
+    <!--    <string name="nav_add_assign_delivery">Assign Delivery</string>-->
+    <string name="notifications_admin_channel_name">Shakti Transport</string>
+    <string name="notifications_admin_channel_description">Shakti Transport</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="alphabetic" translatable="false">abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJkLMNOPQRSTUVWXYZ</string>
+    <string name="alphanumric" translatable="false">abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJkLMNOPQRSTUVWXYZ1234567890</string>
+
+    <!-- navigation drawer item labels  -->
+    <string name="action_signout">Sign Out</string>
+    <string name="action_sync_offline">Sync Offline Data</string>
+    <!--<string name="action_sync_all">Sync All</string>-->
+    <!--<string name="action_state">Sync State Data</string>-->
+    <string name="action_rejected">Rejected Data</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="assigned_delivery_list">Assigned Delivery List</string>
+    <string name="assigned_delivery_detail">Assigned Delivery Detail</string>
+    <string name="lrTransportImages">LR Transport Images</string>
+    <string name="lr_photo">LR Photo</string>
+    <string name="pod_photo">POD Photo</string>
+    <string name="material_photo_front">Material Photo Front</string>
+    <string name="material_photo_side">Material Photo Side</string>
+    <string name="material_photo_top">Material Photo Top</string>
+    <string name="material_photo_bottom">Material Photo Bottom</string>
+    <string name="material_with_customer">Material Photo with Customer</string>
+    <string name="material_photo_Left">Material Photo Left</string>
+    <string name="material_photo_Right">Material Photo Right</string>
+    <string name="please_lr_photo">Please select LR Photo</string>
+    <string name="please_pod_photo">Please select POD Photo</string>
+    <string name="please_material_photo_front">Please select Material Photo Front</string>
+    <string name="please_material_photo_side">Please select Material Photo Side</string>
+    <string name="please_material_photo_top">Please select Material Photo Top</string>
+    <string name="please_material_photo_bottom">Please select Material Photo Bottom</string>
+    <string name="please_material_photo_left">Please select Material Photo Left</string>
+    <string name="please_material_photo_right">Please select Material Photo Right</string>
+    <string name="please_material_with_customer">Please select Material Photo with Customer</string>
+
+    <string name="select_image">Select Images</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="want_to_perform">"What operation do you want to perform?"</string>
+    <string name="display">Display</string>
+    <string name="change">Change</string>
+    <string name="photoGallery">Photo Gallery</string>
+    <string name="cancel">Cancle</string>
+    <string name="internet">Please check your Internet Connection. </string>
+
+
+
+    action_route_map_menu
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
+        <item>@string/nav_item_offline_data</item>
+        <!--        <item>@string/nav_add_delivery_boy_form</item>-->
+        <!--        <item>@string/nav_add_assign_delivery</item>-->
+
+
+    </string-array>
+
+
+</resources>
