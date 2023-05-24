@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+  <!--  <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:id="@+id/tvTransportNoLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/etTransportNo"
+            android:layout_alignBottom="@id/etTransportNo"
+            android:gravity="center_vertical"
+            android:text="Transport No" />
+
+        <EditText
+            android:id="@+id/etTransportNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvTransportNoLabel"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etTransportNo"
+            android:layout_alignParentStart="true"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:gravity="center_vertical"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Start Date" />
+
+        <TextView
+            android:id="@+id/tvStartDateValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etTransportNo"
+            android:layout_alignTop="@id/tvStartDate"
+            android:layout_alignBottom="@id/tvStartDate"
+            android:layout_marginStart="3dp"
+            android:layout_toRightOf="@+id/tvStartDate"
+            android:gravity="center_vertical"
+            tools:text="27.09.2022"/>
+
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etTransportNo"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@id/tvEndDateValue"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="End Date" />
+
+        <TextView
+            android:id="@+id/tvEndDateValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etTransportNo"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tvEndDate"
+            android:layout_alignBottom="@id/tvEndDate"
+            android:layout_marginStart="3dp"
+            android:gravity="center_vertical"
+            tools:text="15.10.2022"/>
+
+        <Button
+            android:id="@+id/btnGo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEndDateValue"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Go" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/btnGo"
+            android:background="@color/black" />
+
+    </RelativeLayout>-->
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:hint="@string/search_doc"
+        android:textSize="15sp"
+        android:textStyle="bold">
+
+        <requestFocus />
+    </EditText>
+
+    <ListView
+        android:id="@+id/partial_load_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/space_mid10"
+        android:layout_marginTop="@dimen/space_mid10"
+        android:layout_marginRight="@dimen/space_mid10"
+        android:divider="@null"
+        android:dividerHeight="@dimen/space_mid10" />
+</LinearLayout>

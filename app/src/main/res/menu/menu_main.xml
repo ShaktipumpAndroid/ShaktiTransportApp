@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="activity.MainActivity">
+
+    <item
+        android:id="@+id/action_sync_state"
+        android:orderInCategory="100"
+        android:title="@string/sync_data"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_pod_state"
+        android:orderInCategory="100"
+        android:title="@string/pod_data"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_signout"
+        android:orderInCategory="100"
+        android:title="@string/action_signout"
+        app:showAsAction="never" />
+
+
+</menu>

@@ -1,0 +1,171 @@
+<resources>
+    <string name="app_name">Shakti Transport App</string>
+    <string name="select_language">Select Language</string>
+    <string name="username">User Name</string>
+    <string name="Password">Password</string>
+    <string name="enter_mobileNo">Enter your mobile number</string>
+
+    <string name="hint_password">Password</string>
+    <string name="btn_save_dsr"> Save</string>
+    <string name="Please_select_start">Please Select Start Date</string>
+    <string name="Please_select_end">Please Select End Date</string>
+
+    <string name="err_msg_name">Enter User Name</string>
+    <string name="err_msg_mobile">Enter Mobile Number</string>
+    <string name="err_msg_mobile_invalid">Enter 10 digit Mobile Number</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+    <string name="crash_toast_text">Ooooops ! App crashed, a report will be sent to developer to fix the issue !</string>
+
+    <!-- material design-->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="pod_data">POD(Prof of delivery)</string>
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_offline_data">Offline Data</string>
+    <!--    <string name="nav_add_delivery_boy_form">Add Delivery Boy</string>-->
+    <!--    <string name="nav_add_assign_delivery">Assign Delivery</string>-->
+    <string name="notifications_admin_channel_name">Shakti Transport</string>
+    <string name="notifications_admin_channel_description">Shakti Transport</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="alphabetic" translatable="false">abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJkLMNOPQRSTUVWXYZ</string>
+    <string name="alphanumric" translatable="false">abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJkLMNOPQRSTUVWXYZ1234567890</string>
+
+    <string name="action_signout">Sign Out</string>
+    <string name="action_sync_offline">Sync Offline Data</string>
+
+    <string name="action_rejected">Rejected Data</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="assigned_delivery_list">Assigned Delivery List</string>
+    <string name="assigned_delivery_detail">Assigned Delivery Detail</string>
+    <string name="lrTransportImages">LR Transport Images</string>
+    <string name="lr_photo">LR Photo</string>
+    <string name="pod_photo">POD Photo</string>
+    <string name="material_photo_front">Material Photo Front</string>
+    <string name="material_photo_side">Material Photo Side</string>
+    <string name="material_photo_top">Material Photo Top</string>
+    <string name="material_photo_bottom">Material Photo Bottom</string>
+    <string name="material_with_customer">Material Photo with Customer</string>
+    <string name="material_photo_Left">Material Photo Left</string>
+    <string name="material_photo_Right">Material Photo Right</string>
+    <string name="please_lr_photo">Please select LR Photo</string>
+    <string name="please_pod_photo">Please select POD Photo</string>
+    <string name="please_material_photo_front">Please select Material Photo Front</string>
+    <string name="please_material_photo_side">Please select Material Photo Side</string>
+    <string name="please_material_photo_top">Please select Material Photo Top</string>
+    <string name="please_material_photo_bottom">Please select Material Photo Bottom</string>
+    <string name="please_material_photo_left">Please select Material Photo Left</string>
+    <string name="please_material_photo_right">Please select Material Photo Right</string>
+    <string name="please_material_with_customer">Please select Material Photo with Customer</string>
+
+    <string name="select_image">Select Images</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="want_to_perform">"What operation do you want to perform?"</string>
+    <string name="display">Display</string>
+    <string name="change">Change</string>
+    <string name="photoGallery">Photo Gallery</string>
+    <string name="cancel">Cancle</string>
+    <string name="internet">Please check your Internet Connection. </string>
+
+    <string name="select_type">Select Type</string>
+    <string name="enter_mobile">Please enter your mobile number.</string>
+    <string name="enter_vaild_mobile">Please enter valid mobile number.</string>
+    <string name="otp_successfully">OTP send successfully.</string>
+    <string name="otp_failed">OTP send failed please try again.</string>
+    <string name="Transport_Officer">Transport Officer</string>
+    <string name="Vendor">Vendor</string>
+    <string name="Driver">Driver</string>
+    <string name="Delivery_Boy">Delivery Boy</string>
+    <string name="Please_Select_Type">Please Select Type</string>
+    <string name="english">English</string>
+    <string name="hindi">Hindi</string>
+    <string name="send">SEND</string>
+    <string name="otp">Send OTP</string>
+    <string name="enter_otp">Enter OTP</string>
+
+    action_route_map_menu
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
+        <item>@string/nav_item_offline_data</item>
+        <!--        <item>@string/nav_add_delivery_boy_form</item>-->
+        <!--        <item>@string/nav_add_assign_delivery</item>-->
+
+
+    </string-array>
+
+
+    <string name="Quotation">Request for Quotation</string>
+    <string name="Partial_Load">Partial Load</string>
+    <string name="Approve_Vehicles">Approve Vehicles</string>
+    <string name="Confirm_Vehicles">Confirm Vehicles</string>
+    <string name="Customer_Data">Submit Customer Data</string>
+    <string name="RFQ_Plan">Active RFQ Plan</string>
+    <string name="Create_Request">Create Request for Quotation</string>
+    <string name="new_rfq">New Request For Quotation</string>
+    <string name="search_doc">Search By Document, From, To Location</string>
+    <string name="Welcome">Welcome</string>
+    <string name="Confirmation">Confirmation</string>
+    <string name="signout">Are you sure you wish to Sign Out ?</string>
+    <string name="Downloading">Downloading Data...</string>
+    <string name="State_Data">Downloading State Data...</string>
+    <string name="No_Internet">No Internet Connection</string>
+    <string name="LR_Info">Search LR Info</string>
+    <string name="enter_lr">Enter LR Number</string>
+    <string name="Submit">Submit</string>
+    <string name="select_Lr">Please select value from list</string>
+    <string name="Lr_list">LR Invoice list</string>
+    <string name="RFQ_List">RFQ List </string>
+    <string name="Quotation_">Quotation</string>
+    <string name="Please_fill_all">Please fill all the required fields before Quote RFQ</string>
+    <string name="enter_Location">Please enter From Location, To Location to view Route on Map</string>
+    <string name="Quotation_submitted">Quotation Data submitted to server Successfully</string>
+    <string name="Quotation_offline">No internet Connection....Quotation Data saved offline</string>
+    <string name="Vehicle">Vehicle Insurance</string>
+    <string name="Driving">Driving Licence</string>
+    <string name="Vehicle_PUC">Vehicle PUC</string>
+    <string name="Required_Date">Required on Date</string>
+    <string name="Required_Time">Required on Time</string>
+    <string name="Expiry_Date">Expiry Date</string>
+    <string name="Expiry_Time">Expiry Time</string>
+    <string name="View_Map">View on Map</string>
+    <string name="Quote_RFQ">Quote RFQ</string>
+    <string name="Vehicle_Make">Vehicle Make</string>
+    <string name="Rs">Amount in Rs.</string>
+    <string name="SAP_Code">SAP Code</string>
+    <string name="Person_Name">Person Name</string>
+    <string name="Km">Distance in Km</string>
+    <string name="Mode_Transport">Mode of Transport</string>
+    <string name="Place_Delivery">Place of Delivery</string>
+    <string name="Transit_Time">Transit Time</string>
+    <string name="Vehicle_Type">Vehicle Type</string>
+    <string name="Weight">Weight</string>
+    <string name="Registration_Number">Vehicle Registration Number</string>
+    <string name="Dala">Dala</string>
+    <string name="Height">Height</string>
+    <string name="Remark">Remark</string>
+    <string name="From_Location">From Location</string>
+    <string name="To_Location">To Location</string>
+    <string name="LR_Date">Pic LR Date</string>
+    <string name="enter_Valid_LR">Please enter Valid LR Number</string>
+    <string name="picked_date">You picked the following date: </string>
+    <string name="Connecting">Connecting to server..please wait !!</string>
+    <string name="Connecting_failed">"Connection to server failed"</string>
+    <string name="Employee_Details">Employee Details</string>
+    <string name="server">Sending Data to server..please wait !</string>
+    <string name="Internet">Please Connect to Internet</string>
+    <string name="location">Latitude, Longitude already saved, Do you want to change it?</string>
+    <string name="please_fill">Please fill Mandatory fields.</string>
+    <string name="LatLong_captured">Lat Long not captured, Please try again.</string>
+    <string name="Latitude">Latitude:-</string>
+    <string name="Longitude">Longitude:-</string>
+    <string name="Signature">Signature already saved, Do you want to change it?</string>
+    <string name="Successfully">Data Submitted Successfully</string>
+    <string name="notSubmitted">Data not Submitted.</string>
+
+</resources>

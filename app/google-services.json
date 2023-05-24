@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "564232014044",
+    "firebase_url": "https://shakti-transport-app.firebaseio.com",
+    "project_id": "shakti-transport-app",
+    "storage_bucket": "shakti-transport-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564232014044:android:412205c915a11d1b",
+        "android_client_info": {
+          "package_name": "com.administrator.shaktiTransportApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564232014044-qg6itc5k1eq3cl3nv2rc6vnhu4jq0tbu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.administrator.shaktiTransportApp",
+            "certificate_hash": "76a44202381aa6cd38afac879e023eb5f5d3418f"
+          }
+        },
+        {
+          "client_id": "564232014044-h99orl41tib7n4guldl73jtr6gck3i6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAflBPbn-qxFICMZ_cERqIyqQHhJywn4WA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564232014044-h99orl41tib7n4guldl73jtr6gck3i6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564232014044:android:743c69e428257996",
+        "android_client_info": {
+          "package_name": "com.example.administrator.shaktiTransportApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564232014044-naj2c9hu59ahnkoc9o2t2dpvn97ks8s3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.administrator.shaktiTransportApp",
+            "certificate_hash": "76a44202381aa6cd38afac879e023eb5f5d3418f"
+          }
+        },
+        {
+          "client_id": "564232014044-h99orl41tib7n4guldl73jtr6gck3i6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAflBPbn-qxFICMZ_cERqIyqQHhJywn4WA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564232014044-h99orl41tib7n4guldl73jtr6gck3i6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

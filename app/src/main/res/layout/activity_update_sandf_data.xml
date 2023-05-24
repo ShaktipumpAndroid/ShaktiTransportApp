@@ -1,0 +1,2621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <LinearLayout
+
+        android:id="@+id/lvlHeaderViewID"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/blue_fb"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:id="@+id/rlvBackViewID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@android:color/transparent">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
+                android:src="@drawable/ic_back_wtt" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="C and F Data Update"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlvAddDEviceViewID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@android:color/transparent"
+            android:visibility="invisible">
+
+            <ImageView
+
+                android:id="@+id/imgaddDeviceIconID"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:src="@drawable/ic_back" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lvlHeaderViewID"
+        android:layout_margin="@dimen/_1sdp">
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent">
+
+<!--1-->
+                <TextView
+                    android:id="@+id/txtVehicleNoID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:text="* Vehicle Number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="normal"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlvVehicleNoID"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@drawable/edt_background_shape">
+
+                    <EditText
+                        android:id="@+id/edtVehicleNoID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-/"
+                        android:hint="Enetr Vehicle Number"
+                        android:inputType="text"
+                        android:text=""
+                        android:textColor="@color/blue_fb"
+                        android:textColorHint="@color/gray_btn"
+
+                        android:textSize="@dimen/_13ssp">
+
+
+                    </EditText>
+
+
+                </RelativeLayout>
+
+                <!--2-->
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/txtDispachDateID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:text="* Dispach Date EX:18.05.2022"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="normal"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlvDispachDateID"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@drawable/edt_background_shape">
+
+                    <EditText
+                        android:id="@+id/edtDispachDateID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789."
+                        android:hint="Enetr Dispach Date EX:18.05.2022"
+                        android:inputType="text"
+                        android:text=""
+                        android:textColor="@color/blue_fb"
+                        android:textColorHint="@color/gray_btn"
+                        android:layout_toStartOf="@+id/imgDispachDateID"
+                        android:textSize="@dimen/_13ssp">
+
+
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/imgDispachDateID"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_date"/>
+
+
+                </RelativeLayout>
+
+
+
+                <!--2-1-->
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/txtDeliveryDateID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:text="* Delivery Date"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="normal"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlvDeliveryDateID"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@drawable/edt_background_shape">
+
+                    <EditText
+                        android:id="@+id/edtDeliveryDateID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789."
+                        android:hint="Enetr Delivery Date EX:18.05.2022"
+
+                        android:inputType="text"
+                        android:text=""
+                        android:textColor="@color/blue_fb"
+                        android:textColorHint="@color/gray_btn"
+                        android:layout_toStartOf="@+id/imgDelivertDateID"
+                        android:textSize="@dimen/_13ssp">
+
+
+                    </EditText>
+
+                    <ImageView
+                        android:id="@+id/imgDelivertDateID"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_date"/>
+
+
+                </RelativeLayout>
+
+
+                <!--3-->
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/txtTransportNameID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:text="* Transport Name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="normal"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlvTransportNameID"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@drawable/edt_background_shape">
+
+                    <EditText
+                        android:id="@+id/edtTransportNameID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@android:color/transparent"
+                        android:digits=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:hint="Enetr Transport Name"
+                        android:inputType="text"
+
+                        android:text=""
+                        android:textColor="@color/blue_fb"
+                        android:textColorHint="@color/gray_btn"
+                        android:textSize="@dimen/_13ssp">
+
+
+                    </EditText>
+
+
+                </RelativeLayout>
+
+
+                <!--4-->
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/txtDriverNoID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:text="* Driver Number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="normal"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlvDriverNoID"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@drawable/edt_background_shape">
+
+                    <EditText
+                        android:id="@+id/edtDriverNoID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:hint="Enetr Driver Number"
+                        android:inputType="number"
+                        android:text=""
+                        android:textColor="@color/blue_fb"
+                        android:textColorHint="@color/gray_btn"
+                        android:textSize="@dimen/_13ssp">
+
+
+                    </EditText>
+
+
+                </RelativeLayout>
+
+                <!--5-->
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/txtRFQNoID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="start"
+                    android:text="* RFQ Number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="normal"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlvRFQNoID"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@drawable/edt_background_shape">
+
+                    <EditText
+                        android:id="@+id/edtRFQNoID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:hint="Enetr RFQ Number"
+                        android:inputType="number"
+                        android:text=""
+                        android:textColor="@color/blue_fb"
+                        android:textColorHint="@color/gray_btn"
+                        android:textSize="@dimen/_13ssp">
+
+
+                    </EditText>
+
+
+                </RelativeLayout>
+
+
+                <!--1  First bill Form-->
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cradViewF1ID"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+
+
+                    <LinearLayout
+
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                        <!--F1-1-->
+                    <LinearLayout
+
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:orientation="vertical"
+                        android:background="@android:color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:id="@+id/txtBillNo1ID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="start"
+                            android:text="*1* Bill Number"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14ssp"
+                            android:textStyle="normal"/>
+
+                        <RelativeLayout
+                            android:id="@+id/rlvBillNo1ID"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:background="@drawable/edt_background_shape">
+
+                            <EditText
+                                android:id="@+id/edtBillNo1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@android:color/transparent"
+                                android:digits="0123456789"
+                                android:hint="Enetr Bill Number"
+                                android:inputType="number"
+                                android:text=""
+                                android:textColor="@color/blue_fb"
+                                android:textColorHint="@color/gray_btn"
+                                android:textSize="@dimen/_14ssp">
+
+
+                            </EditText>
+
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                        <!--F1-2-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtLRNo1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="* LR Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvLRNo1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtLRNo1ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits=" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr LR Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F1-3-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtPumpSer1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Pump Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvPumpSer1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtPumpSer1ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Pump Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerF1ID">
+
+
+                                </EditText>
+
+
+                                <ImageView
+                                    android:id="@+id/imgScannerF1ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F1-4-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtMotorSer1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Motor Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvMotorSer1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtMotorSer1ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Motor Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerF2ID">
+
+
+                                </EditText>
+
+                                <ImageView
+                                    android:id="@+id/imgScannerF2ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F1-5-->
+                        <LinearLayout
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtControllerSer1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Controller Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvControllerSer1ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtControllerSer1ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                    android:hint="Enetr Controller Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerF3ID">
+
+
+                                </EditText>
+
+                                <ImageView
+                                    android:id="@+id/imgScannerF3ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+<LinearLayout
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_15sdp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    android:background="@android:color/transparent"
+    android:weightSum="2">
+
+    <RelativeLayout
+
+        android:id="@+id/rlvVarified1ID"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:id="@+id/txtSNDaftID"
+           android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_all_blue"
+            android:text="Varify"
+            android:padding="@dimen/_10sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/open_sans_bold"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgVarifed1ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+            android:src="@drawable/red_icn"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!--2  Second bill Form-->
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cradViewF2ID"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                        <!--F2-1-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtBillNo2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*2* Bill Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvBillNo2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtBillNo2ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789"
+                                    android:hint="Enetr Bill Number"
+                                    android:inputType="number"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+                        <!--F2-2-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtLRNo2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="* LR Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvLRNo2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtLRNo2ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits=" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr LR Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-3-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtPumpSer2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Pump Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvPumpSer2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtPumpSer2ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Pump Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerS1ID">
+
+
+                                </EditText>
+
+                                <ImageView
+                                    android:id="@+id/imgScannerS1ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F3-4-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtMotorSer2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Motor Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvMotorSer2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtMotorSer2ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Motor Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerS2ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerS2ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F4-5-->
+                        <LinearLayout
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtControllerSer2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Controller Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvControllerSer2ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtControllerSer2ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                    android:hint="Enetr Controller Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerS3ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerS3ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@android:color/transparent"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+
+                                android:id="@+id/rlvVarified2ID"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:id="@+id/txtSNDaft2ID"
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_corner_all_blue"
+                                    android:text="Varify"
+                                    android:padding="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textColor="@color/white"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgVarifed2ID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/red_icn"/>
+
+
+                            </RelativeLayout>
+
+
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!--3  Third bill Form-->
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cradViewF3ID"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                        <!--F2-1-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtBillNo3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*3* Bill Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvBillNo3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtBillNo3ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789"
+                                    android:hint="Enetr Bill Number"
+                                    android:inputType="number"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+                        <!--F2-2-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtLRNo3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="* LR Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvLRNo3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtLRNo3ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits=" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr LR Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-3-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtPumpSer3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Pump Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvPumpSer3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtPumpSer3ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Pump Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerT1ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerT1ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F3-4-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtMotorSer3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Motor Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvMotorSer3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtMotorSer3ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Motor Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerT2ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerT2ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F4-5-->
+                        <LinearLayout
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtControllerSer3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Controller Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvControllerSer3ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtControllerSer3ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Controller Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerT3ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerT3ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@android:color/transparent"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+
+                                android:id="@+id/rlvVarified3ID"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:id="@+id/txtSNDaft3ID"
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_corner_all_blue"
+                                    android:text="Varify"
+                                    android:padding="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textColor="@color/white"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgVarifed3ID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/red_icn"/>
+
+
+                            </RelativeLayout>
+
+
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!--4  four bill Form-->
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cradViewF4ID"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                        <!--F2-1-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtBillNo4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*4* Bill Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvBillNo4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtBillNo4ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789"
+                                    android:hint="Enetr Bill Number"
+                                    android:inputType="number"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-2-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtLRNo4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="* LR Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvLRNo4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtLRNo4ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits=" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr LR Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-3-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtPumpSer4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Pump Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvPumpSer4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtPumpSer4ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Pump Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerFr1ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerFr1ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F3-4-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtMotorSer4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Motor Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvMotorSer4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtMotorSer4ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Motor Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerFr2ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerFr2ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F4-5-->
+                        <LinearLayout
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtControllerSer4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Controller Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvControllerSer4ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtControllerSer4ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                                    android:hint="Enetr Controller Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerFr3ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerFr3ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@android:color/transparent"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+
+                                android:id="@+id/rlvVarified4ID"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:id="@+id/txtSNDaft4ID"
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_corner_all_blue"
+                                    android:text="Varify"
+                                    android:padding="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textColor="@color/white"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgVarifed4ID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/red_icn"/>
+
+
+                            </RelativeLayout>
+
+
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!--5  four bill Form-->
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cradViewF5ID"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                        <!--F2-1-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtBillNo5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*5* Bill Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvBillNo5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtBillNo5ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789"
+                                    android:hint="Enetr Bill Number"
+                                    android:inputType="number"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-2-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtLRNo5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="* LR Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvLRNo5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtLRNo5ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits=" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr LR Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-3-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtPumpSer5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Pump Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvPumpSer5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtPumpSer5ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Pump Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerFv1ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerFv1ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F3-4-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtMotorSer5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Motor Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvMotorSer5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtMotorSer5ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Motor Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerFv2ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerFv2ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F4-5-->
+                        <LinearLayout
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtControllerSer5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Controller Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvControllerSer5ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtControllerSer5ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Controller Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerFv3ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerFv3ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@android:color/transparent"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+
+                                android:id="@+id/rlvVarified5ID"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:id="@+id/txtSNDaft5ID"
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_corner_all_blue"
+                                    android:text="Varify"
+                                    android:padding="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textColor="@color/white"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgVarifed5ID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/red_icn"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <!--6  four bill Form-->
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cradViewF6ID"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="@dimen/_10sdp">
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:background="@drawable/bg_gradient_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+                        <!--F2-1-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtBillNo6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*5* Bill Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvBillNo6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtBillNo6ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789"
+                                    android:hint="Enetr Bill Number"
+                                    android:inputType="number"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerSX1ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerSX1ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-2-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtLRNo6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="* LR Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvLRNo6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtLRNo6ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits=" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr LR Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerSX2ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerSX2ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F2-3-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtPumpSer6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Pump Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvPumpSer6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtPumpSer6ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Pump Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp"
+                                    android:layout_toStartOf="@+id/imgScannerSX3ID">
+
+
+                                </EditText>
+                                <ImageView
+                                    android:id="@+id/imgScannerSX3ID"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/ic_scanner"
+                                    android:layout_alignParentEnd="true"
+                                    android:padding="@dimen/_5sdp"/>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F3-4-->
+                        <LinearLayout
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtMotorSer6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Motor Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvMotorSer6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtMotorSer6ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789 "
+                                    android:hint="Enetr Motor Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <!--F4-5-->
+                        <LinearLayout
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:id="@+id/txtControllerSer6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:gravity="start"
+                                android:text="*  Controller Serial Number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14ssp"
+                                android:textStyle="normal"/>
+
+                            <RelativeLayout
+                                android:id="@+id/rlvControllerSer6ID"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:layout_marginTop="@dimen/_1sdp"
+                                android:background="@drawable/edt_background_shape">
+
+                                <EditText
+                                    android:id="@+id/edtControllerSer6ID"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:background="@android:color/transparent"
+                                    android:digits="0123456789-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    android:hint="Enetr Controller Serial Number"
+                                    android:inputType="text"
+                                    android:text=""
+                                    android:textColor="@color/blue_fb"
+                                    android:textColorHint="@color/gray_btn"
+                                    android:textSize="@dimen/_14ssp">
+
+
+                                </EditText>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@android:color/transparent"
+                            android:weightSum="2">
+
+                            <RelativeLayout
+
+                                android:id="@+id/rlvVarified6ID"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginEnd="@dimen/_20sdp"
+                                    android:id="@+id/txtSNDaft6ID"
+                                    android:layout_centerInParent="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/rounded_corner_all_blue"
+                                    android:text="Varify"
+                                    android:padding="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textColor="@color/white"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgVarifed6ID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/red_icn"/>
+
+
+                            </RelativeLayout>
+
+
+
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+
+                <TextView
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:id="@+id/txtSaveAllID"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/rounded_corner_all_blue"
+                    android:text="Save Data"
+                    android:gravity="center"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    />
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

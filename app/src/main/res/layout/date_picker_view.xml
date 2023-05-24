@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_rl"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="@dimen/space_large25"
+        android:layout_height="@dimen/space_large25"
+        android:layout_margin="@dimen/space_large16"
+        android:background="@drawable/ic_back"
+        android:padding="5dp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/innerrl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/backBtn"
+        android:background="@color/black_trans"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/action_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_bg_rl"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/rounded_corner_bg"
+            android:clickable="false"
+            android:focusable="false"
+            android:minHeight="30dp"
+            android:minEms="6"
+
+            android:padding="@dimen/space_mid10"
+            android:text="Ok"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_xlarge22"
+            android:visibility="visible" />
+
+
+        <RelativeLayout
+            android:id="@+id/dialog_bg_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/space_large20"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="@dimen/space_large20"
+            android:layout_marginBottom="@dimen/space_large20"
+            android:background="@drawable/dialog_bg"
+            android:focusableInTouchMode="false">
+
+
+            <DatePicker
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+            </DatePicker>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
