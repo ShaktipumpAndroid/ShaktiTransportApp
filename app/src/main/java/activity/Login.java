@@ -245,7 +245,7 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
             @Override
             public void onNetworkFailure(int APINumber, String message) {
                 baseRequest.hideLoader();
-                Toast.makeText(mContext, "Please check internet connection!", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, getResources().getString(R.string.please_check), Toast.LENGTH_LONG).show();
             }
         });
 

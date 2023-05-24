@@ -8,12 +8,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.administrator.shaktiTransportApp.R;
 import activity.Login;
+import activity.languagechange.LocaleHelper;
 import webservice.WebURL;
 
 public class NavigateOptionActivity extends AppCompatActivity {
     Context context;
     private TextView txtTransportID, txtSNDaftID;
     private TextView txtPODID;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
 
     @Override
     /** Called when the activity is first created. */
@@ -33,21 +39,15 @@ public class NavigateOptionActivity extends AppCompatActivity {
             startActivity(mIntent);
         });
 
-        txtTransportID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebURL.UserTypeCheck = 2;
-                Intent mIntent = new Intent(NavigateOptionActivity.this, Login.class);
-                startActivity(mIntent);
-            }
+        txtTransportID.setOnClickListener(v -> {
+            WebURL.UserTypeCheck = 2;
+            Intent mIntent = new Intent(NavigateOptionActivity.this, Login.class);
+            startActivity(mIntent);
         });
 
-        txtPODID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(NavigateOptionActivity.this, ActivityPODSearchInfo.class);
-                startActivity(mIntent);
-            }
+        txtPODID.setOnClickListener(v -> {
+            Intent mIntent = new Intent(NavigateOptionActivity.this, ActivityPODSearchInfo.class);
+            startActivity(mIntent);
         });
     }
 }

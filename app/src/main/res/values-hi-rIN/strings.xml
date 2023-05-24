@@ -16,6 +16,9 @@
     <string name="btn_save_dsr"> बचाना</string>
     <string name="Please_select_start">कृपया प्रारंभ दिनक चुनें</string>
     <string name="Please_select_end">कृपया समाप्ति दिनक चुनें</string>
+    <string name="start"> आरंभ करने की दिनक</string>
+    <string name="end">अंतिम दिनक</string>
+
 
     <string name="err_msg_name"> उपयोगकर्ता नाम दर्ज करें</string>
     <string name="err_msg_mobile">मोबाइल नंबर दर्ज करें</string>
@@ -32,7 +35,7 @@
     <string name="drawer_close">बंद करना</string>
     <string name="sync_data">डेटा सिंक करें</string>
     <string name="pod_data">पीओडी (डिलीवरी का सबूत)</string>
-    <string name="nav_item_home">घर</string>
+    <string name="nav_item_home">होम</string>
     <string name="nav_item_offline_data">ऑफलाइन डेटा</string>
     <string name="notifications_admin_channel_name">शक्ति ट्रांसपोर्ट</string>
     <string name="notifications_admin_channel_description">शक्ति ट्रांसपोर्ट</string>
@@ -78,13 +81,14 @@
     <string name="otp_successfully">ओटीपी सफलतापूर्वक भेजा गया।</string>
     <string name="otp_failed">ओटीपी भेजना विफल रहा कृपया पुन: प्रयास करें।</string>
     <string name="Transport_Officer">परिवहन अधिकारी</string>
+
     <string name="Vendor">विक्रेता</string>
     <string name="Driver">चालक</string>
     <string name="Delivery_Boy">वितरण करने वाला लड़का</string>
     <string name="Please_Select_Type">कृपया प्रकार चुनें</string>
 
     <string name="Quotation">उद्धरण के लिए अनुरोध</string>
-    <string name="Partial_Load">पार्शियल भार</string>
+    <string name="Partial_Load">पार्ट लोड</string>
     <string name="Approve_Vehicles">वाहनों को स्वीकृत करें</string>
     <string name="Confirm_Vehicles">वाहनों की पुष्टि करें</string>
     <string name="Customer_Data">ग्राहक डेटा जमा करें</string>
@@ -151,6 +155,54 @@
     <string name="Successfully">डेटा सफलतापूर्वक सबमिट किया गया</string>
     <string name="notSubmitted">डेटा सबमिट नहीं किया गया।</string>
     <string name="Agreement_List">अनुबंध सूची</string>
+    <string name="CFApp">सी और एफ ऐप</string>
+    <string name="Transport">परिवहन ऐप</string>
+    <string name="assigned">सौंपी गई डिलीवरी सूची</string>
+    <string name="Sync_Data">सर्वर पर डेटा सिंक करें..कृपया प्रतीक्षा करें!</string>
+    <string name="Agreement_Detail">अनुबंध विवरण</string>
+    <string name="Mobile_No">कृपया मोबाइल नंबर दर्ज करें</string>
+    <string name="Mobile_Nocorrect">कृपया सही मोबाइल नंबर दर्ज करें</string>
+    <string name="Logout">लॉग आउट</string>
+    <string name="Invoice_Info">खोज चालान जानकारी</string>
+    <string name="enter_invoice_number">कृपया चालान संख्या दर्ज करें.</string>
+    <string name="invoice_number">इनवॉइस संख्या दर्ज करें</string>
 
+    <string name="Vehicle_Number">* गाडी नंबर</string>
+    <string name="enter">वाहन संख्या दर्ज करें</string>
+    <string name="Dispatch">* प्रेषण तिथि पूर्व: 18.05.2022</string>
+    <string name="enter_dispatch">प्रेषण दिनक पूर्व दर्ज करें: 18.05.2022</string>
+    <string name="Delivery_Date">* डिलीवरी की तारीख</string>
+    <string name="enter_Delivery_Date">डिलीवरी की तारीख दर्ज करें EX:18.05.2022</string>
+    <string name="Transport_Name">* परिवहन का नाम</string>
+    <string name="enter_Transport_Name">परिवहन नाम दर्ज करें</string>
+    <string name="Driver_Number">* ड्राइवर संख्या</string>
+    <string name="enter_Driver_Number">ड्राइवर संख्या दर्ज करें</string>
+    <string name="RFQ_Number">* आरएफक्यू संख्या</string>
+    <string name="enter_RFQ_Number">आरएफक्यू संख्या दर्ज करें</string>
+
+    <string name="Bill_Number1">*1* बिल संख्या</string>
+    <string name="Bill_Number2">*2* बिल संख्या</string>
+    <string name="Bill_Number3">*3* बिल संख्या</string>
+    <string name="Bill_Number4">*4* बिल संख्या</string>
+    <string name="Bill_Number5">*5* बिल संख्या</string>
+    <string name="Bill_Number6">*6* बिल संख्या</string>
+    <string name="Enter_Bill">बिल संख्या दर्ज करें</string>
+
+    <string name="LR_number">* एलआर संख्या</string>
+    <string name="enter_LR_number">एलआर संख्या दर्ज करें</string>
+    <string name="pump_serial">*  पंप सीरियल नंबर</string>
+    <string name="enter_pump_serial">पंप सीरियल नंबर दर्ज करें</string>
+    <string name="motor_no">*  मोटर सीरियल नंबर</string>
+    <string name="enter_motor_no">मोटर सीरियल नंबर दर्ज करें</string>
+    <string name="Controller">*  नियंत्रक सीरियल नंबर</string>
+    <string name="enter_Controller">नियंत्रक सीरियल नंबर दर्ज करें</string>
+    <string name="Verify">वेरीफाई</string>
+    <string name="please_check">कृपया इंटरनेट कनेक्शन जांचें!</string>
+    <string name="Amount">राशि</string>
+    <string name="Vehicle_">वाहन संख्या</string>
+    <string name="Vehicle_type">वाहन का प्रकार</string>
+    <string name="Driver_Name">चालक का नाम</string>
+    <string name="Driver_Mobile">चालक मोबाइल नं.</string>
+    <string name="LR_Number_">एलआर संख्या</string>
 
 </resources>

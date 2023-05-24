@@ -33,7 +33,7 @@
                 android:background="@drawable/rounded_corner_all_blue"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
-                android:text="C And F App"
+                android:text="@string/CFApp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp" />
 
@@ -48,7 +48,7 @@
                 android:background="@drawable/rounded_corner_all_blue"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
-                android:text="Transport App"
+                android:text="@string/Transport"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp" />
 
@@ -63,7 +63,7 @@
                 android:background="@drawable/rounded_corner_all_blue"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
-                android:text="POD (Proof of Delivery)"
+                android:text="@string/pod_data"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp" />
 

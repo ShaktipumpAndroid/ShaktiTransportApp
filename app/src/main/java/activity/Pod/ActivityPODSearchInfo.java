@@ -283,7 +283,7 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
         /******************************************************************************************/
 /*                   server connection
 /******************************************************************************************/
-        progressDialog = ProgressDialog.show(mContext, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(mContext, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
 

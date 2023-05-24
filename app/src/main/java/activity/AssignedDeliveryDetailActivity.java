@@ -57,7 +57,6 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
     DatabaseHelper db;
     Context context;
     private Toolbar mToolbar;
-    public static final int MEDIA_TYPE_IMAGE = 1;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private AssignedDeliveryDetailResponse assignedDeliveryResponse;
     public static final int BITMAP_SAMPLE_SIZE = 4;

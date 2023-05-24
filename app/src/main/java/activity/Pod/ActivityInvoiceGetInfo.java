@@ -1,8 +1,4 @@
 package activity.Pod;
-import static android.app.PendingIntent.getActivity;
-
-import activity.PodBean.LrInvoiceResponse;
-import activity.retrofit.BaseRequest;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.administrator.shaktiTransportApp.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -34,6 +30,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import activity.PodBean.InvoicelistBeanResponse;
+import activity.PodBean.LrInvoiceResponse;
+import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
 import bean.LoginBean;
 import database.DatabaseHelper;
@@ -63,6 +61,12 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
 
     Calendar now;
     String usertype;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +74,7 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         mContext = this;
         now = Calendar.getInstance();
 
-        dpd = (DatePickerDialog) this.dpd.getFragmentManager().findFragmentByTag("Datepickerdialog");
+    //    dpd = (DatePickerDialog) this.dpd.getParentFragmentManager().findFragmentByTag("Datepickerdialog");
 
         initView();
     }
@@ -108,44 +112,31 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         rlvBackViewID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
                 // Setting Dialog Title
-                alertDialog.setTitle("Confirmation");
+                alertDialog.setTitle(getResources().getString(R.string.Confirmation));
                 // Setting Dialog Message
-                alertDialog.setMessage("Are you sure you wish to Sign Out ?");
+                alertDialog.setMessage(getResources().getString(R.string.signout));
                 // On pressing Settings button
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        logout();
-                    }
-                });
+                alertDialog.setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> logout());
                 // on pressing cancel button
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                alertDialog.setNegativeButton(getResources().getString(R.string.cancel), (dialog, which) -> dialog.cancel());
 
                 // Showing Alert Message
                 alertDialog.show();
-                finish();
             }
+
         });
 
-        rlvLRSubmitViewID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (initValidation()) {
-                    String [] mStrLen = mLRNumberValue.split(",");
+        rlvLRSubmitViewID.setOnClickListener(v -> {
+            if (initValidation()) {
+                String [] mStrLen = mLRNumberValue.split(",");
 
-                    WebURL.FORM_CHECK_LENGTH = mStrLen.length;
+                WebURL.FORM_CHECK_LENGTH = mStrLen.length;
 
-                    callgetLRInvoceListAPI();
-                }
-
+                callgetLRInvoceListAPI();
             }
+
         });
 
      /*   txtOpenCalenderID.setOnClickListener(new View.OnClickListener() {
@@ -297,7 +288,7 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         //******************************************************************************************/
 /*                   server connection
 /******************************************************************************************/
-        progressDialog = ProgressDialog.show(mContext, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(mContext, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
 
@@ -356,58 +347,6 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
                         });
                     }
 
-                 /*   if (mStatus.equalsIgnoreCase("true")) {
-
-                        if(mInvoicelistBeanResponse.size()>0)
-                            mInvoicelistBeanResponse.clear();
-
-                        JSONArray ja = new JSONArray(jo11);
-                        // JSONObject jo = ja.getJSONObject(0);
-
-                        for (int i = 0; i < ja.length(); i++) {
-
-                            JSONObject join = ja.getJSONObject(i);
-                            InvoicelistBeanResponse mmLrInvoiceResponse = new InvoicelistBeanResponse();
-
-                            mmLrInvoiceResponse.setBill(join.getString("bill"));
-                            mmLrInvoiceResponse.setControllerSerno(join.getString("controllerSerno"));
-                            mmLrInvoiceResponse.setMatorSerno(join.getString("matorSerno"));
-                            mmLrInvoiceResponse.setSetSerno(join.getString("setSerno"));
-
-
-                            mInvoicelistBeanResponse.add(mmLrInvoiceResponse);
-
-                        }
-
-
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                try {
-                                    Intent mIntent = new Intent(ActivityInvoiceGetInfo.this, ActivityUpdateSandFData.class);
-                                    mIntent.putExtra("InvoiceList", (Serializable) mLrInvoiceResponse);
-                                    startActivity(mIntent);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                                progressDialog.dismiss();
-                            }
-
-
-                        });
-
-                    } else {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(mContext, mMessage, Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                            }
-
-                        });
-                        //   Toast.makeText(mContext, mMessage, Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }*/
-
-
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     // dismiss the progress dialog
@@ -426,12 +365,6 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         dpd = null;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        DatePickerDialog dpd = (DatePickerDialog) this.dpd.getParentFragmentManager().findFragmentByTag("Datepickerdialog");
-        if (dpd != null) dpd.setOnDateSetListener(this);
-    }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
@@ -452,8 +385,8 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         } else {
             mMonthV = "" + monthOfYear;
         }
-        // String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        String date = "You picked the following date: " + mDayV + "/" + mMonthV + "/" + year;
+
+        String date = getResources().getString(R.string.picked_date)+ mDayV + "/" + mMonthV + "/" + year;
         System.out.println("date==>>" + date);
         System.out.println("mMonthV==>>" + mMonthV + "" + year);
 

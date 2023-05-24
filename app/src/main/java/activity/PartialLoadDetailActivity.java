@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
 import activity.retrofit.RequestReciever;
 import bean.PartialLoadResponse;
@@ -56,6 +57,10 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
     private BaseRequest baseRequest;
 //    ArrayList deliveryBoyList = new ArrayList<DeliveryBoyResponse>();
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
     @SuppressLint("HandlerLeak")
     @SuppressWarnings("deprecation")
     @Override
@@ -192,7 +197,7 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Agreement Detail");
+        getSupportActionBar().setTitle(getResources().getString(R.string.Agreement_Detail));
     }
 
     private void setData() {
@@ -220,9 +225,9 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Please enter Distance", Toast.LENGTH_SHORT).show();
 //        } else
         if (llDeliveryBoy.getVisibility() == View.VISIBLE && etDeliveryBoyMobileNo.getText().toString().trim().equals("")) {
-            Toast.makeText(getApplicationContext(), "Please enter Mobile No", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Mobile_No), Toast.LENGTH_SHORT).show();
         } else if (llDeliveryBoy.getVisibility() == View.VISIBLE && etDeliveryBoyMobileNo.getText().toString().trim().equals("")) {
-            Toast.makeText(getApplicationContext(), "Please enter correct Mobile No", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Mobile_Nocorrect), Toast.LENGTH_SHORT).show();
         } else {
             returnValue = true;
         }

@@ -9,6 +9,8 @@
     <string name="btn_save_dsr"> Save</string>
     <string name="Please_select_start">Please Select Start Date</string>
     <string name="Please_select_end">Please Select End Date</string>
+    <string name="start"> Start Date</string>
+    <string name="end">End Date</string>
 
     <string name="err_msg_name">Enter User Name</string>
     <string name="err_msg_mobile">Enter Mobile Number</string>
@@ -24,7 +26,7 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="sync_data">Sync Data</string>
-    <string name="pod_data">POD(Prof of delivery)</string>
+    <string name="pod_data">POD(Proof of delivery)</string>
     <string name="nav_item_home">Home</string>
     <string name="nav_item_offline_data">Offline Data</string>
     <!--    <string name="nav_add_delivery_boy_form">Add Delivery Boy</string>-->
@@ -36,6 +38,7 @@
     <string name="alphanumric" translatable="false">abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJkLMNOPQRSTUVWXYZ1234567890</string>
 
     <string name="action_signout">Sign Out</string>
+    <string name="Logout">Logout</string>
     <string name="action_sync_offline">Sync Offline Data</string>
 
     <string name="action_rejected">Rejected Data</string>
@@ -168,5 +171,54 @@
     <string name="Successfully">Data Submitted Successfully</string>
     <string name="notSubmitted">Data not Submitted.</string>
     <string name="Agreement_List">Agreement List </string>
+
+    <string name="CFApp">C And F App</string>
+    <string name="Transport">Transport App</string>
+    <string name="assigned">Assigned Delivery List</string>
+    <string name="Sync_Data">Sync Data on Server..please wait !</string>
+    <string name="Agreement_Detail">Agreement Detail</string>
+    <string name="Mobile_No">Please enter Mobile No</string>
+    <string name="Mobile_Nocorrect">Please enter correct Mobile No</string>
+    <string name="Invoice_Info">Search Invoice Info</string>
+    <string name="enter_invoice_number">Please enter invoice number.</string>
+    <string name="invoice_number">Enter Invoice number</string>
+
+    <string name="Vehicle_Number">* Vehicle Number</string>
+    <string name="enter">Enter Vehicle Number</string>
+    <string name="Dispatch">* Dispatch Date EX:18.05.2022</string>
+    <string name="enter_dispatch">Enter Dispatch Date EX:18.05.2022</string>
+    <string name="Delivery_Date">* Delivery Date</string>
+    <string name="enter_Delivery_Date">Enter Delivery Date EX:18.05.2022</string>
+    <string name="Transport_Name">* Transport Name</string>
+    <string name="enter_Transport_Name">Enter Transport Name</string>
+    <string name="Driver_Number">* Driver Number</string>
+    <string name="enter_Driver_Number">Enter Driver Number</string>
+    <string name="RFQ_Number">* RFQ Number</string>
+    <string name="enter_RFQ_Number">Enter RFQ Number</string>
+
+    <string name="Bill_Number1">*1* Bill Number</string>
+    <string name="Bill_Number2">*2* Bill Number</string>
+    <string name="Bill_Number3">*3* Bill Number</string>
+    <string name="Bill_Number4">*4* Bill Number</string>
+    <string name="Bill_Number5">*5* Bill Number</string>
+    <string name="Bill_Number6">*6* Bill Number</string>
+    <string name="Enter_Bill">Enter Bill Number</string>
+
+    <string name="LR_number">* LR Number</string>
+    <string name="enter_LR_number">Enter LR Number</string>
+    <string name="pump_serial">*  Pump Serial Number</string>
+    <string name="enter_pump_serial">Enter Pump Serial Number</string>
+    <string name="motor_no">*  Motor Serial Number</string>
+    <string name="enter_motor_no">Enter Motor Serial Number</string>
+    <string name="Controller">*  Controller Serial Number</string>
+    <string name="enter_Controller">Enter Controller Serial Number</string>
+    <string name="Verify">Verify</string>
+    <string name="please_check">Please check internet connection!</string>
+    <string name="Amount">Amount</string>
+    <string name="Vehicle_">Vehicle No</string>
+    <string name="Vehicle_type">Vehicle Type</string>
+    <string name="Driver_Name">Driver Name</string>
+    <string name="Driver_Mobile">Driver Mobile No.</string>
+    <string name="LR_Number_">LR Number</string>
 
 </resources>

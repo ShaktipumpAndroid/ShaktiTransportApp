@@ -36,6 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import activity.languagechange.LocaleHelper;
 import adapter.RfqCustomList1;
 import bean.LoginBean;
 import bean.RfqBean;
@@ -61,6 +62,11 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
     private String mUserID, type, mStart, mEnd,  from;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.approved_vehicle);
@@ -73,9 +79,9 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
         Toolbar mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (from.equalsIgnoreCase("A")) {
-            Objects.requireNonNull(getSupportActionBar()).setTitle("Approve Vehicle");
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.Approve_Vehicles));
         } else {
-            Objects.requireNonNull(getSupportActionBar()).setTitle("Confirm Vehicle");
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.Confirm_Vehicles));
         }
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -112,7 +118,7 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
                 mStart = start_date.getText().toString().trim();
                 parseDateToddMMyyyy1(mStart);
             }, mYear, mMonth, mDay);
-            datePickerDialog.setTitle("Start Date");
+            datePickerDialog.setTitle(getResources().getString(R.string.start));
             datePickerDialog.show();
         });
 
@@ -131,7 +137,7 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
                 mEnd = end_date.getText().toString().trim();
                 parseDateToddMMyyyy2(mEnd);
             }, mYear, mMonth, mDay);
-            datePickerDialog.setTitle("End Date");
+            datePickerDialog.setTitle(getResources().getString(R.string.end));
             datePickerDialog.show();
         });
 
@@ -152,7 +158,7 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
                 adapter = new RfqCustomList1(context, from, quotationBeanArrayList);
                 inst_list.setAdapter(adapter);
             } else {
-                Toast.makeText(context, "No internet Connection ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getResources().getString(R.string.No_Internet), Toast.LENGTH_SHORT).show();
             }
         });
     }

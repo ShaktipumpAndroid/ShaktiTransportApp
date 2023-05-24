@@ -270,7 +270,7 @@ public class NewQuotation extends AppCompatActivity {
         }
 
         if (db.isRecordExist(DatabaseHelper.TABLE_QUOTATION, DatabaseHelper.KEY_RFQ_DOC, rfqBean.getRfq_doc())) {
-            QuotationBean quoteBean = new QuotationBean();
+            QuotationBean quoteBean;
             quoteBean = db.getQuotationInformation(rfqBean.getRfq_doc());
             et_remark.setText(quoteBean.getRemark());
             et_vehicle_make.setText(quoteBean.getVehicle_make());

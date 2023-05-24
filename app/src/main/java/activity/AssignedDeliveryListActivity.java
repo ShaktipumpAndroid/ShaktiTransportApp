@@ -2,6 +2,7 @@ package activity;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -33,9 +34,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import activity.PodBean.AssignedDeliveryDetailResponse;
 import activity.PodBean.DeliveryDeliveredInput;
+import activity.languagechange.LocaleHelper;
 import adapter.AssignedDeliveryAdapter;
 import bean.LoginBean;
 import database.DatabaseHelper;
@@ -45,6 +48,7 @@ import webservice.CameraUtils;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
 
+@SuppressWarnings("deprecation")
 public class AssignedDeliveryListActivity extends AppCompatActivity implements ClickListiner {
 
     private RecyclerView recyclerView;
@@ -58,6 +62,12 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
     String mImageFolderName = "/SKAPP/UNLOAD/";
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
+    @SuppressLint("HandlerLeak")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assigned_delivery_list);
@@ -68,8 +78,8 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         db.getLogin();
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Assigned Delivery List");
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.assigned));
         submitAssignedDeliveryDeliveredData();
 //        getAssignedDeliveryList();
         mHandler = new android.os.Handler() {
@@ -89,7 +99,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         String username = LoginBean.getUseid();
         param.add(new BasicNameValuePair("driver_mob", username));
 
-        progressDialog = ProgressDialog.show(AssignedDeliveryListActivity.this, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(AssignedDeliveryListActivity.this, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
             public void run() {
@@ -114,12 +124,12 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
                                 mHandler.sendMessage(msg);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Connection to server failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Connecting_failed), Toast.LENGTH_LONG).show();
                         }
                     } else {
 //                        setDataOnAdapter();
                         Message msg = new Message();
-                        msg.obj = "No Internet Connection";
+                        msg.obj = getResources().getString(R.string.No_Internet);
                         mHandler.sendMessage(msg);
                     }
                     progressDialog.dismiss();
@@ -171,18 +181,10 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
                 return true;
             case R.id.action_signout:
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-                alertDialog.setTitle("Confirmation");
-                alertDialog.setMessage("Are you sure you wish to Sign Out ?");
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        logout();
-                    }
-                });
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                alertDialog.setTitle(getResources().getString(R.string.Confirmation));
+                alertDialog.setMessage(getResources().getString(R.string.signout));
+                alertDialog.setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> logout());
+                alertDialog.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.cancel());
                 alertDialog.show();
                 return true;
         }
@@ -212,7 +214,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
 //        int count = 0;
         ArrayList<DeliveryDeliveredInput> deliveryDeliveredInputList = dataHelper.getDeliveredData();
 
-        progressDialog = ProgressDialog.show(this, "", "Sync Data on Server..please wait !");
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.Sync_Data));
 
         new Thread() {
             public void run() {
