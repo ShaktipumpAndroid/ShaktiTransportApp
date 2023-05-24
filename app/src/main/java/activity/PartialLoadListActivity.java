@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import activity.languagechange.LocaleHelper;
 import adapter.AssignedDeliveryAdapter;
 import adapter.PartialLoadAdapter;
 import bean.LoginBean;
@@ -49,6 +50,10 @@ public class PartialLoadListActivity extends AppCompatActivity {
     EditText editsearch;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partial_load_list);
@@ -60,7 +65,7 @@ public class PartialLoadListActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Agreement List ");
+        getSupportActionBar().setTitle(getResources().getString(R.string.Agreement_List));
         getPartialLoadList();
         mHandler = new android.os.Handler() {
             @Override
@@ -107,7 +112,7 @@ public class PartialLoadListActivity extends AppCompatActivity {
         String username = LoginBean.getUseid();
         param.add(new BasicNameValuePair("trans_no", username));
 
-        progressDialog = ProgressDialog.show(this, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
             public void run() {
@@ -134,11 +139,11 @@ public class PartialLoadListActivity extends AppCompatActivity {
                                 mHandler.sendMessage(msg);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Connection to server failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Connecting_failed), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Message msg = new Message();
-                        msg.obj = "No Internet Connection";
+                        msg.obj = getResources().getString(R.string.No_Internet);
                         mHandler.sendMessage(msg);
                     }
                     progressDialog.dismiss();

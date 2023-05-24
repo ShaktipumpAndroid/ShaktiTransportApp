@@ -167,5 +167,6 @@
     <string name="Signature">Signature already saved, Do you want to change it?</string>
     <string name="Successfully">Data Submitted Successfully</string>
     <string name="notSubmitted">Data not Submitted.</string>
+    <string name="Agreement_List">Agreement List </string>
 
 </resources>

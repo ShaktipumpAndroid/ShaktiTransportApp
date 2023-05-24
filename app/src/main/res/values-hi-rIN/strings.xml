@@ -150,6 +150,7 @@
     <string name="Signature">हस्ताक्षर पहले से सहेजा गया है, क्या आप इसे बदलना चाहते हैं?</string>
     <string name="Successfully">डेटा सफलतापूर्वक सबमिट किया गया</string>
     <string name="notSubmitted">डेटा सबमिट नहीं किया गया।</string>
+    <string name="Agreement_List">अनुबंध सूची</string>
 
 
 </resources>
