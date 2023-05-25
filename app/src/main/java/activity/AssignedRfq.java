@@ -2,21 +2,18 @@ package activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 
 import com.administrator.shaktiTransportApp.R;
 
@@ -25,10 +22,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 import adapter.RfqCustomList;
-import bean.LoginBean;
 import bean.RfqBean;
 import database.DatabaseHelper;
-import utility.CustomUtility;
 
 public class AssignedRfq extends AppCompatActivity {
     Context context;
@@ -37,9 +32,7 @@ public class AssignedRfq extends AppCompatActivity {
     ListView inst_list;
     TextView textview_rfq_id;
     String caseid_text = "";
-    RfqBean rfqbean;
-    CustomUtility customUtility = new CustomUtility();
-    LoginBean loginBean;
+
     RfqCustomList adapter;
     EditText editsearch;
     private Toolbar mToolbar;
@@ -63,7 +56,7 @@ public class AssignedRfq extends AppCompatActivity {
 
         create_rfq = (TextView) findViewById(R.id.create_rfq);
 
-        ArrayList<RfqBean> arraylist_rfq = new ArrayList<RfqBean>();
+        ArrayList<RfqBean> arraylist_rfq;
         arraylist_rfq = db.getRfqList();
 
         adapter = new RfqCustomList(context, arraylist_rfq);
@@ -73,12 +66,10 @@ public class AssignedRfq extends AppCompatActivity {
 
         inst_list.setOnItemClickListener((parent, view, position, id) -> {
 
-            textview_rfq_id = (TextView) view.findViewById(R.id.rfq_id_value);
+            textview_rfq_id =  view.findViewById(R.id.rfq_id_value);
             caseid_text = textview_rfq_id.getText().toString();
-//                Toast.makeText(context,caseid_text,Toast.LENGTH_SHORT).show();
-            // Launching new Activity on selecting single List Item
+
             Intent i = new Intent(context, NewRfq.class);
-            // sending data to new activity
             Bundle extras = new Bundle();
             extras.putString("rfq_docno", caseid_text);
             extras.putString("flag_create_rfq", "Y");
@@ -87,23 +78,20 @@ public class AssignedRfq extends AppCompatActivity {
         });
 
 
-        create_rfq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        create_rfq.setOnClickListener(v -> {
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-                // Setting Dialog Title
-                alertDialog.setTitle("Confirmation");
-                // Setting Dialog Message
-                alertDialog.setMessage(" Do you want to create new Request For Quotation?");
-                // On pressing Settings button
-                alertDialog.setPositiveButton("Yes", (dialog, which) -> createEnquiry());
-                // on pressing cancel button
-                alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-                // Showing Alert Message
-                alertDialog.show();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+            // Setting Dialog Title
+            alertDialog.setTitle("Confirmation");
+            // Setting Dialog Message
+            alertDialog.setMessage(" Do you want to create new Request For Quotation?");
+            // On pressing Settings button
+            alertDialog.setPositiveButton("Yes", (dialog, which) -> createEnquiry());
+            // on pressing cancel button
+            alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+            // Showing Alert Message
+            alertDialog.show();
 
-            }
         });
 
         // Locate the EditText in listview_main.xml

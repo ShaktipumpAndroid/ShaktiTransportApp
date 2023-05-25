@@ -1799,9 +1799,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public ArrayList<RfqBean> getRfqList() {
-        ArrayList<RfqBean> rfqlist = new ArrayList<RfqBean>();
+        ArrayList<RfqBean> rfqlist = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String pending = "";
         db.beginTransaction();
         try {
             String selectQuery = "";

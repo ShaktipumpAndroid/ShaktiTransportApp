@@ -29,14 +29,14 @@ public class RfqCustomList extends ArrayAdapter<RfqBean> {
     DatabaseHelper db;
     RfqBean rfqBean;
     ArrayList<RfqBean> arrayList;
-    private List<RfqBean> SearchesList = null;
+    private List<RfqBean> SearchesList;
 
     public RfqCustomList(Context context, ArrayList<RfqBean> arrayList) {
         super(context, R.layout.rfq_item_view, arrayList);
         this.context = context;
         this.arrayList = arrayList;
 
-        this.SearchesList = new ArrayList<RfqBean>();
+        this.SearchesList = new ArrayList<>();
         this.SearchesList.addAll(arrayList);
     }
 

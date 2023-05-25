@@ -140,9 +140,8 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         System.out.println("jsonObject==>>" + wordsByKey);
         //baseRequest.callAPIGET(1, wordsByKey, NewSolarVFD.GET_DEVICE_SIM_NUMBER_API);/////
         // baseRequest.callAPIGETDirectURL(1, "http://login.yourbulksms.com/api/sendhttp.php?authkey=8716AQbKpjEHR5b4479de&mobiles=" + edtINSTNumberIDSTR + "&message=Enter The Following OTP To Verify Your Account " + mORG_OTP_VALUE + " SHAKTI&sender=SHAKTl&route=4&country=91&DLT_TE_ID=1707161675029844457");/////
-        baseRequest.callAPIGETDirectURL(1,   "http://control.yourbulksms.com/api/sendhttp.php?authkey=393770756d707334373701&" + "mobiles="+ etDeliveryBoyMobileNo.getText().toString()+"&message=New Delivery is Assigned to you Please Use the below link to install the App https://play.google.com/store/search?q=shakti%20Transport%20App&c=apps" + "" + " SHAKTI&sender=SHAKTl&route=2&unicode=0&country=91&DLT_TE_ID=1707161675029844457");
+        baseRequest.callAPIGETDirectURL(1,   "http://control.yourbulksms.com/api/sendhttp.php?authkey=393770756d707334373701&mobiles="+etDeliveryBoyMobileNo.getText().toString()+"&message=Dear%20User%20New%20Delivery%20is%20Assigned%20to%20you%20Please%20Use%20the%20below%20link%20to%20install%20the%20App%20https%3A%2F%2Fplay.google.com%2Fstore%2Fsearch%3Fq%3Dshakti%2520Transport%2520App%26c%3Dapps%20SHAKTIPUMPS&sender=SHAKTl&route=2&unicode=0&country=91&DLT_TE_ID=1707168475371194441");
     }
-
 
    /* public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -160,6 +159,7 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         }
 //        Toast.makeText(getApplicationContext(), str, Toast.LENGTH_SHORT).show();
     }*/
+
 
     private void inItViews() {
         tvZdoc_no = findViewById(R.id.tvZdoc_no);
