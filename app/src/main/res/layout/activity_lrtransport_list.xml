@@ -85,7 +85,6 @@
 
     </RelativeLayout>
 
-
     <RelativeLayout
         android:id="@+id/rlvBottomMainViewID"
         android:layout_alignParentBottom="true"

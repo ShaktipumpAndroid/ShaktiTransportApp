@@ -2,11 +2,12 @@ package activity;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
+import static org.acra.ACRA.log;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,7 +16,6 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -76,12 +76,12 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         db = new DatabaseHelper(context);
         db.getLogin();
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.assigned));
-        submitAssignedDeliveryDeliveredData();
-//        getAssignedDeliveryList();
+       // submitAssignedDeliveryDeliveredData();
+        getAssignedDeliveryList();
         mHandler = new android.os.Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -95,7 +95,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
         final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-        LoginBean loginBean = new LoginBean();
+
         String username = LoginBean.getUseid();
         param.add(new BasicNameValuePair("driver_mob", username));
 
@@ -127,7 +127,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
                             Toast.makeText(getApplicationContext(), getResources().getString(R.string.Connecting_failed), Toast.LENGTH_LONG).show();
                         }
                     } else {
-//                        setDataOnAdapter();
+                        setDataOnAdapter();
                         Message msg = new Message();
                         msg.obj = getResources().getString(R.string.No_Internet);
                         mHandler.sendMessage(msg);
@@ -150,6 +150,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         try {
             assignedDeliveryResponseArrayList.clear();
             assignedDeliveryResponseArrayList = db.getAssignedDeliveryListData();
+            Log.e("Length",""+assignedDeliveryResponseArrayList.size());
             assignedDeliveryAdapter = new AssignedDeliveryAdapter(assignedDeliveryResponseArrayList, this, this::click);
             recyclerView.setAdapter(assignedDeliveryAdapter);
         } catch (Exception exception) {
@@ -193,6 +194,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
 
     private void logout() {
         db.deleteTableData(DatabaseHelper.TABLE_LOGIN);
+        db.deleteTableData(DatabaseHelper.TABLE_ASSIGNED_DELIVERIES);
         CustomUtility.setSharedPreference(context, "capture", "0");
         String selectedFilePath = "/storage/emulated/0/signdemo/signature.jpg";
         File file = new File(selectedFilePath);

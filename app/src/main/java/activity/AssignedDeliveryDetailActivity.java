@@ -2,31 +2,29 @@ package activity;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Message;
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.administrator.shaktiTransportApp.R;
-import com.google.gson.Gson;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -35,13 +33,10 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 import activity.PodBean.AssignedDeliveryDetailResponse;
-import activity.PodBean.AssignedDeliveryResponse;
 import activity.PodBean.DeliveryDeliveredInput;
 import bean.LoginBean;
 import database.DatabaseHelper;
@@ -51,12 +46,12 @@ import webservice.CameraUtils;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
 
+@SuppressWarnings("deprecation")
 public class AssignedDeliveryDetailActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private android.os.Handler mHandler;
     DatabaseHelper db;
     Context context;
-    private Toolbar mToolbar;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private AssignedDeliveryDetailResponse assignedDeliveryResponse;
     public static final int BITMAP_SAMPLE_SIZE = 4;
@@ -67,31 +62,41 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
     private Button btnSubmit;
     public static final String GALLERY_DIRECTORY_NAME = "ShaktiKusumUnload";
     private boolean photo1, photo2, photo3, photo4, photo5, photo6;
-
+    RelativeLayout rlvAddDEviceViewID;
     String mImageFolderName = "/SKAPP/UNLOAD/";
     String type = "UNLOAD/";
     double inst_latitude_double, inst_longitude_double;
+    LinearLayout original,layout;
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint({"HandlerLeak", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_detail);
         context = this;
+        rlvAddDEviceViewID = findViewById(R.id.rlvAddDEviceViewID);
         WebURL.GALLERY_DIRECTORY_NAME_COMMON = "ShaktiKusumUnload";
         db = new DatabaseHelper(context);
         getGpsLocation();
         inItView();
+
+        layout =findViewById(R.id.partialLayout);
+        original =findViewById(R.id.oldlayout);
         Bundle bundle = getIntent().getExtras();
         rfqNoValue = bundle.getString("rfqNoValue");
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Assigned Delivery Detail");
-//        getAssignedDeliveryDetail();
+
+        Log.e("rfqNoValue",rfqNoValue);
         setDataOnView();
-        LoginBean loginBean = new LoginBean();
-        String driverMob = LoginBean.getUseid();
-        WebURL.CUSTOMERID_ID = driverMob;
+        WebURL.CUSTOMERID_ID = LoginBean.getUseid();
+
+        if (rfqNoValue.equalsIgnoreCase("") ){
+            layout.setVisibility(View.VISIBLE);
+            original.setVisibility(View.GONE);
+        }else{
+            layout.setVisibility(View.GONE);
+            original.setVisibility(View.VISIBLE);
+        }
 
         mHandler = new android.os.Handler() {
             @Override
@@ -100,25 +105,6 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
                 Toast.makeText(AssignedDeliveryDetailActivity.this, mString, Toast.LENGTH_LONG).show();
             }
         };
-
-        tvLeft.setOnClickListener(v -> {
-            showConfirmationGallery(DatabaseHelper.KEY_DELIVERY_PHOTO1, "PHOTO_1");
-        });
-        tvRight.setOnClickListener(v -> {
-            showConfirmationGallery(DatabaseHelper.KEY_DELIVERY_PHOTO2, "PHOTO_2");
-        });
-        tvTop.setOnClickListener(v -> {
-            showConfirmationGallery(DatabaseHelper.KEY_DELIVERY_PHOTO3, "PHOTO_3");
-        });
-        tvFront.setOnClickListener(v -> {
-            showConfirmationGallery(DatabaseHelper.KEY_DELIVERY_PHOTO4, "PHOTO_4");
-        });
-        tvIrCopy.setOnClickListener(v -> {
-            showConfirmationGallery(DatabaseHelper.KEY_DELIVERY_PHOTO5, "PHOTO_5");
-        });
-        tvMatrecp.setOnClickListener(v -> {
-            showConfirmationGallery(DatabaseHelper.KEY_DELIVERY_PHOTO6, "PHOTO_6");
-        });
 
         btnSubmit.setOnClickListener(v -> {
             if (validationCheck()) {
@@ -131,30 +117,35 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        rlvAddDEviceViewID.setOnClickListener(V-> {
+            String sapBillno = assignedDeliveryResponse.getBillNo() ;
+                Intent intent = new Intent(AssignedDeliveryDetailActivity.this, AssignedDeliveryImages.class);
+                intent.putExtra("sapBillNo",sapBillno );
+                startActivity(intent);
+
+        });
+        RelativeLayout rlvBackViewID = findViewById(R.id.rlvBackViewID);
+        rlvBackViewID.setOnClickListener(v -> finish());
     }
 
+
     private void inItView() {
-        rfqNo = (TextView) findViewById(R.id.rfq_no);
-        vehNo = (TextView) findViewById(R.id.veh_no);
-        confirmationDate = (TextView) findViewById(R.id.confirmation_date);
-        confirmationTime = (TextView) findViewById(R.id.confirmation_time);
-        transporterName = (TextView) findViewById(R.id.transporter_name);
-        transporterCode = (TextView) findViewById(R.id.transporter_code);
-        fromLocValue = (TextView) findViewById(R.id.from_loc_value);
-        toLocValue = (TextView) findViewById(R.id.to_loc_value);
-        viaAddress = (TextView) findViewById(R.id.viaAddress);
-        vehicle_type = (TextView) findViewById(R.id.vehicle_type);
-        distance = (TextView) findViewById(R.id.distance);
-        delivery_place = (TextView) findViewById(R.id.delivery_place);
-        transit_time = (TextView) findViewById(R.id.transit_time);
-        rfq_date = (TextView) findViewById(R.id.rfq_date);
-        rfq_time = (TextView) findViewById(R.id.rfq_time);
-        tvLeft = (TextView) findViewById(R.id.tvLeft);
-        tvRight = (TextView) findViewById(R.id.tvRight);
-        tvTop = (TextView) findViewById(R.id.tvTop);
-        tvFront = (TextView) findViewById(R.id.tvFront);
-        tvIrCopy = (TextView) findViewById(R.id.tvIrCopy);
-        tvMatrecp = (TextView) findViewById(R.id.tvMatrecp);
+        rfqNo =  findViewById(R.id.rfq_no);
+        vehNo =  findViewById(R.id.veh_no);
+        confirmationDate =  findViewById(R.id.confirmation_date);
+        confirmationTime =  findViewById(R.id.confirmation_time);
+        transporterName =  findViewById(R.id.transporter_name);
+        transporterCode =  findViewById(R.id.transporter_code);
+        fromLocValue =  findViewById(R.id.from_loc_value);
+        toLocValue =  findViewById(R.id.to_loc_value);
+        viaAddress =  findViewById(R.id.viaAddress);
+        vehicle_type =  findViewById(R.id.vehicle_type);
+        distance =  findViewById(R.id.distance);
+        delivery_place =  findViewById(R.id.delivery_place);
+        transit_time =  findViewById(R.id.transit_time);
+        rfq_date =  findViewById(R.id.rfq_date);
+        rfq_time =  findViewById(R.id.rfq_time);
         btnSubmit = findViewById(R.id.btnSubmit);
     }
 
@@ -177,7 +168,7 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
         rfq_date.setText(assignedDeliveryResponse.getRfqDate());
         rfq_time.setText(assignedDeliveryResponse.getRfqTime());
 
-        if (db.isRecordExist(db.TABLE_ASSIGNED_DELIVERY_DELIVERED, db.KEY_DELIVERY_RFQ_DOC, assignedDeliveryResponse.getRfqDoc())) {
+        if (db.isRecordExist(DatabaseHelper.TABLE_ASSIGNED_DELIVERY_DELIVERED, DatabaseHelper.KEY_DELIVERY_RFQ_DOC, assignedDeliveryResponse.getRfqDoc())) {
             DeliveryDeliveredInput deliveryDeliveredInput = db.getDeliveredDetail(assignedDeliveryResponse.getRfqDoc());
             photo1_text = deliveryDeliveredInput.getPhoto1();
             setIcon(DatabaseHelper.KEY_DELIVERY_PHOTO1);
@@ -203,10 +194,9 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
 //            case R.id.action_signout:
 //                return true;
         }
@@ -214,12 +204,12 @@ public class AssignedDeliveryDetailActivity extends AppCompatActivity {
     }
 
     private void showConfirmationGallery(final String keyimage, final String name) {
-        final CustomUtility customUtility = new CustomUtility();
+        new CustomUtility();
         final CharSequence[] items = {"Take Photo", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
         builder.setTitle("Add Photo!");
         builder.setItems(items, (dialog, item) -> {
-            boolean result = customUtility.checkPermission(context);
+            boolean result = CustomUtility.checkPermission(context);
             if (items[item].equals("Take Photo")) {
                 if (result) {
                     openCamera(name);

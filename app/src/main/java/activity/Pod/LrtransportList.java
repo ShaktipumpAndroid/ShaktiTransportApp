@@ -59,7 +59,6 @@ public class LrtransportList extends AppCompatActivity {
 
         WebURL.mSapBillNumber  ="";
 
-        //  baseRequest = new BaseRequest(this);
         List<Boolean> mLrInvoiceSelectionCheck = new ArrayList<>();
         RelativeLayout rlvAddDEviceViewID = findViewById(R.id.rlvAddDEviceViewID);
         RelativeLayout rlvBackViewID = findViewById(R.id.rlvBackViewID);

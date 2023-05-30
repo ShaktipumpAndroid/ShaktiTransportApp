@@ -120,8 +120,12 @@ public class SplashActivity extends Activity  {
                             ii = new Intent(SplashActivity.this, MainActivity.class);
                             ii.putExtra("login_flag", "Y");
                             startActivity(ii);
-                        }
-                        else
+                        }else if(mUserCheckType == 4){
+
+                            ii = new Intent(SplashActivity.this, AssignedDeliveryListActivity.class);
+                            startActivity(ii);
+
+                        } else
                         {
                             CustomUtility.setSharedPreference(context, "UserTypeSNF", "1");/// CNF= 1, Transport = 2;
                             ii = new Intent(SplashActivity.this, MainActivity.class);

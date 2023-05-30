@@ -220,5 +220,7 @@
     <string name="Driver_Name">Driver Name</string>
     <string name="Driver_Mobile">Driver Mobile No.</string>
     <string name="LR_Number_">LR Number</string>
+    <string name="AssignedDeliveryImages">Delivery Images</string>
+    <string name="take_photo">Take Photo</string>
 
 </resources>

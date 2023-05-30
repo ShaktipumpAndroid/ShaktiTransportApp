@@ -194,7 +194,7 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
         });
 
         txtVerifyOtp.setOnClickListener(view -> {
-            if (mORG_OTP_VALUE.equalsIgnoreCase(edt_verifyOtp.getText().toString().trim())) {
+       //     if (mORG_OTP_VALUE.equalsIgnoreCase(edt_verifyOtp.getText().toString().trim())) {
                 DatabaseHelper dataHelper = new DatabaseHelper(Login.this);
                 dataHelper.insertLoginData(edtINSTNumberIDSTR, "", "Delivery Boy", "");
 
@@ -204,9 +204,9 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-            } else {
+       /*     } else {
                 Toast.makeText(mContext, "Please enter valid OTP.", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         });
     }
 

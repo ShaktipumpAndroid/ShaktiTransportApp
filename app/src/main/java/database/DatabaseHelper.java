@@ -60,6 +60,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_BILL_NO = "bill_no";
     public static final String KEY_TRANS_NO = "trans_no";
     public static final String KEY_ASSIGN_NO = "assign_no";
+    public static final String KEY_BOOK_DATE = "book_date";
+    public static final String KEY_LR_NO = "lr_no";
+    public static final String KEY_MOBILE = "mobile_no";
     public static final String KEY_DELIVERY_PHOTO1 = "delivery_photo_1";
     public static final String KEY_DELIVERY_PHOTO2 = "delivery_photo_2";
     public static final String KEY_DELIVERY_PHOTO3 = "delivery_photo_3";
@@ -424,6 +427,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_BILL_NO + " TEXT," +
             KEY_TRANS_NO + " TEXT," +
             KEY_ASSIGN_NO + " TEXT," +
+            KEY_BOOK_DATE + " TEXT," +
+            KEY_LR_NO + " TEXT," +
+            KEY_MOBILE+ " TEXT," +
             KEY_ASSIGNED_DELIVERY_CONF_DATE + " TEXT," +
             KEY_ASSIGNED_DELIVERY_CONF_TIME + " TEXT," +
             KEY_ASSIGNED_DELIVERY_CONFIRMED + " TEXT," +
@@ -1256,12 +1262,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     values.put(KEY_BILL_NO, assignedDeliveryDetailResponse.get(p).getBillNo());
                     values.put(KEY_TRANS_NO, assignedDeliveryDetailResponse.get(p).getTransNo());
                     values.put(KEY_ASSIGN_NO, assignedDeliveryDetailResponse.get(p).getAssignMob());
-                    i = db.insert(TABLE_ASSIGNED_DELIVERIES, null, values);
-                    db.setTransactionSuccessful();
+                    values.put(KEY_BOOK_DATE,assignedDeliveryDetailResponse.get(p).getzBookDate());
+                    values.put(KEY_LR_NO,assignedDeliveryDetailResponse.get(p).getzLRno());
+                    values.put(KEY_MOBILE,assignedDeliveryDetailResponse.get(p).getzMobile());
+
+
+                    db.insert(TABLE_ASSIGNED_DELIVERIES, null, values);
+
+
                 } catch (SQLiteException e) {
                     e.printStackTrace();
                 }
+
             }
+
+            db.setTransactionSuccessful();
         } catch (SQLiteException e) {
             e.printStackTrace();
         } finally {
@@ -1659,7 +1674,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public ArrayList<AssignedDeliveryDetailResponse> getAssignedDeliveryListData() {
-        ArrayList<AssignedDeliveryDetailResponse> assignedDeliveryList = new ArrayList<AssignedDeliveryDetailResponse>();
+        ArrayList<AssignedDeliveryDetailResponse> assignedDeliveryList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         db.beginTransaction();
         try {
@@ -1690,6 +1705,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         assignedDeliveryResponse.setBillNo(cursor.getString(cursor.getColumnIndex(KEY_BILL_NO)));
                         assignedDeliveryResponse.setTransNo(cursor.getString(cursor.getColumnIndex(KEY_TRANS_NO)));
                         assignedDeliveryResponse.setAssignMob(cursor.getString(cursor.getColumnIndex(KEY_ASSIGN_NO)));
+                        assignedDeliveryResponse.setzLRno(cursor.getString(cursor.getColumnIndex(KEY_LR_NO)));
+                        assignedDeliveryResponse.setzBookDate(cursor.getString(cursor.getColumnIndex(KEY_BOOK_DATE)));
+                        assignedDeliveryResponse.setzMobile(cursor.getString(cursor.getColumnIndex(KEY_MOBILE)));
+                        assignedDeliveryResponse.setViaAddress(cursor.getString(cursor.getColumnIndex(KEY_ASSIGNED_DELIVERY_VIA_ADDRESS)));
+
                         assignedDeliveryList.add(assignedDeliveryResponse);
                         cursor.moveToNext();
                     }
@@ -2472,6 +2492,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             database.close();
         }
         return lrtransportImages;
+    }
+
+    public List<ImageModel> getAssignedDeliveryImages() {
+        ArrayList<ImageModel> Images = new ArrayList<>();
+        SQLiteDatabase  database = this.getWritableDatabase();
+        if(CustomUtility.doesTableExist(database,TABLE_LR_IMAGES)) {
+            Cursor cursor = database.rawQuery(" SELECT * FROM " + TABLE_LR_IMAGES, null);
+            ImageModel imageModel;
+
+            if (cursor.getCount() > 0) {
+                for (int i = 0; i < cursor.getCount(); i++) {
+                    cursor.moveToNext();
+
+                    imageModel = new ImageModel();
+                    imageModel.setID(cursor.getString(0));
+                    imageModel.setName(cursor.getString(1));
+                    imageModel.setBillNo(cursor.getString(2));
+                    imageModel.setImagePath(cursor.getString(3));
+                    imageModel.setImageSelected(Boolean.parseBoolean(cursor.getString(4)));
+                    Images.add(imageModel);
+                }
+            }
+            cursor.close();
+            database.close();
+        }
+        return Images;
     }
 
     public void updateLrImagesRecord(String name, String path, boolean isSelected, String sapbillno) {

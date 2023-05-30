@@ -47,20 +47,20 @@ public class AssignedRfq extends AppCompatActivity {
         db = new DatabaseHelper(context);
 
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar =  findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.Quotation));
 
-        create_rfq = (TextView) findViewById(R.id.create_rfq);
+        create_rfq =  findViewById(R.id.create_rfq);
 
         ArrayList<RfqBean> arraylist_rfq;
         arraylist_rfq = db.getRfqList();
 
         adapter = new RfqCustomList(context, arraylist_rfq);
-        inst_list = (ListView) findViewById(R.id.rfq_list);
+        inst_list =  findViewById(R.id.rfq_list);
         inst_list.setAdapter(adapter);
 
 
@@ -136,6 +136,7 @@ public class AssignedRfq extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         switch (id) {

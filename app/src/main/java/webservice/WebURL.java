@@ -3,7 +3,6 @@ package webservice;
 
 public class WebURL {
 
-    public static final String IMAGE_DIRECTORY_NAME = "shaktitranspotapp";
     public static int UserTypeCheck = 0;
     public static int FORM_CHECK_LENGTH = 0;
     public static String ANDROID_APP_VERSION = "";
