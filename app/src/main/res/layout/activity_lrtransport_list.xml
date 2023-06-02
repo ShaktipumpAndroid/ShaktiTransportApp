@@ -38,11 +38,11 @@
             android:background="@android:color/transparent">
 
             <TextView
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="LR Invoice list"
+                android:layout_centerInParent="true"
+                android:text="@string/Lr_list"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp" />
 
@@ -84,7 +84,6 @@
             android:layout_height="match_parent"/>
 
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/rlvBottomMainViewID"
@@ -137,7 +136,7 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_30sdp"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:gravity="center"
             android:fontFamily="@font/open_sans_bold"
             android:textColor="@color/white"

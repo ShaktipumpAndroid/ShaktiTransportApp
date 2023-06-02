@@ -38,13 +38,33 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <Spinner
-                    android:id="@+id/spinner_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/popup_relative">
+
+                    <Spinner
+                        android:id="@+id/spinnerLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_3sdp"
+                        android:spinnerMode="dialog"/>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:spinnerMode="dialog" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/popup_relative">
+                    <Spinner
+                        android:id="@+id/spinner_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:spinnerMode="dialog" />
+                </RelativeLayout>
+
+
+
 
                 <LinearLayout
                     android:id="@+id/ll_UserNamePassword"
@@ -65,7 +85,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:hint="User Name"
+                            android:hint="@string/username"
                             android:inputType="number"
                             android:shadowColor="@color/colorAccent"
                             android:singleLine="true"
@@ -89,7 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:hint="Password"
+                            android:hint="@string/Password"
                             android:inputType="textPassword"
                             android:textColor="@color/colorAccent"
                             android:textColorHint="@color/colorAccent"
@@ -107,7 +127,7 @@
                         android:layout_marginBottom="@dimen/space_mid10"
                         android:padding="@dimen/space_mid10"
                         android:src="@drawable/icn_button1"
-                        android:text="SEND"
+                        android:text="@string/send"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -132,7 +152,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:digits="0123456789"
-                            android:hint="Enter your mpbile number"
+                            android:hint="@string/enter_mobileNo"
                             android:inputType="number"
                             android:maxLength="10"
                             android:textColor="@color/black"
@@ -151,7 +171,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/open_sans_bold"
                         android:gravity="center"
-                        android:text="Send OTP"
+                        android:text="@string/otp"
                         android:textSize="@dimen/_12ssp"
                         android:visibility="visible" />
 
@@ -168,7 +188,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="0123456789"
-                            android:hint="Enter OTP"
+                            android:hint="@string/enter_otp"
                             android:inputType="number"
                             android:maxLength="4"
                             android:textColor="@color/black"

@@ -1,22 +1,18 @@
 package activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.StrictMode;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -30,6 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.administrator.shaktiTransportApp.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -41,32 +39,35 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
 import activity.Pod.ActivityInvoiceGetInfo;
-import activity.Pod.ActivityUpdateSandFData;
+import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
 import activity.retrofit.RequestReciever;
 import bean.LoginBean;
 import database.DatabaseHelper;
 import utility.CustomUtility;
+import webservice.Constants;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
 
-public class Login extends AppCompatActivity {
+@SuppressWarnings("deprecation")
+public class Login extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    protected static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     Spinner spinner_type;
     int index;
     String username,
             password,
-            login, ename,
+            login, name,
             usertype,
-            rfqnum,
+            rfqnum,loginUser,
             spinner_type_text;
     List<String> list = null;
     Context mContext;
+    @SuppressLint("HandlerLeak")
     android.os.Handler mHandler = new android.os.Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -74,17 +75,22 @@ public class Login extends AppCompatActivity {
             Toast.makeText(Login.this, mString, Toast.LENGTH_LONG).show();
         }
     };
+    String[] language;
     private ProgressDialog progressDialog;
     private EditText inputName, inputPassword, edt_verifyOtp;
     private TextInputLayout inputLayoutName,
             inputLayoutPassword;
-    private ImageView btnSignUp;
     private LinearLayout ll_UserNamePassword;
     private RelativeLayout rl_Otp, lvlOTPMianID;
     private EditText edtINSTNumberID;
     private BaseRequest baseRequest;
-    private TextView txt_GetOtp, txtVerifyOtp;
     private String edtINSTNumberIDSTR, mORG_OTP_VALUE = "";
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,26 +98,29 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mContext = this;
         baseRequest = new BaseRequest(this);
-        list = new ArrayList<String>();
+        list = new ArrayList<>();
+
+        Spinner language_spinner = findViewById(R.id.spinnerLanguage);
+        language = new String[]{getResources().getString(R.string.select_language), getResources().getString(R.string.english), getResources().getString(R.string.hindi)};
 
         getUserTypeValue();
 
-        inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
-        inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_password);
-        inputName = (EditText) findViewById(R.id.login_Et);
-        inputPassword = (EditText) findViewById(R.id.password);
-        btnSignUp = (ImageView) findViewById(R.id.btn_signup);
+        inputLayoutName =  findViewById(R.id.input_layout_name);
+        inputLayoutPassword =  findViewById(R.id.input_layout_password);
+        inputName =  findViewById(R.id.login_Et);
+        inputPassword =  findViewById(R.id.password);
+        ImageView btnSignUp =  findViewById(R.id.btn_signup);
         ll_UserNamePassword = findViewById(R.id.ll_UserNamePassword);
         rl_Otp = findViewById(R.id.rl_Otp);
         edtINSTNumberID = findViewById(R.id.edtINSTNumberID);
-        txt_GetOtp = findViewById(R.id.txt_GetOtp);
-        txtVerifyOtp = findViewById(R.id.txtVerifyOtp);
+        TextView txt_GetOtp = findViewById(R.id.txt_GetOtp);
+        TextView txtVerifyOtp = findViewById(R.id.txtVerifyOtp);
         lvlOTPMianID = findViewById(R.id.lvlOTPMianID);
         edt_verifyOtp = findViewById(R.id.edt_verifyOtp);
         inputName.addTextChangedListener(new MyTextWatcher(inputName));
         inputPassword.addTextChangedListener(new MyTextWatcher(inputPassword));
 
-        spinner_type = (Spinner) findViewById(R.id.spinner_type);
+        spinner_type =  findViewById(R.id.spinner_type);
 
         spinner_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -125,6 +134,22 @@ public class Login extends AppCompatActivity {
                     rl_Otp.setVisibility(View.GONE);
                 }
                 spinner_type_text = spinner_type.getSelectedItem().toString();
+
+                if (spinner_type_text.equals(getResources().getString(R.string.Transport_Officer))) {
+                    loginUser = "Transport Officer";
+
+                } else if (spinner_type_text.equals(getResources().getString(R.string.Vendor))) {
+                    loginUser = "Vendor";
+
+                } else if (spinner_type_text.equals(getResources().getString(R.string.Driver))) {
+                    loginUser = "Driver";
+
+                } else if (spinner_type_text.equals(getResources().getString(R.string.Delivery_Boy))) {
+                    loginUser = "Delivery Boy";
+
+                }
+
+                Log.e("Type===>",""+loginUser);
             }
 
             @Override
@@ -132,7 +157,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        spinner_type.setPrompt("Select Type");
+        spinner_type.setPrompt(getResources().getString(R.string.select_type));
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_item_center, list);
 
@@ -149,31 +174,42 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item_center, language);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        language_spinner.setSelection(0, false);
+        language_spinner.setAdapter(adapter);
+
+        language_spinner.setOnItemSelectedListener(this);
+
+
         txt_GetOtp.setOnClickListener(view -> {
             edtINSTNumberIDSTR = edtINSTNumberID.getText().toString().trim();
             if (edtINSTNumberIDSTR.equalsIgnoreCase("")) {
-                Toast.makeText(mContext, "Please enter your mobile number.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, getResources().getString(R.string.enter_mobile), Toast.LENGTH_SHORT).show();
             } else if (edtINSTNumberIDSTR.length() < 10 && android.util.Patterns.PHONE.matcher(edtINSTNumberIDSTR).matches()) {
-                Toast.makeText(mContext, "Please enter valid mobile number.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, getResources().getString(R.string.enter_vaild_mobile), Toast.LENGTH_SHORT).show();
             } else {
                 checkMobileNumber();
             }
         });
 
         txtVerifyOtp.setOnClickListener(view -> {
-           // if (mORG_OTP_VALUE.equalsIgnoreCase(edt_verifyOtp.getText().toString().trim())) {
+       //     if (mORG_OTP_VALUE.equalsIgnoreCase(edt_verifyOtp.getText().toString().trim())) {
                 DatabaseHelper dataHelper = new DatabaseHelper(Login.this);
                 dataHelper.insertLoginData(edtINSTNumberIDSTR, "", "Delivery Boy", "");
-                LoginBean lb = new LoginBean();
-                lb.setLogin(edtINSTNumberIDSTR, "", "Delivery Boy", "");
+
+                LoginBean.setLogin(edtINSTNumberIDSTR, "", "Delivery Boy", "");
                 CustomUtility.setSharedPreference(mContext, "UserTypeSNF", "4");
+
+                CustomUtility.setSharedPreference(mContext, "Userid", edtINSTNumberIDSTR);
+
                 Intent intent = new Intent(mContext, AssignedDeliveryListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
-          //  } else {
-                //Toast.makeText(mContext, "Please enter valid OTP.", Toast.LENGTH_SHORT).show();
-           // }
+       /*     } else {
+                Toast.makeText(mContext, "Please enter valid OTP.", Toast.LENGTH_SHORT).show();
+            }*/
         });
     }
 
@@ -192,10 +228,10 @@ public class Login extends AppCompatActivity {
             @Override
             public void onSuccess(int APINumber, String Json, Object obj) {
                 try {
-                    if (!Json.equalsIgnoreCase("")) {
-                        Toast.makeText(mContext, "OTP send successfully.", Toast.LENGTH_LONG).show();
+                    if (!obj.toString().isEmpty()) {
+                        Toast.makeText(mContext, getResources().getString(R.string.otp_successfully), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(mContext, "OTP send failed please try again.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mContext, getResources().getString(R.string.otp_failed), Toast.LENGTH_LONG).show();
                     }
                     baseRequest.hideLoader();
                 } catch (Exception e) {
@@ -206,20 +242,21 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(int APINumber, String errorCode, String message) {
                 baseRequest.hideLoader();
-                Toast.makeText(mContext, "OTP send failed please try again.", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(mContext, "OTP send failed please try again On Failure.", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onNetworkFailure(int APINumber, String message) {
                 baseRequest.hideLoader();
-                Toast.makeText(mContext, "Please check internet connection!", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, getResources().getString(R.string.please_check), Toast.LENGTH_LONG).show();
             }
         });
 
-        Map<String, String> wordsByKey = new HashMap<>();
+        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection") Map<String, String> wordsByKey = new HashMap<>();
         System.out.println("jsonObject==>>" + wordsByKey);
         //baseRequest.callAPIGET(1, wordsByKey, NewSolarVFD.GET_DEVICE_SIM_NUMBER_API);/////
-        baseRequest.callAPIGETDirectURL(1, "http://login.yourbulksms.com/api/sendhttp.php?authkey=8716AQbKpjEHR5b4479de&mobiles=" + edtINSTNumberIDSTR + "&message=Enter The Following OTP To Verify Your Account " + mORG_OTP_VALUE + " SHAKTI&sender=SHAKTl&route=4&country=91&DLT_TE_ID=1707161675029844457");/////
+       // baseRequest.callAPIGETDirectURL(1, "http://login.yourbulksms.com/api/sendhttp.php?authkey=8716AQbKpjEHR5b4479de&mobiles=" + edtINSTNumberIDSTR + "&message=Enter The Following OTP To Verify Your Account " + mORG_OTP_VALUE + " SHAKTI&sender=SHAKTl&route=4&country=91&DLT_TE_ID=1707161675029844457");/////
+        baseRequest.callAPIGETDirectURL(1,   "http://control.yourbulksms.com/api/sendhttp.php?authkey=393770756d707334373701&" + "mobiles="+edtINSTNumberIDSTR+"&message=Enter The Following OTP To Verify Your Account " + mORG_OTP_VALUE + " SHAKTI&sender=SHAKTl&route=2&unicode=0&country=91&DLT_TE_ID=1707161675029844457");
     }
 
     private void serverLogin() {
@@ -228,11 +265,10 @@ public class Login extends AppCompatActivity {
         username = inputName.getText().toString();
         password = inputPassword.getText().toString();
 
-        final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-        param.clear();
+        final ArrayList<NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("PERNR", username));
         param.add(new BasicNameValuePair("PASS", password));
-        param.add(new BasicNameValuePair("OBJS", spinner_type_text));
+        param.add(new BasicNameValuePair("OBJS", loginUser));
         param.add(new BasicNameValuePair("DEVICE_NAME", CustomUtility.getDeviceName()));
         param.add(new BasicNameValuePair("APP_VERSION", WebURL.ANDROID_APP_VERSION));
         param.add(new BasicNameValuePair("API", String.valueOf(Build.VERSION.SDK_INT)));
@@ -251,10 +287,10 @@ public class Login extends AppCompatActivity {
 
                             for (int i = 0; i < ja.length(); i++) {
                                 JSONObject jo = ja.getJSONObject(i);
-                                login = jo.getString("LOGIN");
-                                ename = jo.getString("NAME");
-                                usertype = jo.getString("OBJS");
-                                if (usertype.contains("Driver ")) {
+                                login = jo.getString("LOGIN").trim();
+                                name = jo.getString("NAME").trim();
+                                usertype = jo.getString("OBJS").trim();
+                                if (usertype.contains("Driver")) {
                                     rfqnum = jo.getString("RFQ_DOC");
                                 } else {
                                     rfqnum = "";
@@ -263,10 +299,9 @@ public class Login extends AppCompatActivity {
                             Log.e("LOG", "IN" + login);
 
                             if ("Y".equals(login)) {
-                                DatabaseHelper dataHelper = new DatabaseHelper(Login.this);
-                                dataHelper.insertLoginData(username, ename, usertype, rfqnum);
-                                LoginBean lb = new LoginBean();
-                                lb.setLogin(username, ename, usertype, rfqnum);
+                                @SuppressWarnings("resource") DatabaseHelper dataHelper = new DatabaseHelper(Login.this);
+                                dataHelper.insertLoginData(username, name, usertype, rfqnum);
+                                LoginBean.setLogin(username, name, usertype, rfqnum);
 
                                 progressDialog.dismiss();
 
@@ -334,8 +369,7 @@ public class Login extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
 
-        final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-//        param.clear();
+        final ArrayList<NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("driver_mob", edtINSTNumberIDSTR));
 
         progressDialog = ProgressDialog.show(Login.this, "", "Connecting to server..please wait !");
@@ -410,17 +444,17 @@ public class Login extends AppCompatActivity {
     }
 
     public void getUserTypeValue() {
-        list.add("Select Type");
-        list.add("Transport Officer");
-        list.add("Vendor");
-        list.add("Driver");
-        list.add("Delivery Boy");
+        list.add(getResources().getString(R.string.select_type));
+        list.add(getResources().getString(R.string.Transport_Officer));
+        list.add(getResources().getString(R.string.Vendor));
+        list.add(getResources().getString(R.string.Driver));
+        list.add(getResources().getString(R.string.Delivery_Boy));
     }
 
     private boolean validateType() {
         boolean value;
         if (index == 0) {
-            Toast.makeText(this, "Please Select Type", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.Please_Select_Type), Toast.LENGTH_LONG).show();
             value = false;
         } else {
             value = true;
@@ -430,7 +464,7 @@ public class Login extends AppCompatActivity {
 
     private class MyTextWatcher implements TextWatcher {
 
-        private View view;
+        private final View view;
 
         private MyTextWatcher(View view) {
             this.view = view;
@@ -443,13 +477,42 @@ public class Login extends AppCompatActivity {
         }
 
         public void afterTextChanged(Editable editable) {
-            switch (view.getId()) {
-                case R.id.login_Et:
-                    validateName();
-                    break;
-
+            if (view.getId() == R.id.login_Et) {
+                validateName();
             }
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (parent.getSelectedItem().toString().equals(getResources().getString(R.string.hindi))) {
+            CustomUtility.setSharedPreference(getApplicationContext(), Constants.selectedLanguage,"Hindi");
+            updateView("hi");
+        } else if (parent.getSelectedItem().toString().equals(getResources().getString(R.string.english))) {
+            CustomUtility.setSharedPreference(getApplicationContext(), Constants.selectedLanguage,"English");
+            updateView("en");
+        }
+    }
+
+    private void updateView(String languageCode) {
+        Context context = LocaleHelper.setLocale(Login.this, languageCode);
+        Resources resources = context.getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        Configuration conf = resources.getConfiguration();
+        conf.setLocale(new Locale(languageCode)); // API 17+ only.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            context.createConfigurationContext(conf);
+        } else {
+            resources.updateConfiguration(conf, dm);
+        }
+        Intent refresh = new Intent(this, Login.class);
+        finish();
+        startActivity(refresh);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

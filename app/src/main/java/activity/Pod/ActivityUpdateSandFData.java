@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.os.StrictMode;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.administrator.shaktiTransportApp.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -30,17 +28,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import activity.PodBean.InvoicelistBeanResponse;
-import activity.PodBean.LrInvoiceResponse;
+import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
-import utility.CustomUtility;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
 
@@ -98,6 +93,12 @@ public class ActivityUpdateSandFData extends AppCompatActivity implements DatePi
 private int intVarified1ID=0,intVarified2ID=0,intVarified3ID=0,intVarified4ID=0,intVarified5ID=0,intVarified6ID=0;
 
     private List<InvoicelistBeanResponse> mInvoicelistBeanResponse;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +108,7 @@ private int intVarified1ID=0,intVarified2ID=0,intVarified3ID=0,intVarified4ID=0,
 
 
 
-       // dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+       // dpd = (DatePickerDialog) this.dpd.getParentFragmentManager().findFragmentByTag("Datepickerdialog");
 
         initView();
         initHeaderView();
@@ -357,24 +358,40 @@ private int intVarified1ID=0,intVarified2ID=0,intVarified3ID=0,intVarified4ID=0,
         });
 
 
-        imgDispachDateID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkDateClick = 1;
-                showDatePickerDialog();
+        imgDispachDateID.setOnClickListener(view -> {
+            Calendar currentDate;
+            int mDay, mMonth, mYear;
+            currentDate = Calendar.getInstance();
 
-            }
+            mDay = currentDate.get(Calendar.DAY_OF_MONTH);
+            mMonth = currentDate.get(Calendar.MONTH);
+            mYear = currentDate.get(Calendar.YEAR);
+            android.app.DatePickerDialog datePickerDialog = new android.app.DatePickerDialog(mContext, (datePicker, i, i1, i2) -> {
+                i1 = i1 + 1;
+                edtDispachDateID.setText(i2 + "/" + i1 + "/" + i);
+              /*  mStart = edtDispachDateID.getText().toString().trim();
+                parseDateToddMMyyyy1(mStart);*/
+            }, mYear, mMonth, mDay);
+            datePickerDialog.setTitle("Start Date");
+            datePickerDialog.show();
         });
 
-        imgDelivertDateID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        imgDelivertDateID.setOnClickListener(view -> {
+            Calendar currentDate;
+            int mDay, mMonth, mYear;
+            currentDate = Calendar.getInstance();
 
-
-                checkDateClick = 2;
-                showDatePickerDialog();
-
-            }
+            mDay = currentDate.get(Calendar.DAY_OF_MONTH);
+            mMonth = currentDate.get(Calendar.MONTH);
+            mYear = currentDate.get(Calendar.YEAR);
+            android.app.DatePickerDialog datePickerDialog = new android.app.DatePickerDialog(mContext, (datePicker, i, i1, i2) -> {
+                i1 = i1 + 1;
+                edtDeliveryDateID.setText(i2 + "/" + i1 + "/" + i);
+              /*  mStart = edtDispachDateID.getText().toString().trim();
+                parseDateToddMMyyyy1(mStart);*/
+            }, mYear, mMonth, mDay);
+            datePickerDialog.setTitle("Start Date");
+            datePickerDialog.show();
         });
 
 
@@ -1292,7 +1309,7 @@ private int intVarified1ID=0,intVarified2ID=0,intVarified3ID=0,intVarified4ID=0,
 
 
 
-        dpd.show(getFragmentManager(), "DatePickerDialog");
+        dpd.show(this.dpd.getParentFragmentManager(), "DatePickerDialog");
     }
 
 
@@ -1302,18 +1319,18 @@ private int intVarified1ID=0,intVarified2ID=0,intVarified3ID=0,intVarified4ID=0,
         dpd = null;
     }
 
-    @Override
+  /*  @Override
     public void onResume() {
         super.onResume();
-        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+        DatePickerDialog dpd = (DatePickerDialog) this.dpd.getParentFragmentManager().findFragmentByTag("Datepickerdialog");
         if(dpd != null) dpd.setOnDateSetListener(this);
-    }
+    }*/
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         int numDigitsDay = String.valueOf(dayOfMonth).length();
         int numDigitsMonth = String.valueOf(monthOfYear).length();
-        //   String substring = str.substring(Math.max(str.length() - 2, 0));
+
         ++monthOfYear;
         String mDayV = "";
         String mMonthV = "";

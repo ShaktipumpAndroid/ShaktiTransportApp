@@ -17,7 +17,7 @@
         android:background="@color/header_color"
         android:gravity="center"
         android:padding="@dimen/space_mid10"
-        android:text="New Request For Quotation"
+        android:text="@string/new_rfq"
         android:textColor="@color/white"
         android:textSize="@dimen/size_large18" />
 
@@ -28,11 +28,11 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:hint="Search By Document, From, To Location"
+        android:hint="@string/search_doc"
         android:textSize="15sp"
         android:textStyle="bold">
-
         <requestFocus />
+
     </EditText>
 
     <LinearLayout

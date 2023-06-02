@@ -71,7 +71,7 @@ public class LrtransportImages extends AppCompatActivity implements ImageSelecti
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setTitle(getResources().getString(R.string.lrTransportImages));
+        getSupportActionBar().setTitle(getResources().getString(R.string.lrTransportImages));
         CustomUtility.setSharedPreference(mContext, "lrImages", "");
 
         Bundle bundle = getIntent().getExtras();
@@ -110,8 +110,6 @@ public class LrtransportImages extends AppCompatActivity implements ImageSelecti
             CustomUtility.setSharedPreference(mContext, "lrImages", "1");
             isBackPressed = true;
         }
-
-        // Log.e("Images==>",CustomUtility.getSharedPreferences(getApplicationContext(), "lrImages" ));
 
         return isBackPressed;
 

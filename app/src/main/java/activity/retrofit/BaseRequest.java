@@ -78,7 +78,11 @@ public class BaseRequest extends BaseRequestParser {
                     if (null != requestReciever) {
                         requestReciever.onSuccess(APINumber_, responseServer, getDataArray());
                     }
-                } else if (mResponseCode.equals("false")) {
+                }else if (mResponseCode.equals("001")) {
+                    if (null != requestReciever) {
+                        requestReciever.onSuccess(APINumber_, responseServer, getDataArray());
+                    }
+                }  else if (mResponseCode.equals("false")) {
                     if (null != requestReciever) {
                         requestReciever.onFailure(1, "" + mResponseCode, message);
                     }

@@ -2,10 +2,12 @@ package activity;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
+import static org.acra.ACRA.log;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,7 +16,6 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,9 +34,11 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import activity.PodBean.AssignedDeliveryDetailResponse;
 import activity.PodBean.DeliveryDeliveredInput;
+import activity.languagechange.LocaleHelper;
 import adapter.AssignedDeliveryAdapter;
 import bean.LoginBean;
 import database.DatabaseHelper;
@@ -45,6 +48,7 @@ import webservice.CameraUtils;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
 
+@SuppressWarnings("deprecation")
 public class AssignedDeliveryListActivity extends AppCompatActivity implements ClickListiner {
 
     private RecyclerView recyclerView;
@@ -58,6 +62,12 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
     String mImageFolderName = "/SKAPP/UNLOAD/";
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
+    @SuppressLint("HandlerLeak")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assigned_delivery_list);
@@ -66,12 +76,12 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         db = new DatabaseHelper(context);
         db.getLogin();
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Assigned Delivery List");
-        submitAssignedDeliveryDeliveredData();
-//        getAssignedDeliveryList();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getResources().getString(R.string.assigned));
+       // submitAssignedDeliveryDeliveredData();
+        getAssignedDeliveryList();
         mHandler = new android.os.Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -85,11 +95,11 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
         final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-        LoginBean loginBean = new LoginBean();
+
         String username = LoginBean.getUseid();
         param.add(new BasicNameValuePair("driver_mob", username));
 
-        progressDialog = ProgressDialog.show(AssignedDeliveryListActivity.this, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(AssignedDeliveryListActivity.this, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
             public void run() {
@@ -114,12 +124,12 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
                                 mHandler.sendMessage(msg);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Connection to server failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Connecting_failed), Toast.LENGTH_LONG).show();
                         }
                     } else {
-//                        setDataOnAdapter();
+                        setDataOnAdapter();
                         Message msg = new Message();
-                        msg.obj = "No Internet Connection";
+                        msg.obj = getResources().getString(R.string.No_Internet);
                         mHandler.sendMessage(msg);
                     }
                     progressDialog.dismiss();
@@ -140,6 +150,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
         try {
             assignedDeliveryResponseArrayList.clear();
             assignedDeliveryResponseArrayList = db.getAssignedDeliveryListData();
+            Log.e("Length",""+assignedDeliveryResponseArrayList.size());
             assignedDeliveryAdapter = new AssignedDeliveryAdapter(assignedDeliveryResponseArrayList, this, this::click);
             recyclerView.setAdapter(assignedDeliveryAdapter);
         } catch (Exception exception) {
@@ -151,6 +162,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
     public void click(int index) {
         Intent intentNewDeliveryRequestActivity = new Intent(AssignedDeliveryListActivity.this, AssignedDeliveryDetailActivity.class);
         intentNewDeliveryRequestActivity.putExtra("rfqNoValue", assignedDeliveryResponseArrayList.get(index).getRfqDoc());
+        intentNewDeliveryRequestActivity.putExtra("billNo",assignedDeliveryResponseArrayList.get(index).getBillNo());
         startActivityForResult(intentNewDeliveryRequestActivity, 1000);
     }
 
@@ -171,18 +183,10 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
                 return true;
             case R.id.action_signout:
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-                alertDialog.setTitle("Confirmation");
-                alertDialog.setMessage("Are you sure you wish to Sign Out ?");
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        logout();
-                    }
-                });
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                alertDialog.setTitle(getResources().getString(R.string.Confirmation));
+                alertDialog.setMessage(getResources().getString(R.string.signout));
+                alertDialog.setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> logout());
+                alertDialog.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> dialog.cancel());
                 alertDialog.show();
                 return true;
         }
@@ -191,6 +195,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
 
     private void logout() {
         db.deleteTableData(DatabaseHelper.TABLE_LOGIN);
+        db.deleteTableData(DatabaseHelper.TABLE_ASSIGNED_DELIVERIES);
         CustomUtility.setSharedPreference(context, "capture", "0");
         String selectedFilePath = "/storage/emulated/0/signdemo/signature.jpg";
         File file = new File(selectedFilePath);
@@ -212,7 +217,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
 //        int count = 0;
         ArrayList<DeliveryDeliveredInput> deliveryDeliveredInputList = dataHelper.getDeliveredData();
 
-        progressDialog = ProgressDialog.show(this, "", "Sync Data on Server..please wait !");
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.Sync_Data));
 
         new Thread() {
             public void run() {

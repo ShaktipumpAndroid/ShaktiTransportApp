@@ -38,10 +38,10 @@
             android:background="@android:color/transparent">
 
             <TextView
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Serarch LR Info"
+                android:layout_centerInParent="true"
+                android:text="@string/LR_Info"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp" />
 
@@ -95,7 +95,7 @@
                 android:text=""
                 android:digits="0123456789"
                 android:inputType="number"
-                android:hint="Enetr LR Number"
+                android:hint="@string/enter_lr"
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/blue_fb"
                 android:textColorHint="@color/gray_btn">
@@ -170,7 +170,7 @@ android:textSize="@dimen/_12ssp"
                 android:background="@android:color/transparent"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="@dimen/_14ssp"

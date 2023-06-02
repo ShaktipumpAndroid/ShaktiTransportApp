@@ -242,4 +242,26 @@ public class PartialLoadResponse implements Parcelable {
 		dest.writeString(vkorg);
 		dest.writeString(status);
 	}
+
+	@Override
+	public String toString() {
+		return "PartialLoadResponse{" +
+				"zdocNo='" + zdocNo + '\'' +
+				", zdocdate='" + zdocdate + '\'' +
+				", zlrno='" + zlrno + '\'' +
+				", transporterMob='" + transporterMob + '\'' +
+				", werks='" + werks + '\'' +
+				", kunag='" + kunag + '\'' +
+				", zbookdate='" + zbookdate + '\'' +
+				", vbeln='" + vbeln + '\'' +
+				", zmobileno='" + zmobileno + '\'' +
+				", ztransname='" + ztransname + '\'' +
+				", custName='" + custName + '\'' +
+				", zdelivery='" + zdelivery + '\'' +
+				", zdeliverdTo='" + zdeliverdTo + '\'' +
+				", fkdat='" + fkdat + '\'' +
+				", vkorg='" + vkorg + '\'' +
+				", status='" + status + '\'' +
+				'}';
+	}
 }

@@ -22,6 +22,7 @@ import com.administrator.shaktiTransportApp.R;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import activity.languagechange.LocaleHelper;
 import adapter.QuotationCustomList;
 import adapter.RfqCustomList;
 import bean.LoginBean;
@@ -44,6 +45,11 @@ public class AssignedRfqVendor extends AppCompatActivity {
     private Toolbar mToolbar;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assigned_rfq_vendor);
@@ -53,27 +59,24 @@ public class AssignedRfqVendor extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("RFQ List ");
+        getSupportActionBar().setTitle(getResources().getString(R.string.RFQ_List));
 
-        ArrayList<RfqBean> quotationBeanArrayList = new ArrayList<RfqBean>();
+        ArrayList<RfqBean> quotationBeanArrayList ;
         quotationBeanArrayList = db.getRfqList();
 
         adapter = new RfqCustomList(context, quotationBeanArrayList);
         inst_list = (ListView) findViewById(R.id.rfq_list);
         inst_list.setAdapter(adapter);
 
-        inst_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                textview_rfq_id = (TextView) view.findViewById(R.id.rfq_id_value);
-                caseid_text = textview_rfq_id.getText().toString();
-                Intent i = new Intent(context, NewQuotation.class);
-                Bundle extras = new Bundle();
-                extras.putString("rfq_docno", caseid_text);
-                extras.putString("flag_create_rfq", "Y");
-                i.putExtras(extras);
-                startActivity(i);
-            }
+        inst_list.setOnItemClickListener((parent, view, position, id) -> {
+            textview_rfq_id = (TextView) view.findViewById(R.id.rfq_id_value);
+            caseid_text = textview_rfq_id.getText().toString();
+            Intent i = new Intent(context, NewQuotation.class);
+            Bundle extras = new Bundle();
+            extras.putString("rfq_docno", caseid_text);
+            extras.putString("flag_create_rfq", "Y");
+            i.putExtras(extras);
+            startActivity(i);
         });
 
         // Locate the EditText in listview_main.xml

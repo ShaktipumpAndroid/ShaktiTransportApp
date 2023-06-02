@@ -1,5 +1,6 @@
 package database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,13 +11,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Spinner;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import activity.PodBean.AssignedDeliveryDetailResponse;
-import activity.PodBean.AssignedDeliveryResponse;
 import activity.PodBean.DeliveryDeliveredInput;
 import activity.PodBean.ImageModel;
 import bean.DocumentBean;
@@ -62,6 +60,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_BILL_NO = "bill_no";
     public static final String KEY_TRANS_NO = "trans_no";
     public static final String KEY_ASSIGN_NO = "assign_no";
+    public static final String KEY_BOOK_DATE = "book_date";
+    public static final String KEY_LR_NO = "lr_no";
+    public static final String KEY_MOBILE = "mobile_no";
     public static final String KEY_DELIVERY_PHOTO1 = "delivery_photo_1";
     public static final String KEY_DELIVERY_PHOTO2 = "delivery_photo_2";
     public static final String KEY_DELIVERY_PHOTO3 = "delivery_photo_3";
@@ -426,6 +427,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_BILL_NO + " TEXT," +
             KEY_TRANS_NO + " TEXT," +
             KEY_ASSIGN_NO + " TEXT," +
+            KEY_BOOK_DATE + " TEXT," +
+            KEY_LR_NO + " TEXT," +
+            KEY_MOBILE+ " TEXT," +
             KEY_ASSIGNED_DELIVERY_CONF_DATE + " TEXT," +
             KEY_ASSIGNED_DELIVERY_CONF_TIME + " TEXT," +
             KEY_ASSIGNED_DELIVERY_CONFIRMED + " TEXT," +
@@ -519,7 +523,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteDeliveredData(String rfqNo) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String where = "";
+        String where;
         where = KEY_DELIVERY_RFQ_DOC + "='" + rfqNo + "'";
         int value = db.delete(TABLE_ASSIGNED_DELIVERY_DELIVERED, where, null);
         Log.i("DeleteValue", value + "");
@@ -527,7 +531,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteDeliveryData(String rfqNo) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String where = "";
+        String where;
         where = KEY_ASSIGNED_DELIVERY_RFQ_DOC + "='" + rfqNo + "'";
         int value = db.delete(TABLE_ASSIGNED_DELIVERIES, where, null);
         Log.i("DeleteValue", value + "");
@@ -548,7 +552,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_DATE, date);
 
             // Insert Row
-            long i = db.insert(TABLE_SYNC_DAILY, null, values);
+            db.insert(TABLE_SYNC_DAILY, null, values);
 
             // Insert into database successfully.
             db.setTransactionSuccessful();
@@ -577,6 +581,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    @SuppressLint("Range")
     public boolean isImageSaved(String tablename, String where, String docno, String field) {
         String result = null;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -626,6 +631,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    @SuppressLint("Range")
     public String getSyncDailyDate() {
         String date = null;
 
@@ -692,14 +698,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
     public ArrayList<String> getList(String key, String text, String title) {
 
         ArrayList<String> list = new ArrayList<String>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-
-        list.clear();
 
         db.beginTransaction();
         try {
@@ -729,7 +734,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
 
 
-            Cursor cursor = db.rawQuery(selectQuery, null);
+            @SuppressLint("Recycle") Cursor cursor = db.rawQuery(selectQuery, null);
 
 
             if (cursor.getCount() > 0) {
@@ -794,7 +799,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_USERTYPE, usertype);
             values.put(KEY_ADD1, userrfq);
             // Insert Row
-            long i = db.insert(TABLE_LOGIN, null, values);
+            db.insert(TABLE_LOGIN, null, values);
             // Insert into database successfully.
             db.setTransactionSuccessful();
         } catch (SQLiteException e) {
@@ -807,10 +812,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
     public boolean getLogin() {
-        long t = 0;
         SQLiteDatabase db = null;
-        String selectQuery = null;
+        String selectQuery;
         Cursor c = null;
 
         try {
@@ -820,7 +825,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             LoginBean lb = new LoginBean();
             if (c.getCount() > 0) {
                 if (c.moveToFirst()) {
-                    lb.setLogin(c.getString(c.getColumnIndex(KEY_USERID)),
+                    LoginBean.setLogin(c.getString(c.getColumnIndex(KEY_USERID)),
                             c.getString(c.getColumnIndex(KEY_USERNAME)),
                             c.getString(c.getColumnIndex(KEY_USERTYPE)),
                             c.getString(c.getColumnIndex(KEY_ADD1)));
@@ -831,14 +836,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         } finally {
             c.close();
+            assert db != null;
             db.close();
         }
         return false;
     }
 
+
+    @SuppressLint("Range")
     public ArrayList<RouteBean> getRouteList(String key, String fr_tehsil, String to_tehsil) {
 
-        ArrayList<RouteBean> routelist = new ArrayList<RouteBean>();
+        ArrayList<RouteBean> routelist = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -913,6 +921,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return routelist;
     }
 
+    @SuppressLint("Range")
     public ArrayList<RfqBean> getRfq(String rfq_docno) {
 
         ArrayList<RfqBean> rfqlist = new ArrayList<RfqBean>();
@@ -923,7 +932,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.beginTransaction();
         try {
-            String selectQuery = "";
+            String selectQuery;
             selectQuery = "SELECT  *  FROM " + TABLE_RFQ + " WHERE " + KEY_RFQ_DOC + " = '" + rfq_docno + "'";
             Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -986,8 +995,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rfqlist;
     }
 
+    @SuppressLint("Range")
     public ArrayList<QuotationBean> getQuote(String rfq_docno) {
-        ArrayList<QuotationBean> quotelist = new ArrayList<QuotationBean>();
+        ArrayList<QuotationBean> quotelist = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String lv_status = "";
         db.beginTransaction();
@@ -1032,8 +1042,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Start the transaction.
         db.beginTransaction();
         ContentValues values;
-        CustomUtility customUtility = new CustomUtility();
-        LoginBean loginBean = new LoginBean();
+
         try {
             values = new ContentValues();
             String where = " ";
@@ -1145,6 +1154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
     public ArrayList<DeliveryDeliveredInput> getDeliveredData() {
         ArrayList<DeliveryDeliveredInput> deliveryDeliveredInputArrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1186,6 +1196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return deliveryDeliveredInputArrayList;
     }
 
+    @SuppressLint("Range")
     public DeliveryDeliveredInput getDeliveredDetail(String rfqCode) {
         DeliveryDeliveredInput deliveryDeliveredInput = new DeliveryDeliveredInput();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1252,12 +1263,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     values.put(KEY_BILL_NO, assignedDeliveryDetailResponse.get(p).getBillNo());
                     values.put(KEY_TRANS_NO, assignedDeliveryDetailResponse.get(p).getTransNo());
                     values.put(KEY_ASSIGN_NO, assignedDeliveryDetailResponse.get(p).getAssignMob());
-                    i = db.insert(TABLE_ASSIGNED_DELIVERIES, null, values);
-                    db.setTransactionSuccessful();
+                    values.put(KEY_BOOK_DATE,assignedDeliveryDetailResponse.get(p).getzBookDate());
+                    values.put(KEY_LR_NO,assignedDeliveryDetailResponse.get(p).getzLRno());
+                    values.put(KEY_MOBILE,assignedDeliveryDetailResponse.get(p).getzMobile());
+
+
+                    db.insert(TABLE_ASSIGNED_DELIVERIES, null, values);
+
+
                 } catch (SQLiteException e) {
                     e.printStackTrace();
                 }
+
             }
+
+            db.setTransactionSuccessful();
         } catch (SQLiteException e) {
             e.printStackTrace();
         } finally {
@@ -1267,15 +1287,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void insertPartialLoadData(ArrayList<PartialLoadResponse> partialLoadResponseArrayList) {
-        long i = 0;
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
         ContentValues values;
-        CustomUtility customUtility = new CustomUtility();
 
         try {
             for (int p = 0; p < partialLoadResponseArrayList.size(); p++) {
-                try {
                     values = new ContentValues();
                     values.put(KEY_PARTIAL_LOAD_ZDOC_DOC, partialLoadResponseArrayList.get(p).getZdocNo());
                     values.put(KEY_PARTIAL_LOAD_ZDOC_DATE, partialLoadResponseArrayList.get(p).getZdocdate());
@@ -1294,14 +1311,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     values.put(KEY_PARTIAL_LOAD_VKORG, partialLoadResponseArrayList.get(p).getVkorg());
                     values.put(KEY_PARTIAL_LOAD_STATUS, partialLoadResponseArrayList.get(p).getStatus());
 
-                    i = db.insert(TABLE_PARTIAL_LOAD, null, values);
-                    db.setTransactionSuccessful();
-                } catch (SQLiteException e) {
-                    e.printStackTrace();
-                }
+                db.insert(TABLE_PARTIAL_LOAD, null, values);
+
+
             }
+            db.setTransactionSuccessful();
         } catch (SQLiteException e) {
             e.printStackTrace();
+            Log.e("Error====>", e.toString());
         } finally {
             db.endTransaction();
             db.close();
@@ -1507,6 +1524,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return flag;
     }
 
+    @SuppressLint("Range")
     public RouteBean getRoute(String fr_tehsil, String to_tehsil) {
 
         RouteBean routeBean = new RouteBean();
@@ -1556,6 +1574,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return routeBean;
     }
 
+    @SuppressLint("Range")
     public RfqBean getRfqInformation(String rfq_docno) {
         RfqBean rfqBean = new RfqBean();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1614,6 +1633,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rfqBean;
     }
 
+    @SuppressLint("Range")
     public QuotationBean getQuotationInformation(String rfq_docno) {
         QuotationBean quoteBean = new QuotationBean();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1653,8 +1673,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return quoteBean;
     }
 
+    @SuppressLint("Range")
     public ArrayList<AssignedDeliveryDetailResponse> getAssignedDeliveryListData() {
-        ArrayList<AssignedDeliveryDetailResponse> assignedDeliveryList = new ArrayList<AssignedDeliveryDetailResponse>();
+        ArrayList<AssignedDeliveryDetailResponse> assignedDeliveryList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         db.beginTransaction();
         try {
@@ -1685,6 +1706,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         assignedDeliveryResponse.setBillNo(cursor.getString(cursor.getColumnIndex(KEY_BILL_NO)));
                         assignedDeliveryResponse.setTransNo(cursor.getString(cursor.getColumnIndex(KEY_TRANS_NO)));
                         assignedDeliveryResponse.setAssignMob(cursor.getString(cursor.getColumnIndex(KEY_ASSIGN_NO)));
+                        assignedDeliveryResponse.setzLRno(cursor.getString(cursor.getColumnIndex(KEY_LR_NO)));
+                        assignedDeliveryResponse.setzBookDate(cursor.getString(cursor.getColumnIndex(KEY_BOOK_DATE)));
+                        assignedDeliveryResponse.setzMobile(cursor.getString(cursor.getColumnIndex(KEY_MOBILE)));
+                        assignedDeliveryResponse.setViaAddress(cursor.getString(cursor.getColumnIndex(KEY_ASSIGNED_DELIVERY_VIA_ADDRESS)));
+
                         assignedDeliveryList.add(assignedDeliveryResponse);
                         cursor.moveToNext();
                     }
@@ -1700,13 +1726,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return assignedDeliveryList;
     }
 
+    @SuppressLint("Range")
     public ArrayList<PartialLoadResponse> getPartialLoadListData() {
         ArrayList<PartialLoadResponse> assignedDeliveryList = new ArrayList<PartialLoadResponse>();
         SQLiteDatabase db = this.getReadableDatabase();
         db.beginTransaction();
         try {
             String selectQuery = "";
-            selectQuery = "SELECT * FROM " + TABLE_PARTIAL_LOAD;
+            selectQuery =  "SELECT * FROM " + TABLE_PARTIAL_LOAD;
             Cursor cursor = db.rawQuery(selectQuery, null);
             Log.e("Count", "&&&" + cursor.getCount());
             if (cursor.getCount() > 0) {
@@ -1744,6 +1771,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return assignedDeliveryList;
     }
 
+    @SuppressLint("Range")
     public AssignedDeliveryDetailResponse getAssignedDeliveryDetail(String rfqCode) {
         AssignedDeliveryDetailResponse assignedDeliveryDetailResponse = null;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -1790,10 +1818,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return assignedDeliveryDetailResponse;
     }
 
+    @SuppressLint("Range")
     public ArrayList<RfqBean> getRfqList() {
-        ArrayList<RfqBean> rfqlist = new ArrayList<RfqBean>();
+        ArrayList<RfqBean> rfqlist = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String pending = "";
         db.beginTransaction();
         try {
             String selectQuery = "";
@@ -1846,6 +1874,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rfqlist;
     }
 
+    @SuppressLint("Range")
     public ArrayList<RfqBean> getRfqcnfrmList() {
         ArrayList<RfqBean> rfqlist = new ArrayList<RfqBean>();
         rfqlist.clear();
@@ -1903,6 +1932,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rfqlist;
     }
 
+    @SuppressLint("Range")
     public ArrayList<RfqBean> getRfqappList() {
         ArrayList<RfqBean> rfqlist = new ArrayList<RfqBean>();
         rfqlist.clear();
@@ -1975,6 +2005,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    @SuppressLint("Range")
     public ArrayList<RfqBean> getRfqList(String key) {
 
         String complete = "X";
@@ -2063,6 +2094,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    @SuppressLint("Range")
     public ArrayList<QuotationBean> getQuoteList(String key) {
 
         String complete = "X";
@@ -2229,6 +2261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
     public ArrayList<DocumentBean> getDocumentInformation1(String enq_docno) {
 
         DocumentBean documentBean = new DocumentBean();
@@ -2287,6 +2320,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list_document;
     }
 
+    @SuppressLint("Range")
     public DocumentBean getDocumentInformation(String enq_docno) {
 
         DocumentBean documentBean = new DocumentBean();
@@ -2343,6 +2377,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return documentBean;
     }
 
+    @SuppressLint("Range")
     public String getImage(String table, String where, String docno, String field, String where1, String key_flag) {
 
         String result = null;
@@ -2460,6 +2495,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return lrtransportImages;
     }
 
+    public List<ImageModel> getAssignedDeliveryImages() {
+        ArrayList<ImageModel> Images = new ArrayList<>();
+        SQLiteDatabase  database = this.getWritableDatabase();
+        if(CustomUtility.doesTableExist(database,TABLE_LR_IMAGES)) {
+            Cursor cursor = database.rawQuery(" SELECT * FROM " + TABLE_LR_IMAGES, null);
+            ImageModel imageModel;
+
+            if (cursor.getCount() > 0) {
+                for (int i = 0; i < cursor.getCount(); i++) {
+                    cursor.moveToNext();
+
+                    imageModel = new ImageModel();
+                    imageModel.setID(cursor.getString(0));
+                    imageModel.setName(cursor.getString(1));
+                    imageModel.setBillNo(cursor.getString(2));
+                    imageModel.setImagePath(cursor.getString(3));
+                    imageModel.setImageSelected(Boolean.parseBoolean(cursor.getString(4)));
+                    Images.add(imageModel);
+                }
+            }
+            cursor.close();
+            database.close();
+        }
+        return Images;
+    }
+
     public void updateLrImagesRecord(String name, String path, boolean isSelected, String sapbillno) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -2483,4 +2544,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.close();
     }
 
+    @SuppressLint("Range")
+    public AssignedDeliveryDetailResponse getAssignedDeliveryListValue(String billNo) {
+        AssignedDeliveryDetailResponse assignedDeliveryResponse = null;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try {
+            String selectQuery = "";
+            selectQuery = "SELECT * FROM " + TABLE_ASSIGNED_DELIVERIES + " WHERE " + KEY_BILL_NO + " = '" + billNo + "'";
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            Log.e("Count", "&&&" + cursor.getCount());
+            if (cursor.getCount() > 0) {
+                if (cursor.moveToFirst()) {
+                    while (!cursor.isAfterLast()) {
+                        assignedDeliveryResponse = new AssignedDeliveryDetailResponse();
+                        assignedDeliveryResponse.setBillNo(cursor.getString(cursor.getColumnIndex(KEY_BILL_NO)));
+                        assignedDeliveryResponse.setzLRno(cursor.getString(cursor.getColumnIndex(KEY_LR_NO)));
+                        assignedDeliveryResponse.setzBookDate(cursor.getString(cursor.getColumnIndex(KEY_BOOK_DATE)));
+                        assignedDeliveryResponse.setzMobile(cursor.getString(cursor.getColumnIndex(KEY_MOBILE)));
+                        assignedDeliveryResponse.setViaAddress(cursor.getString(cursor.getColumnIndex(KEY_ASSIGNED_DELIVERY_VIA_ADDRESS)));
+                        assignedDeliveryResponse.setTransporterName(cursor.getString(cursor.getColumnIndex(KEY_ASSIGNED_DELIVERY_TRANSPORTER_NAME)));
+                        cursor.moveToNext();
+                    }
+                }
+                db.setTransactionSuccessful();
+            }
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return assignedDeliveryResponse;
+    }
 }

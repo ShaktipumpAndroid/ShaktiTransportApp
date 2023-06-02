@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -15,8 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.administrator.shaktiTransportApp.R;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -33,6 +31,7 @@ import java.util.List;
 
 import activity.PodBean.InvoicelistBeanResponse;
 import activity.PodBean.LrInvoiceResponse;
+import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
 import bean.LoginBean;
 import database.DatabaseHelper;
@@ -45,30 +44,29 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
 
     private RelativeLayout rlvBackViewID;
     private RelativeLayout rlvLRSubmitViewID;
-    private RecyclerView rclyFoultListView;
-    private TransportListAdapter mDeviceFaultParametrAdapter;
-    //private BaseRequest baseRequest;
-
+    private DatePickerDialog dpd;
     private EditText edtInvoice1ID,edtInvoice2ID,edtInvoice3ID,edtInvoice4ID,edtInvoice5ID,edtInvoice6ID;
-    // private EditText edtLrMobileID;
-    // private TextView txtOpenCalenderID;
+
     private String mStrInvoice1ID,mStrInvoice2ID,mStrInvoice3ID,mStrInvoice4ID,mStrInvoice5ID,mStrInvoice6ID;
-    private String mLRMobileValue;
+
     private String mLRNumberValue = "";
 
-    //private List<FaultRecordResponse> mFaultRecordResponse;
     DatabaseHelper db;
     private Intent myIntent;
-    private String mPlantID;
-    private List<LrInvoiceResponse> mLrInvoiceResponse;
     private List<InvoicelistBeanResponse> mInvoicelistBeanResponse;
-
+    private List<LrInvoiceResponse> mLrInvoiceResponse;
+    private String mPlantID;
     private BaseRequest baseRequest;
     private ProgressDialog progressDialog;
 
-    private DatePickerDialog dpd;
     Calendar now;
     String usertype;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +74,7 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         mContext = this;
         now = Calendar.getInstance();
 
-        // dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+    //    dpd = (DatePickerDialog) this.dpd.getParentFragmentManager().findFragmentByTag("Datepickerdialog");
 
         initView();
     }
@@ -114,44 +112,31 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         rlvBackViewID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
                 // Setting Dialog Title
-                alertDialog.setTitle("Confirmation");
+                alertDialog.setTitle(getResources().getString(R.string.Confirmation));
                 // Setting Dialog Message
-                alertDialog.setMessage("Are you sure you wish to Sign Out ?");
+                alertDialog.setMessage(getResources().getString(R.string.signout));
                 // On pressing Settings button
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        logout();
-                    }
-                });
+                alertDialog.setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> logout());
                 // on pressing cancel button
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+                alertDialog.setNegativeButton(getResources().getString(R.string.cancel), (dialog, which) -> dialog.cancel());
 
                 // Showing Alert Message
                 alertDialog.show();
-                finish();
             }
+
         });
 
-        rlvLRSubmitViewID.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (initValidation()) {
-                    String [] mStrLen = mLRNumberValue.split(",");
+        rlvLRSubmitViewID.setOnClickListener(v -> {
+            if (initValidation()) {
+                String [] mStrLen = mLRNumberValue.split(",");
 
-                    WebURL.FORM_CHECK_LENGTH = mStrLen.length;
+                WebURL.FORM_CHECK_LENGTH = mStrLen.length;
 
-                    callgetLRInvoceListAPI();
-                }
-
+                callgetLRInvoceListAPI();
             }
+
         });
 
      /*   txtOpenCalenderID.setOnClickListener(new View.OnClickListener() {
@@ -184,50 +169,6 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         boolean deleted = file.delete();
         finish();
 
-    }
-
-    private void showDatePickerDialog() {
-//Vihu
-
-       /* String dayNumber  = (String) DateFormat.format("dd",   new Date()); // 06
-        String monthNumber  = (String) DateFormat.format("MM",   new Date()); // 06
-        //   String year         = (String) DateFormat.format("yyyy", new Date()); // 2013
-        String year         = (String) DateFormat.format("yyyy", new Date()); // 13
-        System.out.println("mMonthV11==>>"+dayNumber+"/"+monthNumber+"/"+year);
-        Calendar c = Calendar.getInstance();
-        c.set(Integer.parseInt(year), Integer.parseInt(monthNumber), Integer.parseInt(dayNumber));
-        dpd.setMaxDate(c);*/
-
-        if (dpd == null) {
-            dpd = DatePickerDialog.newInstance(
-                    ActivityInvoiceGetInfo.this,
-                    now.get(Calendar.YEAR),
-                    now.get(Calendar.MONTH),
-                    now.get(Calendar.DAY_OF_MONTH)
-            );
-        } else {
-            dpd.initialize(
-                    ActivityInvoiceGetInfo.this,
-                    now.get(Calendar.YEAR),
-                    now.get(Calendar.MONTH),
-                    now.get(Calendar.DAY_OF_MONTH)
-            );
-
-
-        }
-
-
-        dpd.setAccentColor(Color.parseColor("#034f84"));
-        dpd.setTitle("Pic LR Date");
-        dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.VERTICAL);
-
-        dpd.setOnCancelListener(dialog -> {
-            Log.d("DatePickerDialog", "Dialog was cancelled");
-            dpd = null;
-        });
-        //dpd.show(requireFragmentManager(), "Datepickerdialog");
-        //dpd.getShowsDialog();
-        dpd.show(getFragmentManager(), "DatePickerDialog");
     }
 
     private boolean initValidation() {
@@ -333,7 +274,6 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         //   password = inputPassword.getText().toString();
 
         final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-        param.clear();
         //  param.add(new BasicNameValuePair("lrno", mLRNumberValue));
         param.add(new BasicNameValuePair("bill", mLRNumberValue));
 
@@ -345,10 +285,10 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
 
         //  param.add(new BasicNameValuePair("pernr", username));
         // param.add(new BasicNameValuePair("pass", password));
-        /******************************************************************************************/
+        //******************************************************************************************/
 /*                   server connection
 /******************************************************************************************/
-        progressDialog = ProgressDialog.show(mContext, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(mContext, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
 
@@ -358,7 +298,7 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
                     String obj = CustomHttpClient.executeHttpPost1(WebURL.API_SNF_GET_INVOICE_DATA, param);
                     Log.d("check_error", obj);
                     Log.e("check_error", obj);
-/******************************************************************************************/
+//******************************************************************************************/
 /*                       get JSONwebservice Data
 /******************************************************************************************/
 //8109816953
@@ -395,71 +335,17 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
                         }
 
 
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                try {
-                                    Intent mIntent = new Intent(ActivityInvoiceGetInfo.this, ActivityUpdateSandFData.class);
-                                    mIntent.putExtra("InvoiceList", (Serializable) mInvoicelistBeanResponse);
-                                    startActivity(mIntent);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                                progressDialog.dismiss();
+                        runOnUiThread(() -> {
+                            try {
+                                Intent mIntent = new Intent(ActivityInvoiceGetInfo.this, ActivityUpdateSandFData.class);
+                                mIntent.putExtra("InvoiceList", (Serializable) mInvoicelistBeanResponse);
+                                startActivity(mIntent);
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
                             }
+                            progressDialog.dismiss();
                         });
                     }
-
-                 /*   if (mStatus.equalsIgnoreCase("true")) {
-
-                        if(mInvoicelistBeanResponse.size()>0)
-                            mInvoicelistBeanResponse.clear();
-
-                        JSONArray ja = new JSONArray(jo11);
-                        // JSONObject jo = ja.getJSONObject(0);
-
-                        for (int i = 0; i < ja.length(); i++) {
-
-                            JSONObject join = ja.getJSONObject(i);
-                            InvoicelistBeanResponse mmLrInvoiceResponse = new InvoicelistBeanResponse();
-
-                            mmLrInvoiceResponse.setBill(join.getString("bill"));
-                            mmLrInvoiceResponse.setControllerSerno(join.getString("controllerSerno"));
-                            mmLrInvoiceResponse.setMatorSerno(join.getString("matorSerno"));
-                            mmLrInvoiceResponse.setSetSerno(join.getString("setSerno"));
-
-
-                            mInvoicelistBeanResponse.add(mmLrInvoiceResponse);
-
-                        }
-
-
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                try {
-                                    Intent mIntent = new Intent(ActivityInvoiceGetInfo.this, ActivityUpdateSandFData.class);
-                                    mIntent.putExtra("InvoiceList", (Serializable) mLrInvoiceResponse);
-                                    startActivity(mIntent);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                                progressDialog.dismiss();
-                            }
-
-
-                        });
-
-                    } else {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(mContext, mMessage, Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                            }
-
-                        });
-                        //   Toast.makeText(mContext, mMessage, Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }*/
-
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -479,12 +365,6 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         dpd = null;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
-        if (dpd != null) dpd.setOnDateSetListener(this);
-    }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
@@ -505,8 +385,8 @@ public class ActivityInvoiceGetInfo extends AppCompatActivity implements DatePic
         } else {
             mMonthV = "" + monthOfYear;
         }
-        // String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        String date = "You picked the following date: " + mDayV + "/" + mMonthV + "/" + year;
+
+        String date = getResources().getString(R.string.picked_date)+ mDayV + "/" + mMonthV + "/" + year;
         System.out.println("date==>>" + date);
         System.out.println("mMonthV==>>" + mMonthV + "" + year);
 

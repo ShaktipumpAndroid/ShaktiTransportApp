@@ -2,14 +2,12 @@ package activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
+
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,17 +15,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
 import com.administrator.shaktiTransportApp.R;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Objects;
 
 import adapter.RfqCustomList;
-import bean.LoginBean;
 import bean.RfqBean;
 import database.DatabaseHelper;
-import utility.CustomUtility;
 
 public class AssignedRfq extends AppCompatActivity {
     Context context;
@@ -36,9 +32,7 @@ public class AssignedRfq extends AppCompatActivity {
     ListView inst_list;
     TextView textview_rfq_id;
     String caseid_text = "";
-    RfqBean rfqbean;
-    CustomUtility customUtility = new CustomUtility();
-    LoginBean loginBean;
+
     RfqCustomList adapter;
     EditText editsearch;
     private Toolbar mToolbar;
@@ -51,76 +45,55 @@ public class AssignedRfq extends AppCompatActivity {
         context = this;
 
         db = new DatabaseHelper(context);
-
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar =  findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Request for Quotation ");
+        getSupportActionBar().setTitle(getResources().getString(R.string.Quotation));
 
-        create_rfq = (TextView) findViewById(R.id.create_rfq);
+        create_rfq =  findViewById(R.id.create_rfq);
 
-        ArrayList<RfqBean> arraylist_rfq = new ArrayList<RfqBean>();
+        ArrayList<RfqBean> arraylist_rfq;
         arraylist_rfq = db.getRfqList();
 
         adapter = new RfqCustomList(context, arraylist_rfq);
-        inst_list = (ListView) findViewById(R.id.rfq_list);
+        inst_list =  findViewById(R.id.rfq_list);
         inst_list.setAdapter(adapter);
 
 
-        inst_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        inst_list.setOnItemClickListener((parent, view, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            textview_rfq_id =  view.findViewById(R.id.rfq_id_value);
+            caseid_text = textview_rfq_id.getText().toString();
 
-                textview_rfq_id = (TextView) view.findViewById(R.id.rfq_id_value);
-                caseid_text = textview_rfq_id.getText().toString();
-//                Toast.makeText(context,caseid_text,Toast.LENGTH_SHORT).show();
-                // Launching new Activity on selecting single List Item
-                Intent i = new Intent(context, NewRfq.class);
-                // sending data to new activity
-                Bundle extras = new Bundle();
-                extras.putString("rfq_docno", caseid_text);
-                extras.putString("flag_create_rfq", "Y");
-                i.putExtras(extras);
-                startActivity(i);
-            }
+            Intent i = new Intent(context, NewRfq.class);
+            Bundle extras = new Bundle();
+            extras.putString("rfq_docno", caseid_text);
+            extras.putString("flag_create_rfq", "Y");
+            i.putExtras(extras);
+            startActivity(i);
         });
 
 
-        create_rfq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        create_rfq.setOnClickListener(v -> {
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-                // Setting Dialog Title
-                alertDialog.setTitle("Confirmation");
-                // Setting Dialog Message
-                alertDialog.setMessage(" Do you want to create new Request For Quotation?");
-                // On pressing Settings button
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+            // Setting Dialog Title
+            alertDialog.setTitle("Confirmation");
+            // Setting Dialog Message
+            alertDialog.setMessage(" Do you want to create new Request For Quotation?");
+            // On pressing Settings button
+            alertDialog.setPositiveButton("Yes", (dialog, which) -> createEnquiry());
+            // on pressing cancel button
+            alertDialog.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+            // Showing Alert Message
+            alertDialog.show();
 
-                    public void onClick(DialogInterface dialog, int which) {
-                        createEnquiry();
-                    }
-                });
-                // on pressing cancel button
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                // Showing Alert Message
-                alertDialog.show();
-
-            }
         });
 
         // Locate the EditText in listview_main.xml
-        editsearch = (EditText) findViewById(R.id.search);
+        editsearch =  findViewById(R.id.search);
 
         // Capture Text in EditText
         editsearch.addTextChangedListener(new TextWatcher() {
@@ -161,6 +134,7 @@ public class AssignedRfq extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         switch (id) {

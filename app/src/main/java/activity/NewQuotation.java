@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +21,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.administrator.shaktiTransportApp.R;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+import activity.languagechange.LocaleHelper;
 import backgroundservice.SyncDataService;
 import bean.LoginBean;
 import bean.QuotationBean;
@@ -47,7 +46,10 @@ public class NewQuotation extends AppCompatActivity {
     DatabaseHelper db;
     private Toolbar mToolbar;
     private LinearLayout moduleOneLL;
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +61,11 @@ public class NewQuotation extends AppCompatActivity {
         context = this;
         db = new DatabaseHelper(context);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Quotation");
+        getSupportActionBar().setTitle(getResources().getString(R.string.Quotation_));
         getLayout();
         setData();
 
@@ -73,14 +75,14 @@ public class NewQuotation extends AppCompatActivity {
                 SyncDataInBackground();
                 onBackPressed();
             } else {
-                Toast.makeText(context, "Please fill all the required fields before Quote RFQ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getResources().getString(R.string.Please_fill_all), Toast.LENGTH_SHORT).show();
             }
         });
 
         tv_get_route.setOnClickListener(arg0 -> {
             fr_route = et_route_from.getText().toString();
             to_route = et_route_to.getText().toString();
-            List<String> place_list = new ArrayList<String>();
+            List<String> place_list = new ArrayList<>();
 
             if (!TextUtils.isEmpty(fr_route)) {
                 place_list.add(fr_route);
@@ -99,7 +101,7 @@ public class NewQuotation extends AppCompatActivity {
             if (place_list.size() > 0) {
                 openEventOnMap(place_list);
             } else {
-                Toast.makeText(getApplicationContext(), "Please enter From Location, To Location to view Route on Map", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.enter_Location), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -173,9 +175,9 @@ public class NewQuotation extends AppCompatActivity {
             i.putExtra("sync_data", "quote_data");
             i.putExtra("rfq_docno", rfq_docno);
             startService(i);
-            Toast.makeText(getApplicationContext(), "Quotation Data submitted to server Successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Quotation_submitted), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(), "No internet Connection....Quotation Data saved offline", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Quotation_offline), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -268,7 +270,7 @@ public class NewQuotation extends AppCompatActivity {
         }
 
         if (db.isRecordExist(DatabaseHelper.TABLE_QUOTATION, DatabaseHelper.KEY_RFQ_DOC, rfqBean.getRfq_doc())) {
-            QuotationBean quoteBean = new QuotationBean();
+            QuotationBean quoteBean;
             quoteBean = db.getQuotationInformation(rfqBean.getRfq_doc());
             et_remark.setText(quoteBean.getRemark());
             et_vehicle_make.setText(quoteBean.getVehicle_make());

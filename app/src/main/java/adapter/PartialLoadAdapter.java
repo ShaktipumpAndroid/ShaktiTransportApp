@@ -25,7 +25,7 @@ public class PartialLoadAdapter extends ArrayAdapter<PartialLoadResponse> {
         super(context, R.layout.partial_load_item_view, arrayList);
         this.context = context;
         this.arrayList = arrayList;
-        this.SearchesList = new ArrayList<PartialLoadResponse>();
+        this.SearchesList = new ArrayList<>();
         this.SearchesList.addAll(arrayList);
     }
 
@@ -57,7 +57,7 @@ public class PartialLoadAdapter extends ArrayAdapter<PartialLoadResponse> {
         TextView tvCustomerName = (TextView) view.findViewById(R.id.tvCustomerName);
 
         tvBillNo.setText(String.valueOf(partialLoadResponse.getVbeln()));
-        tvBillDate.setText(String.valueOf(partialLoadResponse.getFkdat()));
+        tvBillDate.setText(String.valueOf(partialLoadResponse.getFkdat()))  ;
         tvLrNo.setText(String.valueOf(partialLoadResponse.getZlrno()));
         tvCustomerCode.setText(String.valueOf(partialLoadResponse.getKunag()));
         tvCustomerName.setText(String.valueOf(partialLoadResponse.getCustName()));
@@ -72,7 +72,7 @@ public class PartialLoadAdapter extends ArrayAdapter<PartialLoadResponse> {
         } else {
             for (PartialLoadResponse cs : SearchesList) {
                 if (cs.getCustName().toLowerCase(Locale.getDefault()).contains(charText) ||
-                        cs.getVbeln().toLowerCase(Locale.getDefault()).contains(charText)) {
+                        cs.getVbeln().toLowerCase(Locale.getDefault()).contains(charText) || cs.getZlrno().toLowerCase(Locale.getDefault()).contains(charText)) {
                     arrayList.add(cs);
                 }
             }

@@ -1,32 +1,28 @@
 package activity;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
+
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.administrator.shaktiTransportApp.BuildConfig;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
 import com.administrator.shaktiTransportApp.R;
-import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -38,7 +34,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
+import activity.languagechange.LocaleHelper;
 import adapter.RfqCustomList1;
 import bean.LoginBean;
 import bean.RfqBean;
@@ -54,22 +52,19 @@ import webservice.WebURL;
 public class VehicleApprovedActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context context;
-    RecyclerView recyclerView;
-    View.OnClickListener onclick;
+
     LinearLayout lin1, lin2;
     RfqCustomList1 adapter;
     DatabaseHelper db;
-    int count, count1;
     ListView inst_list;
-    TextView textview_rfq_id;
-    String caseid_text = "";
     AlertDialog dialog;
-    private LinearLayoutManager layoutManagerSubCategory;
     private EditText start_date, end_date;
-    private TextView save;
-    private Toolbar mToolbar;
-    private TextInputLayout start, end;
-    private String mUserID, type, mStart, mEnd, obj, from;
+    private String mUserID, type, mStart, mEnd,  from;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,12 +76,12 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
         from = bundle.getString("from");
 
         db = new DatabaseHelper(context);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (from.equalsIgnoreCase("A")) {
-            getSupportActionBar().setTitle("Approve Vehical");
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.Approve_Vehicles));
         } else {
-            getSupportActionBar().setTitle("Confirm Vehical");
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.Confirm_Vehicles));
         }
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -98,75 +93,63 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
         lin1 = findViewById(R.id.lin1);
         lin2 = findViewById(R.id.lin2);
 
-        inst_list = (ListView) findViewById(R.id.rfq_list);
+        inst_list =  findViewById(R.id.rfq_list);
 
-        start = (TextInputLayout) findViewById(R.id.start);
-        end = (TextInputLayout) findViewById(R.id.end);
+        findViewById(R.id.start);
+        findViewById(R.id.end);
 
-        start_date = (EditText) findViewById(R.id.start_date);
-        end_date = (EditText) findViewById(R.id.end_date);
-        save = (TextView) findViewById(R.id.save);
+        start_date =  findViewById(R.id.start_date);
+        end_date =  findViewById(R.id.end_date);
+        TextView save = findViewById(R.id.save);
         start_date.setFocusable(false);
         end_date.setFocusable(false);
 
-        start_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar currentDate;
-                int mDay, mMonth, mYear;
-                currentDate = Calendar.getInstance();
+        start_date.setOnClickListener(view -> {
+            Calendar currentDate;
+            int mDay, mMonth, mYear;
+            currentDate = Calendar.getInstance();
 
-                mDay = currentDate.get(Calendar.DAY_OF_MONTH);
-                mMonth = currentDate.get(Calendar.MONTH);
-                mYear = currentDate.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        i1 = i1 + 1;
-                        start_date.setText(i2 + "/" + i1 + "/" + i);
-                        mStart = start_date.getText().toString().trim();
-                        parseDateToddMMyyyy1(mStart);
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog.setTitle("Start Date");
-                datePickerDialog.show();
-            }
+            mDay = currentDate.get(Calendar.DAY_OF_MONTH);
+            mMonth = currentDate.get(Calendar.MONTH);
+            mYear = currentDate.get(Calendar.YEAR);
+            @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(context, (datePicker, i, i1, i2) -> {
+                i1 = i1 + 1;
+                start_date.setText(i2 + "/" + i1 + "/" + i);
+                mStart = start_date.getText().toString().trim();
+                parseDateToddMMyyyy1(mStart);
+            }, mYear, mMonth, mDay);
+            datePickerDialog.setTitle(getResources().getString(R.string.start));
+            datePickerDialog.show();
         });
 
         // Date help for leave to
-        end_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar currentDate;
-                int mDay, mMonth, mYear;
-                currentDate = Calendar.getInstance();
+        end_date.setOnClickListener(view -> {
+            Calendar currentDate;
+            int mDay, mMonth, mYear;
+            currentDate = Calendar.getInstance();
 
-                mDay = currentDate.get(Calendar.DAY_OF_MONTH);
-                mMonth = currentDate.get(Calendar.MONTH);
-                mYear = currentDate.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        i1 = i1 + 1;
-                        end_date.setText(i2 + "/" + i1 + "/" + i);
-                        mEnd = end_date.getText().toString().trim();
-                        parseDateToddMMyyyy2(mEnd);
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog.setTitle("End Date");
-                datePickerDialog.show();
-            }
+            mDay = currentDate.get(Calendar.DAY_OF_MONTH);
+            mMonth = currentDate.get(Calendar.MONTH);
+            mYear = currentDate.get(Calendar.YEAR);
+            @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(context, (datePicker, i, i1, i2) -> {
+                i1 = i1 + 1;
+                end_date.setText(i2 + "/" + i1 + "/" + i);
+                mEnd = end_date.getText().toString().trim();
+                parseDateToddMMyyyy2(mEnd);
+            }, mYear, mMonth, mDay);
+            datePickerDialog.setTitle(getResources().getString(R.string.end));
+            datePickerDialog.show();
         });
 
         save.setOnClickListener(view -> {
             if (CustomUtility.isInternetOn()) {
                 // Write Your Code What you want to do
-                LoginBean lb = new LoginBean();
-                mUserID = lb.getUseid();
-                type = lb.getUsertype();
-                db.deleteEmployeeData(db.TABLE_RFQ);
-                checkDataValtidation();
-                ArrayList<RfqBean> quotationBeanArrayList = new ArrayList<RfqBean>();
+
+                mUserID = LoginBean.getUseid();
+                type = LoginBean.getUsertype();
+                db.deleteEmployeeData(DatabaseHelper.TABLE_RFQ);
+                checkDataValidation();
+                ArrayList<RfqBean> quotationBeanArrayList;
                 if (from.equalsIgnoreCase("A")) {
                     quotationBeanArrayList = db.getRfqappList();
                 } else {
@@ -175,16 +158,14 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
                 adapter = new RfqCustomList1(context, from, quotationBeanArrayList);
                 inst_list.setAdapter(adapter);
             } else {
-                Toast.makeText(context, "No internet Connection ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getResources().getString(R.string.No_Internet), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-
-        return true;
+       return true;
     }
 
     @Override
@@ -208,51 +189,47 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
 
     }
 
-    public String parseDateToddMMyyyy1(String time) {
+    public void parseDateToddMMyyyy1(String time) {
         String inputPattern = "dd/MM/yyyy";
         String outputPattern = "yyyyMMdd";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-
-        Date date = null;
-        String str = null;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
         try {
-            date = inputFormat.parse(time);
+            Date date = inputFormat.parse(time);
+            assert date != null;
             mStart = outputFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return str;
     }
 
-    public String parseDateToddMMyyyy2(String time) {
+    public void parseDateToddMMyyyy2(String time) {
         String inputPattern = "dd/MM/yyyy";
         String outputPattern = "yyyyMMdd";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
 
-        Date date = null;
-        String str = null;
+        Date date;
 
         try {
             date = inputFormat.parse(time);
+            assert date != null;
             mEnd = outputFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return str;
     }
 
-    private void checkDataValtidation() {
+    private void checkDataValidation() {
         try {
-            if (mStart == null || mStart.equalsIgnoreCase("") || mStart.equalsIgnoreCase(null)) {
+            if (mStart == null || mStart.equalsIgnoreCase("")) {
                 start_date.setFocusable(true);
                 start_date.requestFocus();
                 Toast.makeText(context, getResources().getString(R.string.Please_select_start), Toast.LENGTH_SHORT).show();
                 if (dialog != null)
                     dialog.dismiss();
-            } else if (mEnd == null || mEnd.equalsIgnoreCase("") || mEnd.equalsIgnoreCase(null)) {
+            } else if (mEnd == null || mEnd.equalsIgnoreCase("")) {
                 end_date.setFocusable(true);
                 end_date.requestFocus();
                 Toast.makeText(context, getResources().getString(R.string.Please_select_end), Toast.LENGTH_SHORT).show();
@@ -263,7 +240,7 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
                 builder.setCancelable(false); // if you want user to wait for some process to finish,
                 builder.setView(R.layout.layout_loading);
                 dialog = builder.create();
-                getApprovaData(context);
+                getApprovalData(context);
             }
 
         } catch (Exception exp) {
@@ -271,9 +248,9 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
         }
     }
 
-    public void getApprovaData(Context context) {
-        DatabaseHelper dataHelper = new DatabaseHelper(context);
-        final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
+    public void getApprovalData(Context context) {
+        @SuppressWarnings("resource") DatabaseHelper dataHelper = new DatabaseHelper(context);
+        final ArrayList<NameValuePair> param = new ArrayList<>();
         param.add(new BasicNameValuePair("pernr", mUserID));
         param.add(new BasicNameValuePair("begda", mStart));
         param.add(new BasicNameValuePair("endda", mEnd));
@@ -318,9 +295,9 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
                         jo_rfq.optString("confirmed"));
 
                 if (dataHelper.isRecordExist(DatabaseHelper.TABLE_RFQ, DatabaseHelper.KEY_RFQ_DOC, rfqBean.getRfq_doc())) {
-                    dataHelper.updateRfqData(dataHelper.KEY_RFQ_UPDATE_FROM_SAP, rfqBean);
+                    dataHelper.updateRfqData(DatabaseHelper.KEY_RFQ_UPDATE_FROM_SAP, rfqBean);
                 } else {
-                    dataHelper.updateRfqData(dataHelper.KEY_INSERT_RFQ, rfqBean);
+                    dataHelper.updateRfqData(DatabaseHelper.KEY_INSERT_RFQ, rfqBean);
                 }
                 if (dialog != null)
                     dialog.dismiss();
@@ -345,7 +322,7 @@ public class VehicleApprovedActivity extends AppCompatActivity implements View.O
             builder.setCancelable(false); // if you want user to wait for some process to finish,
             builder.setView(R.layout.layout_loading);
             dialog = builder.create();
-            getApprovaData(context);
+            getApprovalData(context);
         }
     }
 

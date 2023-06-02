@@ -1,26 +1,20 @@
 package activity.Pod;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.administrator.shaktiTransportApp.R;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import org.apache.http.NameValuePair;
@@ -31,14 +25,11 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import activity.PodBean.LrInvoiceModel;
 import activity.PodBean.LrInvoiceResponse;
+import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
-import activity.retrofit.RequestReciever;
-import utility.CustomUtility;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
 
@@ -58,6 +49,12 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
 
     private DatePickerDialog dpd;
     Calendar now ;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +145,7 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
 
 
         dpd.setAccentColor(Color.parseColor("#034f84"));
-        dpd.setTitle("Pic LR Date");
+        dpd.setTitle(getResources().getString(R.string.LR_Date));
         dpd.setScrollOrientation(DatePickerDialog.ScrollOrientation.VERTICAL);
 
         dpd.setOnCancelListener(dialog -> {
@@ -157,7 +154,7 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
         });
         //dpd.show(requireFragmentManager(), "Datepickerdialog");
         //dpd.getShowsDialog();
-        dpd.show(getFragmentManager(), "DatePickerDialog");
+      //  dpd.show(getFragmentManager(), "DatePickerDialog");
     }
 
     private boolean initValidation() {
@@ -166,14 +163,9 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
 
         if(mLRNumberValue.equalsIgnoreCase(""))
         {
-            Toast.makeText(mContext, "Please enter Valid LR Number", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, getResources().getString(R.string.enter_Valid_LR), Toast.LENGTH_SHORT).show();
             return false;
         }
-        /*else if(mLRNumberValue.equalsIgnoreCase(""))
-        {
-            Toast.makeText(mContext, "Please select valid date", Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
         else
         {
            //
@@ -291,7 +283,7 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
         /******************************************************************************************/
 /*                   server connection
 /******************************************************************************************/
-        progressDialog = ProgressDialog.show(mContext, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(mContext, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
 
@@ -385,8 +377,8 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
     @Override
     public void onResume() {
         super.onResume();
-        DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
-        if(dpd != null) dpd.setOnDateSetListener(this);
+      /*  DatePickerDialog dpd = (DatePickerDialog) getFragmentManager().findFragmentByTag("Datepickerdialog");
+        if(dpd != null) dpd.setOnDateSetListener(this);*/
     }
 
     @Override
@@ -415,7 +407,7 @@ public class ActivityPODSearchInfo extends AppCompatActivity implements DatePick
             mMonthV =  ""+ monthOfYear;
         }
         // String date = "You picked the following date: "+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
-        String date = "You picked the following date: "+mDayV+"/"+mMonthV+"/"+year;
+        String date = getResources().getString(R.string.picked_date)+mDayV+"/"+mMonthV+"/"+year;
         System.out.println("date==>>"+date);
         System.out.println("mMonthV==>>"+mMonthV+""+year);
 

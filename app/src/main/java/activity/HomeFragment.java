@@ -4,6 +4,7 @@ package activity;
  * Created by shakti on 10/3/2016.
  */
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 
 import com.administrator.shaktiTransportApp.R;
 
+import activity.Pod.ActivityPODSearchInfo;
+import activity.languagechange.LocaleHelper;
 import bean.LoginBean;
 import database.DatabaseHelper;
 
@@ -28,7 +31,7 @@ public class HomeFragment extends Fragment {
 
     Context context;
     TextView textview_cnfrm_vehicle;
-    TextView textview_rfq, textview_app_vehicle;
+    TextView textview_rfq, textview_app_vehicle, textView_pod;
     String usertype;
     RelativeLayout approve_vehicle, cnfrm_vehicle, rfq, rlAssignedDeliveryList, rlAgreement;
 
@@ -42,6 +45,7 @@ public class HomeFragment extends Fragment {
         context = this.getActivity();
     }
 
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class HomeFragment extends Fragment {
         textview_rfq = (TextView) rootView.findViewById(R.id.textview_rfq);
         textview_app_vehicle = (TextView) rootView.findViewById(R.id.textview_app_vehicle);
         textview_cnfrm_vehicle = (TextView) rootView.findViewById(R.id.textview_cnfrm_vehicle);
-
+        textView_pod = (TextView) rootView.findViewById(R.id.text_pod);
         rfq = (RelativeLayout) rootView.findViewById(R.id.rfq);
         rlAssignedDeliveryList = (RelativeLayout) rootView.findViewById(R.id.rlAssignedDeliveryList);
         rlAgreement = rootView.findViewById(R.id.rlAgreement);
@@ -66,21 +70,24 @@ public class HomeFragment extends Fragment {
 
         rlAssignedDeliveryList.setVisibility(View.GONE);
         if ("Driver".equals(usertype)) {
-            textview_rfq.setText("Submit Customer Data");
+            textview_rfq.setText(getResources().getString(R.string.Customer_Data));
             approve_vehicle.setVisibility(View.GONE);
             cnfrm_vehicle.setVisibility(View.GONE);
         } else if ("Vendor".equals(usertype)) {
-            textview_rfq.setText("Active RFQ Plan");
+            textview_rfq.setText(getResources().getString(R.string.RFQ_Plan));
             approve_vehicle.setVisibility(View.VISIBLE);
             cnfrm_vehicle.setVisibility(View.VISIBLE);
             rlAgreement.setVisibility(View.VISIBLE);
+            textView_pod.setText(getResources().getString(R.string.pod_data));
+            rlAssignedDeliveryList.setVisibility(View.VISIBLE);
         } else if("Transport Officer".equals(usertype)){
             rlAssignedDeliveryList.setVisibility(View.VISIBLE);
-            textview_rfq.setText("Create Request for Quotation");
+            rlAgreement.setVisibility(View.GONE);
+            textview_rfq.setText(getResources().getString(R.string.Create_Request));
             approve_vehicle.setVisibility(View.GONE);
             cnfrm_vehicle.setVisibility(View.GONE);
         } else {
-            textview_rfq.setText("Create Request for Quotation");
+            textview_rfq.setText(getResources().getString(R.string.Create_Request));
             approve_vehicle.setVisibility(View.GONE);
             cnfrm_vehicle.setVisibility(View.GONE);
         }
@@ -100,8 +107,14 @@ public class HomeFragment extends Fragment {
         });
 
         rlAssignedDeliveryList.setOnClickListener(view -> {
-            Intent intent = new Intent(context, OfficerAssignedDeliveryListActivity.class);
-            startActivity(intent);
+
+            if ("Vendor".equals(usertype)) {
+                Intent mIntent = new Intent(context, ActivityPODSearchInfo.class);
+                startActivity(mIntent);
+            }else {
+                Intent intent = new Intent(context, OfficerAssignedDeliveryListActivity.class);
+                startActivity(intent);
+            }
         });
 
         rlAgreement.setOnClickListener(view -> {

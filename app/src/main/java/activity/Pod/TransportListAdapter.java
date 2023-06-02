@@ -1,5 +1,6 @@
 package activity.Pod;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -50,7 +51,7 @@ public class TransportListAdapter extends RecyclerView.Adapter<TransportListAdap
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.txtTRLRValueID.setText(mLrInvoiceResponse.get(position).getLrno());
         holder.txtTRNameValueID.setText(mLrInvoiceResponse.get(position).getTransporterName());
         holder.txtMOBNumberValueID.setText(mLrInvoiceResponse.get(position).getMobno());

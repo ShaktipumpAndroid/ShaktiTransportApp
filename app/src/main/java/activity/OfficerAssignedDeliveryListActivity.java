@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import activity.languagechange.LocaleHelper;
 import adapter.OfficerAssignedDeliveryAdapter;
 import bean.LoginBean;
 import bean.OfficerAssignedDeliveryResponse;
@@ -49,24 +50,23 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
     private ArrayList<OfficerAssignedDeliveryResponse> officerAssignedDeliveryResponseArrayList = new ArrayList<>();
     private android.os.Handler mHandler;
     EditText editsearch, etTransportNo;
-    TextView tvStartDate, tvStartDateValue, tvEndDate, tvEndDateValue;
-    Button btnGo;
+    TextView tvStartDateValue, tvEndDateValue;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partial_load_list);
-        inst_list = (ListView) findViewById(R.id.partial_load_list);
-        editsearch = (EditText) findViewById(R.id.search);
-        etTransportNo = (EditText) findViewById(R.id.etTransportNo);
-        tvStartDate = (TextView) findViewById(R.id.tvStartDate);
-        tvStartDateValue = (TextView) findViewById(R.id.tvStartDateValue);
-        tvEndDate = (TextView) findViewById(R.id.tvEndDate);
-        tvEndDateValue = (TextView) findViewById(R.id.tvEndDateValue);
-        btnGo = (Button) findViewById(R.id.btnGo);
+        inst_list =  findViewById(R.id.partial_load_list);
+        editsearch =  findViewById(R.id.search);
+
 
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -80,11 +80,11 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
             }
         };
 
-        btnGo.setOnClickListener(v -> {
+/*        btnGo.setOnClickListener(v -> {
             if (isInputValid()) {
                 getOfficerAssignedDeliveryList();
             }
-        });
+        });*/
 
         inst_list.setOnItemClickListener((parent, view, position, id) -> {
             Intent i = new Intent(mContext, OfficerAssignedDeliveryDetailActivity.class);
@@ -112,7 +112,7 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
             }
         });
 
-        tvStartDate.setOnClickListener(v -> {
+       /* tvStartDate.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
@@ -136,7 +136,7 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
                     (view, year1, monthOfYear, dayOfMonth) -> tvEndDateValue.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year1),
                     year, month, day);
             datePickerDialog.show();
-        });
+        });*/
     }
 
     private boolean isInputValid() {
@@ -145,9 +145,9 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Please Enter Transporter No", Toast.LENGTH_SHORT).show();
 //        }
         if (tvStartDateValue.getText().equals("")) {
-            Toast.makeText(this, "Please select Start Date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.Please_select_start), Toast.LENGTH_SHORT).show();
         } else if (tvEndDateValue.getText().equals("")) {
-            Toast.makeText(this, "Please select End Date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.Please_select_end), Toast.LENGTH_SHORT).show();
         } else {
             result = true;
         }
@@ -164,7 +164,7 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
         param.add(new BasicNameValuePair("billdt_low", tvStartDateValue.getText().toString()));
         param.add(new BasicNameValuePair("billdt_high", tvEndDateValue.getText().toString()));
 
-        progressDialog = ProgressDialog.show(this, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
             public void run() {
@@ -189,11 +189,11 @@ public class OfficerAssignedDeliveryListActivity extends AppCompatActivity {
                                 mHandler.sendMessage(msg);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Connection to server failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Connecting_failed), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Message msg = new Message();
-                        msg.obj = "No Internet Connection";
+                        msg.obj = getResources().getString(R.string.No_Internet);
                         mHandler.sendMessage(msg);
                     }
                     progressDialog.dismiss();

@@ -305,7 +305,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".3"
-                    android:text="zmobileno"
+                    android:text="Contact Person"
                     android:textColor="@color/header_color"
                     android:textSize="@dimen/size_small14" />
 
@@ -316,6 +316,19 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_weight="1"
                     android:textSize="@dimen/size_small14" />
+
+                <ImageView
+                    android:id="@+id/mobile_image"
+                    android:layout_width="8dp"
+                    android:layout_height="33dp"
+                    android:layout_gravity="right"
+                    android:layout_toRightOf="@+id/mobile_txt"
+                    android:layout_weight="0.1"
+                    android:drawableTop="@drawable/call"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:src="@drawable/call"
+                    android:textSize="@dimen/_10sdp" />
+
 
             </LinearLayout>
 
@@ -489,8 +502,8 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="3dp"
                 android:text="Submit" />
         </LinearLayout>
     </ScrollView>

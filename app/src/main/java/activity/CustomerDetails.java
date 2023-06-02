@@ -48,6 +48,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import activity.languagechange.LocaleHelper;
 import adapter.Controller;
 import bean.DocumentBean;
 import bean.LoginBean;
@@ -150,6 +151,11 @@ public class CustomerDetails extends AppCompatActivity {
     }
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
@@ -172,7 +178,7 @@ public class CustomerDetails extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Employee Details");
+        getSupportActionBar().setTitle(getResources().getString(R.string.Employee_Details));
 
         setData();
 
@@ -181,12 +187,7 @@ public class CustomerDetails extends AppCompatActivity {
         }
 
 
-        et_doc_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(DatePickeActivity.getIntent(context, "", "", "", false), 301);
-            }
-        });
+        et_doc_date.setOnClickListener(v -> startActivityForResult(DatePickeActivity.getIntent(context, "", "", "", false), 301));
 
 
         photo_1.setOnClickListener(view -> {
@@ -240,12 +241,12 @@ public class CustomerDetails extends AppCompatActivity {
 
         save_exit.setOnClickListener(view -> {
             if (CustomUtility.isInternetOn()) {
-                progressDialog = ProgressDialog.show(CustomerDetails.this, "", "Sending Data to server..please wait !");
+                progressDialog = ProgressDialog.show(CustomerDetails.this, "", getResources().getString(R.string.server));
                 saveData();
                 saveData1();
             } else {
                 saveData();
-                Toast.makeText(context, "Please Connect to Internet...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getResources().getString(R.string.Internet), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -256,14 +257,14 @@ public class CustomerDetails extends AppCompatActivity {
                 getGpsLocation();
             } else {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-                alertDialog.setTitle("Confirmation");
-                alertDialog.setMessage("Latitude, Longitude already saved, Do you want to change it?");
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                alertDialog.setTitle(getResources().getString(R.string.Confirmation));
+                alertDialog.setMessage(getResources().getString(R.string.location));
+                alertDialog.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         getGpsLocation();
                     }
                 });
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
@@ -580,38 +581,38 @@ public class CustomerDetails extends AppCompatActivity {
                                 } else {
                                     if (progressDialog != null)
                                         progressDialog.dismiss();
-                                    Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 if (progressDialog != null)
                                     progressDialog.dismiss();
-                                Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             if (progressDialog != null)
                                 progressDialog.dismiss();
-                            Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         if (progressDialog != null)
                             progressDialog.dismiss();
-                        Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if (progressDialog != null)
                         progressDialog.dismiss();
-                    Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
                 }
 
             } else {
                 if (progressDialog != null)
                     progressDialog.dismiss();
-                Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
             }
         } else {
             if (progressDialog != null)
                 progressDialog.dismiss();
-            Toast.makeText(this, "Please fill Mandatory fields.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.please_fill), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -622,11 +623,11 @@ public class CustomerDetails extends AppCompatActivity {
             inst_latitude_double = gps.getLatitude();
             inst_longitude_double = gps.getLongitude();
             if (inst_latitude_double == 0.0) {
-                CustomUtility.ShowToast("Lat Long not captured, Please try again.", context);
+                CustomUtility.ShowToast(getResources().getString(R.string.LatLong_captured), context);
             } else {
                 geoIndigation.setImageDrawable(getResources().getDrawable(R.drawable.right_mark_icn_green));
                 getAddress(context, inst_latitude_double, inst_longitude_double);
-                CustomUtility.ShowToast("Latitude:-" + inst_latitude_double + "     " + "Longitude:-" + inst_longitude_double, context);
+                CustomUtility.ShowToast(getResources().getString(R.string.Latitude) + inst_latitude_double + "     " + getResources().getString(R.string.Longitude) + inst_longitude_double, context);
             }
         } else {
             gps.showSettingsAlert();
@@ -756,12 +757,12 @@ public class CustomerDetails extends AppCompatActivity {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         // Setting Dialog Title
-        alertDialog.setTitle("Confirmation");
+        alertDialog.setTitle(getResources().getString(R.string.Confirmation));
         // Setting Dialog Message
-        alertDialog.setMessage("Signature already saved, Do you want to change it?");
+        alertDialog.setMessage(getResources().getString(R.string.Signature));
         // On pressing Settings button
 
-        alertDialog.setNegativeButton("Change", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(getResources().getString(R.string.change), new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(context, Signature_View.class);
@@ -777,17 +778,17 @@ public class CustomerDetails extends AppCompatActivity {
     public void showConfirmationAlert(final String keyimage) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         // Setting Dialog Title
-        alertDialog.setTitle("Confirmation");
+        alertDialog.setTitle(getResources().getString(R.string.Confirmation));
         // Setting Dialog Message
-        alertDialog.setMessage("Image already saved, Do you want to change it or display?");
+        alertDialog.setMessage(getResources().getString(R.string.Signature));
         // On pressing Settings button
-        alertDialog.setPositiveButton("Display", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(getResources().getString(R.string.display), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 displayImage(keyimage);
             }
         });
 
-        alertDialog.setNegativeButton("Change", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(getResources().getString(R.string.change), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 showConfirmationGallery(keyimage);
             }
@@ -799,7 +800,7 @@ public class CustomerDetails extends AppCompatActivity {
 
     public void showConfirmationGallery(final String keyimage) {
         final CustomUtility customUtility = new CustomUtility();
-        final CharSequence[] items = {"Take Photo", "Choose from Gallery", "Cancel"};
+        final CharSequence[] items = {getResources().getString(R.string.camera), getResources().getString(R.string.gallery), getResources().getString(R.string.cancel)};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Add Photo!");
@@ -947,7 +948,7 @@ public class CustomerDetails extends AppCompatActivity {
 
                             progressDialog.dismiss();
                             Message msg = new Message();
-                            msg.obj = "Data Submitted Successfully.";
+                            msg.obj = getResources().getString(R.string.Successfully);
                             mHandler.sendMessage(msg);
 
                             LoginBean loginBean = new LoginBean();
@@ -960,7 +961,7 @@ public class CustomerDetails extends AppCompatActivity {
                         } else {
                             progressDialog.dismiss();
                             Message msg = new Message();
-                            msg.obj = "Data not Submitted.";
+                            msg.obj = getResources().getString(R.string.notSubmitted);
                             mHandler.sendMessage(msg);
                         }
 

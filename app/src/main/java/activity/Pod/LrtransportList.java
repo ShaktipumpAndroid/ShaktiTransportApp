@@ -59,7 +59,6 @@ public class LrtransportList extends AppCompatActivity {
 
         WebURL.mSapBillNumber  ="";
 
-        //  baseRequest = new BaseRequest(this);
         List<Boolean> mLrInvoiceSelectionCheck = new ArrayList<>();
         RelativeLayout rlvAddDEviceViewID = findViewById(R.id.rlvAddDEviceViewID);
         RelativeLayout rlvBackViewID = findViewById(R.id.rlvBackViewID);
@@ -74,9 +73,7 @@ public class LrtransportList extends AppCompatActivity {
         System.out.println("mLrInvoiceResponse.size()2==>>"+mLrInvoiceResponse.size());
 
         for (int i = 0; i < mLrInvoiceResponse.size(); i++) {
-
             mLrInvoiceSelectionCheck.add(false);
-
         }
 
 
@@ -85,7 +82,7 @@ public class LrtransportList extends AppCompatActivity {
 
         File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),GALLERY_DIRECTORY_NAME);
 
-        File dir = new File(root.getAbsolutePath() + "/SKTR/BLT/"); //it is my root directory
+        File dir = new File(root.getAbsolutePath() + "/SKTR/BLT/");
 
         File billno = new File(root.getAbsolutePath() + "/SKTR/BLT/" + mLrInvoiceResponse.get(0).getLrno()+mLrInvoiceResponse.get(0).getMobno()); // it is my sub folder directory .. it can vary..
 
@@ -127,7 +124,7 @@ public class LrtransportList extends AppCompatActivity {
                 startActivity(intent);
             }
             else {
-                Toast.makeText(mContext, "Please select value from list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, getResources().getString(R.string.select_Lr), Toast.LENGTH_SHORT).show();
             }
 
         });

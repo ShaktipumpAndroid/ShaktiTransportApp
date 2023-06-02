@@ -7,7 +7,7 @@
 
     <include layout="@layout/toolbar" />
 
-    <RelativeLayout
+  <!--  <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
@@ -92,7 +92,7 @@
             android:layout_below="@id/btnGo"
             android:background="@color/black" />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <EditText
         android:id="@+id/search"
@@ -101,7 +101,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
-        android:hint="Search By Document, From, To Location"
+        android:hint="@string/search_doc"
         android:textSize="15sp"
         android:textStyle="bold">
 

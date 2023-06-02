@@ -1,5 +1,6 @@
 package activity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.net.ParseException;
 
 import com.administrator.shaktiTransportApp.R;
 import com.google.gson.Gson;
@@ -24,10 +27,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
+import java.util.Objects;
 
-import adapter.AssignedDeliveryAdapter;
+import activity.languagechange.LocaleHelper;
 import adapter.PartialLoadAdapter;
 import bean.LoginBean;
 import bean.PartialLoadResponse;
@@ -40,26 +47,31 @@ public class PartialLoadListActivity extends AppCompatActivity {
     Context mContext;
     ListView inst_list;
     PartialLoadAdapter partialLoadAdapter;
-    private Toolbar mToolbar;
     private DatabaseHelper db;
     private ProgressDialog progressDialog;
-    private ArrayList<PartialLoadResponse> partialLoadResponseArrayList = new ArrayList<>();
+    private final ArrayList<PartialLoadResponse> partialLoadResponseArrayList = new ArrayList<>();
     private android.os.Handler mHandler;
     EditText editsearch;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
+    }
+    @SuppressWarnings("deprecation")
+    @SuppressLint("HandlerLeak")
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partial_load_list);
-        inst_list = (ListView) findViewById(R.id.partial_load_list);
-        editsearch = (EditText) findViewById(R.id.search);
+        inst_list =  findViewById(R.id.partial_load_list);
+        editsearch =  findViewById(R.id.search);
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         db = new DatabaseHelper(mContext);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Agreement List ");
+        getSupportActionBar().setTitle(getResources().getString(R.string.Agreement_List));
         getPartialLoadList();
         mHandler = new android.os.Handler() {
             @Override
@@ -101,12 +113,11 @@ public class PartialLoadListActivity extends AppCompatActivity {
     private void getPartialLoadList() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
-        final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-        LoginBean loginBean = new LoginBean();
+        final ArrayList<NameValuePair> param = new ArrayList<>();
         String username = LoginBean.getUseid();
         param.add(new BasicNameValuePair("trans_no", username));
 
-        progressDialog = ProgressDialog.show(this, "", "Connecting to server..please wait !");
+        progressDialog = ProgressDialog.show(this, "", getResources().getString(R.string.Connecting));
 
         new Thread() {
             public void run() {
@@ -123,7 +134,8 @@ public class PartialLoadListActivity extends AppCompatActivity {
                                     PartialLoadResponse partialLoadResponse = gson.fromJson(String.valueOf(json), PartialLoadResponse.class);
                                     partialLoadResponseArrayList.add(partialLoadResponse);
                                 }
-                                db.deleteTableData(DatabaseHelper.TABLE_PARTIAL_LOAD);
+                               // db.deleteTableData(DatabaseHelper.TABLE_PARTIAL_LOAD);
+                                Log.e("length===>",""+partialLoadResponseArrayList.size());
                                 db.insertPartialLoadData(partialLoadResponseArrayList);
                                 progressDialog.dismiss();
                             } else {
@@ -132,11 +144,11 @@ public class PartialLoadListActivity extends AppCompatActivity {
                                 mHandler.sendMessage(msg);
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), "Connection to server failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.Connecting_failed), Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Message msg = new Message();
-                        msg.obj = "No Internet Connection";
+                        msg.obj = getResources().getString(R.string.No_Internet);
                         mHandler.sendMessage(msg);
                     }
                     progressDialog.dismiss();
@@ -149,12 +161,25 @@ public class PartialLoadListActivity extends AppCompatActivity {
         }.start();
     }
 
+    @SuppressLint("SimpleDateFormat")
     private void setDataOnAdapter() {
         runOnUiThread(() -> {
             try {
-                partialLoadResponseArrayList.clear();
-                partialLoadResponseArrayList = db.getPartialLoadListData();
-                partialLoadAdapter = new PartialLoadAdapter(mContext, partialLoadResponseArrayList);
+                Log.e("PartialLoadList===>",""+db.getPartialLoadListData().size());
+                ArrayList<PartialLoadResponse> partialLoadResponses = db.getPartialLoadListData();
+
+
+                Collections.sort(partialLoadResponses, (o1, o2) -> {
+                    try {
+                        return new SimpleDateFormat("dd.MM.yyyy").parse(o1.getFkdat()).compareTo(new SimpleDateFormat("dd.MM.yyyy").parse(o2.getFkdat()));
+                    } catch (ParseException e) {
+                        return 0;
+                    } catch (java.text.ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                System.out.println(partialLoadResponses);
+                partialLoadAdapter = new PartialLoadAdapter(mContext, partialLoadResponses);
                 inst_list.setAdapter(partialLoadAdapter);
             } catch (Exception exception) {
                 exception.printStackTrace();

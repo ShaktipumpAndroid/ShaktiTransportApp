@@ -61,6 +61,39 @@ public class AssignedDeliveryDetailResponse{
 	@SerializedName("assign_mob")
 	private String assignMob;
 
+	@SerializedName("zlrno")
+	private String zLRno;
+
+	@SerializedName("zbookdate")
+	private String zBookDate;
+
+	@SerializedName("zmobileno")
+	private String zMobile;
+
+	public String getzLRno() {
+		return zLRno;
+	}
+
+	public void setzLRno(String zLRno) {
+		this.zLRno = zLRno;
+	}
+
+	public String getzBookDate() {
+		return zBookDate;
+	}
+
+	public void setzBookDate(String zBookDate) {
+		this.zBookDate = zBookDate;
+	}
+
+	public String getzMobile() {
+		return zMobile;
+	}
+
+	public void setzMobile(String zMobile) {
+		this.zMobile = zMobile;
+	}
+
 	public String getFrLocation(){
 		return frLocation;
 	}

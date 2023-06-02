@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -13,7 +14,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/header"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        tools:ignore="ObsoleteLayoutParam">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:paddingTop="5dp"
-                    android:text="Vehicle Insurence"
+                    android:text="@string/Vehicle"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/size_small15" />
 
@@ -43,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
-                    android:text="Driving Licence"
+                    android:text="@string/Driving"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/size_small15" />
 
@@ -52,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
-                    android:text="Vehicle PUC"
+                    android:text="@string/Vehicle_PUC"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/size_small15" />
 
@@ -83,7 +85,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/ic_mendotry"
-                                android:hint="Vehicle Make"
+                                android:hint="@string/Vehicle_Make"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -119,7 +121,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableLeft="@drawable/ic_mendotry"
-                                android:hint="Amount in Rs."
+                                android:hint="@string/Rs"
                                 android:inputType="number"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
@@ -163,7 +165,7 @@
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:focusable="false"
-                                android:hint="SAP Code"
+                                android:hint="@string/SAP_Code"
                                 android:inputType="number"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
@@ -200,7 +202,7 @@
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:focusable="false"
-                                android:hint="Person Name"
+                                android:hint="@string/Person_Name"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -273,7 +275,7 @@
                                         android:id="@+id/distance_et"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:hint="Distance in Km"
+                                        android:hint="@string/Km"
                                         android:shadowColor="@color/colorAccent"
                                         android:singleLine="true"
                                         android:textColor="@color/colorAccent"
@@ -308,7 +310,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
 
-                                        android:hint="Mode of Transport"
+                                        android:hint="@string/Mode_Transport"
                                         android:shadowColor="@color/colorAccent"
                                         android:singleLine="true"
                                         android:textColor="@color/colorAccent"
@@ -355,7 +357,7 @@
                                 android:id="@+id/delivery_place_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Place of Delivery"
+                                android:hint="@string/Place_Delivery"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -389,7 +391,7 @@
                                 android:id="@+id/transit_time_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Transit Time"
+                                android:hint="@string/Transit_Time"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -431,7 +433,7 @@
 
                                 android:layout_height="wrap_content"
                                 android:focusable="true"
-                                android:hint="Vehicle Type"
+                                android:hint="@string/Vehicle_Type"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -464,7 +466,7 @@
                                 android:id="@+id/vehicle_weight_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Weight"
+                                android:hint="@string/Weight"
 
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
@@ -507,7 +509,7 @@
 
                                 android:layout_height="wrap_content"
                                 android:focusable="true"
-                                android:hint="Dala"
+                                android:hint="@string/Dala"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -540,8 +542,7 @@
                                 android:id="@+id/height_et"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Height"
-
+                                android:hint="@string/Height"
                                 android:shadowColor="@color/colorAccent"
                                 android:singleLine="true"
                                 android:textColor="@color/colorAccent"
@@ -580,7 +581,7 @@
                         <TextView
                             style="@style/wrap_text_medatory"
                             android:drawableRight="@null"
-                            android:text="Required on Date"
+                            android:text="@string/Required_Date"
                             android:textColor="@color/colorAccent" />
 
 
@@ -604,7 +605,7 @@
                             style="@style/wrap_text_medatory"
                             android:drawableRight="@null"
 
-                            android:text="Required on Time"
+                            android:text="@string/Required_Time"
                             android:textColor="@color/colorAccent" />
 
                     </LinearLayout>
@@ -635,7 +636,7 @@
                             style="@style/wrap_text_medatory"
                             android:drawableRight="@null"
 
-                            android:text="Expiry Date"
+                            android:text="@string/Expiry_Date"
                             android:textColor="@color/colorAccent" />
 
 
@@ -660,7 +661,7 @@
                             style="@style/wrap_text_medatory"
                             android:drawableRight="@null"
 
-                            android:text="Expiry Time"
+                            android:text="@string/Expiry_Time"
                             android:textColor="@color/colorAccent" />
 
                     </LinearLayout>
@@ -680,7 +681,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_mendotry"
-                        android:hint="Vehicle Registration Number"
+                        android:hint="@string/Registration_Number"
                         android:shadowColor="@color/colorAccent"
                         android:singleLine="true"
                         android:textColor="@color/colorAccent"
@@ -703,7 +704,7 @@
                         android:id="@+id/remark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Remark"
+                        android:hint="@string/Remark"
                         android:shadowColor="@color/colorAccent"
                         android:singleLine="true"
                         android:textColor="@color/colorAccent"
@@ -726,7 +727,7 @@
                         android:id="@+id/from_location_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="From Location"
+                        android:hint="@string/From_Location"
                         android:shadowColor="@color/colorAccent"
                         android:textColor="@color/colorAccent"
                         android:textColorHighlight="@color/colorAccent"
@@ -747,7 +748,7 @@
                         android:id="@+id/to_location_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="To Location"
+                        android:hint="@string/To_Location"
                         android:shadowColor="@color/colorAccent"
                         android:textColor="@color/colorAccent"
                         android:textColorHighlight="@color/colorAccent"
@@ -781,7 +782,7 @@
                     android:background="@color/header_color"
                     android:gravity="center"
                     android:padding="@dimen/space_mid10"
-                    android:text="View on Map"
+                    android:text="@string/View_Map"
                     android:textColor="@color/white"
                     android:textSize="@dimen/size_large18" />
 
@@ -805,18 +806,13 @@
                     android:background="@color/header_color"
                     android:gravity="center"
                     android:padding="@dimen/space_mid10"
-                    android:text="Quote RFQ"
+                    android:text="@string/Quote_RFQ"
                     android:textColor="@color/white"
                     android:textSize="@dimen/size_large18" />
             </LinearLayout>
 
-
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-
 
 </LinearLayout>
