@@ -57,7 +57,7 @@ public class PartialLoadAdapter extends ArrayAdapter<PartialLoadResponse> {
         TextView tvCustomerName = (TextView) view.findViewById(R.id.tvCustomerName);
 
         tvBillNo.setText(String.valueOf(partialLoadResponse.getVbeln()));
-        tvBillDate.setText(String.valueOf(partialLoadResponse.getFkdat())) ;
+        tvBillDate.setText(String.valueOf(partialLoadResponse.getFkdat()))  ;
         tvLrNo.setText(String.valueOf(partialLoadResponse.getZlrno()));
         tvCustomerCode.setText(String.valueOf(partialLoadResponse.getKunag()));
         tvCustomerName.setText(String.valueOf(partialLoadResponse.getCustName()));
