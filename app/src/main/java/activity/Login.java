@@ -200,6 +200,9 @@ public class Login extends AppCompatActivity implements AdapterView.OnItemSelect
 
                 LoginBean.setLogin(edtINSTNumberIDSTR, "", "Delivery Boy", "");
                 CustomUtility.setSharedPreference(mContext, "UserTypeSNF", "4");
+
+                CustomUtility.setSharedPreference(mContext, "Userid", edtINSTNumberIDSTR);
+
                 Intent intent = new Intent(mContext, AssignedDeliveryListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

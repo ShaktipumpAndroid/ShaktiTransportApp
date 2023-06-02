@@ -1,5 +1,6 @@
 package activity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.net.ParseException;
 
 import com.administrator.shaktiTransportApp.R;
 import com.google.gson.Gson;
@@ -25,11 +27,14 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Locale;
+import java.util.Objects;
 
 import activity.languagechange.LocaleHelper;
-import adapter.AssignedDeliveryAdapter;
 import adapter.PartialLoadAdapter;
 import bean.LoginBean;
 import bean.PartialLoadResponse;
@@ -42,10 +47,9 @@ public class PartialLoadListActivity extends AppCompatActivity {
     Context mContext;
     ListView inst_list;
     PartialLoadAdapter partialLoadAdapter;
-    private Toolbar mToolbar;
     private DatabaseHelper db;
     private ProgressDialog progressDialog;
-    private ArrayList<PartialLoadResponse> partialLoadResponseArrayList = new ArrayList<>();
+    private final ArrayList<PartialLoadResponse> partialLoadResponseArrayList = new ArrayList<>();
     private android.os.Handler mHandler;
     EditText editsearch;
 
@@ -53,17 +57,19 @@ public class PartialLoadListActivity extends AppCompatActivity {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleHelper.onAttach(base));
     }
+    @SuppressWarnings("deprecation")
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partial_load_list);
-        inst_list = (ListView) findViewById(R.id.partial_load_list);
-        editsearch = (EditText) findViewById(R.id.search);
+        inst_list =  findViewById(R.id.partial_load_list);
+        editsearch =  findViewById(R.id.search);
         mContext = this;
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         db = new DatabaseHelper(mContext);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.Agreement_List));
         getPartialLoadList();
@@ -107,8 +113,7 @@ public class PartialLoadListActivity extends AppCompatActivity {
     private void getPartialLoadList() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
-        final ArrayList<NameValuePair> param = new ArrayList<NameValuePair>();
-        LoginBean loginBean = new LoginBean();
+        final ArrayList<NameValuePair> param = new ArrayList<>();
         String username = LoginBean.getUseid();
         param.add(new BasicNameValuePair("trans_no", username));
 
@@ -160,7 +165,24 @@ public class PartialLoadListActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             try {
                 Log.e("PartialLoadList===>",""+db.getPartialLoadListData().size());
-                partialLoadAdapter = new PartialLoadAdapter(mContext, db.getPartialLoadListData());
+                ArrayList<PartialLoadResponse> partialLoadResponses = db.getPartialLoadListData();
+
+
+                Collections.sort(partialLoadResponses, new Comparator<PartialLoadResponse>() {
+
+                    @Override
+                    public int compare(PartialLoadResponse o1, PartialLoadResponse o2) {
+                        try {
+                            return new SimpleDateFormat("dd.MM.yyyy").parse(o1.getFkdat()).compareTo(new SimpleDateFormat("dd.MM.yyyy").parse(o2.getFkdat()));
+                        } catch (ParseException e) {
+                            return 0;
+                        } catch (java.text.ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+                System.out.println(partialLoadResponses.toString());
+                partialLoadAdapter = new PartialLoadAdapter(mContext, partialLoadResponses);
                 inst_list.setAdapter(partialLoadAdapter);
             } catch (Exception exception) {
                 exception.printStackTrace();

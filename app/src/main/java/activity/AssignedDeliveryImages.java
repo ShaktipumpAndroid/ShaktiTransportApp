@@ -98,17 +98,15 @@ public class AssignedDeliveryImages extends AppCompatActivity implements ImageSe
 
         if (!imageArrayList.get(0).isImageSelected()) {
             Toast.makeText(this, getResources().getString(R.string.please_lr_photo), Toast.LENGTH_SHORT).show();
-        } else  if (!imageArrayList.get(1).isImageSelected()) {
-            Toast.makeText(this, getResources().getString(R.string.please_pod_photo), Toast.LENGTH_SHORT).show();
-        }else if (!imageArrayList.get(2).isImageSelected()) {
+        } else if (!imageArrayList.get(1).isImageSelected()) {
             Toast.makeText(this, getResources().getString(R.string.please_material_photo_front), Toast.LENGTH_SHORT).show();
-        }  else if (!imageArrayList.get(3).isImageSelected()) {
+        }  else if (!imageArrayList.get(2).isImageSelected()) {
             Toast.makeText(this, getResources().getString(R.string.please_material_photo_side), Toast.LENGTH_SHORT).show();
-        }  else if (!imageArrayList.get(4).isImageSelected()) {
+        }  else if (!imageArrayList.get(3).isImageSelected()) {
             Toast.makeText(this, getResources().getString(R.string.please_material_photo_top), Toast.LENGTH_SHORT).show();
-        }   else if (!imageArrayList.get(5).isImageSelected()) {
+        }   else if (!imageArrayList.get(4).isImageSelected()) {
             Toast.makeText(this, getResources().getString(R.string.please_material_photo_bottom), Toast.LENGTH_SHORT).show();
-        }   else if (!imageArrayList.get(6).isImageSelected()) {
+        }    else if (!imageArrayList.get(5).isImageSelected()) {
             Toast.makeText(this, getResources().getString(R.string.please_material_with_customer), Toast.LENGTH_SHORT).show();
         }  else {
             CustomUtility.setSharedPreference(mContext, "lrImages", "1");
@@ -126,6 +124,8 @@ public class AssignedDeliveryImages extends AppCompatActivity implements ImageSe
         itemNameList.add(getResources().getString(R.string.material_photo_side));
         itemNameList.add(getResources().getString(R.string.material_photo_top));
         itemNameList.add(getResources().getString(R.string.material_photo_bottom));
+        itemNameList.add(getResources().getString(R.string.material_with_customer));
+
 
         for (int i = 0; i < itemNameList.size(); i++) {
             ImageModel imageModel = new ImageModel();

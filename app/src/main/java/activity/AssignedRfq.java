@@ -45,8 +45,6 @@ public class AssignedRfq extends AppCompatActivity {
         context = this;
 
         db = new DatabaseHelper(context);
-
-
         mToolbar =  findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);

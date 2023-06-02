@@ -85,10 +85,10 @@
 
             <LinearLayout
                 android:id="@+id/oldlayout"
-                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -440,12 +440,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
-                android:padding="@dimen/space_mid8"
                 android:id="@+id/partialLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/space_mid8"
+                android:visibility="gone">
 
 
                 <LinearLayout
@@ -529,13 +529,27 @@
                         android:textColor="@color/header_color"
                         android:textSize="@dimen/size_small14" />
 
+
                     <TextView
                         android:id="@+id/contact_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:textSize="@dimen/size_small14" />
+
+                    <ImageView
+                        android:id="@+id/mobile_image"
+                        android:layout_width="8dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:layout_toRightOf="@+id/mobile_txt"
+                        android:layout_weight="0.1"
+                        android:drawableTop="@drawable/call"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:src="@drawable/call"
+                        android:textSize="@dimen/_10sdp" />
+
 
                 </LinearLayout>
 
@@ -564,10 +578,10 @@
 
                 <LinearLayout
 
-                    android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
                     <TextView
                         android:layout_width="0dp"

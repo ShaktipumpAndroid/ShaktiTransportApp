@@ -73,9 +73,7 @@ public class LrtransportList extends AppCompatActivity {
         System.out.println("mLrInvoiceResponse.size()2==>>"+mLrInvoiceResponse.size());
 
         for (int i = 0; i < mLrInvoiceResponse.size(); i++) {
-
             mLrInvoiceSelectionCheck.add(false);
-
         }
 
 
@@ -84,7 +82,7 @@ public class LrtransportList extends AppCompatActivity {
 
         File root = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),GALLERY_DIRECTORY_NAME);
 
-        File dir = new File(root.getAbsolutePath() + "/SKTR/BLT/"); //it is my root directory
+        File dir = new File(root.getAbsolutePath() + "/SKTR/BLT/");
 
         File billno = new File(root.getAbsolutePath() + "/SKTR/BLT/" + mLrInvoiceResponse.get(0).getLrno()+mLrInvoiceResponse.get(0).getMobno()); // it is my sub folder directory .. it can vary..
 

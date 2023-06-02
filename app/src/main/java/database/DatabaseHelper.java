@@ -842,6 +842,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+
     @SuppressLint("Range")
     public ArrayList<RouteBean> getRouteList(String key, String fr_tehsil, String to_tehsil) {
 
@@ -1732,7 +1733,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             String selectQuery = "";
-            selectQuery = "SELECT * FROM " + TABLE_PARTIAL_LOAD;
+            selectQuery =  "SELECT * FROM " + TABLE_PARTIAL_LOAD;
             Cursor cursor = db.rawQuery(selectQuery, null);
             Log.e("Count", "&&&" + cursor.getCount());
             if (cursor.getCount() > 0) {
@@ -2543,4 +2544,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.close();
     }
 
+    @SuppressLint("Range")
+    public AssignedDeliveryDetailResponse getAssignedDeliveryListValue(String billNo) {
+        AssignedDeliveryDetailResponse assignedDeliveryResponse = null;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.beginTransaction();
+        try {
+            String selectQuery = "";
+            selectQuery = "SELECT * FROM " + TABLE_ASSIGNED_DELIVERIES + " WHERE " + KEY_BILL_NO + " = '" + billNo + "'";
+
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            Log.e("Count", "&&&" + cursor.getCount());
+            if (cursor.getCount() > 0) {
+                if (cursor.moveToFirst()) {
+                    while (!cursor.isAfterLast()) {
+                        assignedDeliveryResponse = new AssignedDeliveryDetailResponse();
+                        assignedDeliveryResponse.setBillNo(cursor.getString(cursor.getColumnIndex(KEY_BILL_NO)));
+                        assignedDeliveryResponse.setzLRno(cursor.getString(cursor.getColumnIndex(KEY_LR_NO)));
+                        assignedDeliveryResponse.setzBookDate(cursor.getString(cursor.getColumnIndex(KEY_BOOK_DATE)));
+                        assignedDeliveryResponse.setzMobile(cursor.getString(cursor.getColumnIndex(KEY_MOBILE)));
+                        assignedDeliveryResponse.setViaAddress(cursor.getString(cursor.getColumnIndex(KEY_ASSIGNED_DELIVERY_VIA_ADDRESS)));
+                        assignedDeliveryResponse.setTransporterName(cursor.getString(cursor.getColumnIndex(KEY_ASSIGNED_DELIVERY_TRANSPORTER_NAME)));
+                        cursor.moveToNext();
+                    }
+                }
+                db.setTransactionSuccessful();
+            }
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return assignedDeliveryResponse;
+    }
 }

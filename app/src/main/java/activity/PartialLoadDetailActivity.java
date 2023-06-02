@@ -1,15 +1,24 @@
 package activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.StrictMode;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -18,6 +27,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.administrator.shaktiTransportApp.R;
 
@@ -34,6 +45,7 @@ import activity.languagechange.LocaleHelper;
 import activity.retrofit.BaseRequest;
 import activity.retrofit.RequestReciever;
 import bean.PartialLoadResponse;
+import database.DatabaseHelper;
 import utility.CustomUtility;
 import webservice.CustomHttpClient;
 import webservice.WebURL;
@@ -42,15 +54,17 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
 
     private PartialLoadResponse partialLoadResponse;
     Context mContext;
+    private DatabaseHelper db;
+    String value = "Self";
     private TextView tvZdoc_no, tvBillNo, tvZdocdate, tvVkorg, tvBillDate, tvWerks, tvZlrno,
             tvZbookdate, tvZmobileno, tvZtransname, tvTransporter_mob, tvZdelivery, tvZdeliverdTo,
             tvStatus, tvCustomerCode, tvCustomerName;
     private EditText etDistance, etDeliveryBoyMobileNo;
-    //    etVehicleType, etVehicleNo, etLicence;
+    private ImageView mobile_image;
     private LinearLayout llDeliveryBoy;
     private Button btnSubmit;
+    RadioButton rb;
     private RadioGroup rgDeliveryAssigned;
-    //    private Spinner spinner_delivery_boy;
     private android.os.Handler mHandler;
     private ProgressDialog progressDialog;
     RadioButton rbSelf, rbDeliveryBoy;
@@ -71,9 +85,9 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         partialLoadResponse = bundle.getParcelable("partialLoadDetail");
         inItViews();
         setData();
-
+        mContext = this;
         baseRequest = new BaseRequest(this);
-
+        db = new DatabaseHelper(mContext);
 //        getDeliveryBoysList();
         mHandler = new android.os.Handler() {
             @Override
@@ -83,9 +97,30 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
             }
         };
 
+        mobile_image.setOnClickListener(v -> {
+
+            if (!TextUtils.isEmpty(partialLoadResponse.getZmobileno())) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.CALL_PHONE}, 222);
+                    } else {
+                        Make_Call(partialLoadResponse.getZmobileno());
+                    }
+
+                } else {
+                    Make_Call(partialLoadResponse.getZmobileno());
+                }
+            }
+            Toast.makeText(mContext, "Calling....", Toast.LENGTH_SHORT).show();
+        });
+
         rgDeliveryAssigned.setOnCheckedChangeListener((group, checkedId) -> {
-            RadioButton rb = (RadioButton) findViewById(checkedId);
+            rb =  findViewById(checkedId);
+
+            value = rb.getText().toString();
             if (rb.getText().equals("Self")) {
+
                 llDeliveryBoy.setVisibility(View.GONE);
             } else {
                 llDeliveryBoy.setVisibility(View.VISIBLE);
@@ -93,18 +128,43 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         });
 
         btnSubmit.setOnClickListener(v -> {
-            if (isValidate()) {
-                assignedDelivery();
 
-                if(!etDeliveryBoyMobileNo.getText().toString().isEmpty()){
-                    callInsertAndUpdateDebugDataAPI();
-                }
-                else{
-                    Toast.makeText(mContext, "Enter Mobile no", Toast.LENGTH_SHORT).show();
+                if(!value.equalsIgnoreCase("Self")){
+                    if (!etDistance.getText().toString().isEmpty()) {
+                        if(!etDeliveryBoyMobileNo.getText().toString().isEmpty() && etDeliveryBoyMobileNo.length() == 10){
+                            callInsertAndUpdateDebugDataAPI();
+                            assignedDelivery();
+                        }
+                        else{
+                            Toast.makeText(mContext, "Enter Mobile no", Toast.LENGTH_SHORT).show();
+                        }
+                         }else {
+                          Toast.makeText(mContext, "Enter all fields no", Toast.LENGTH_SHORT).show();
+                        }
+                }else {
+                    if(!etDistance.getText().toString().isEmpty()){
+                        assignedDelivery();
+                    }else {
+                        Toast.makeText(mContext, "Enter all fields no", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
-            }
+
         });
+    }
+    private void Make_Call(String mobile) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            // new Capture_employee_gps_location(context, "12", mobile);
+            intent.setData(Uri.parse("tel:" + mobile));
+            if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            mContext.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void callInsertAndUpdateDebugDataAPI() {
@@ -181,9 +241,10 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
 //        spinner_delivery_boy = (Spinner) findViewById(R.id.spinner_delivery_boy);
 //        spinner_delivery_boy.setPrompt("Select Delivery Boy");
         llDeliveryBoy = findViewById(R.id.llDeliveryBoy);
-        rgDeliveryAssigned = (RadioGroup) findViewById(R.id.rgDeliveryAssigned);
+        rgDeliveryAssigned =  findViewById(R.id.rgDeliveryAssigned);
         etDistance = findViewById(R.id.etDistance);
         etDeliveryBoyMobileNo = findViewById(R.id.etDeliveryBoyMobileNo);
+        mobile_image = findViewById(R.id.mobile_image);
 //        etVehicleType = findViewById(R.id.etVehicleType);
 //        etVehicleNo = findViewById(R.id.etVehicleNo);
 //        etLicence = findViewById(R.id.etLicence);
@@ -193,7 +254,7 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         rbSelf = findViewById(R.id.rbSelf);
         rbDeliveryBoy = findViewById(R.id.rbDeliveryBoy);
         btnSubmit = findViewById(R.id.btnSubmit);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -238,7 +299,7 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().build();
         StrictMode.setThreadPolicy(policy);
         int selectedId = rgDeliveryAssigned.getCheckedRadioButtonId();
-        RadioButton radioSexButton = (RadioButton) findViewById(selectedId);
+        RadioButton radioSexButton =  findViewById(selectedId);
         final ArrayList<NameValuePair> param = new ArrayList<>();
         String zdeliveredBy = "BOY";
         if (!radioSexButton.getText().equals("Self")) {
@@ -262,6 +323,9 @@ public class PartialLoadDetailActivity extends AppCompatActivity {
                             Message msg = new Message();
                             msg.obj = jsonObject.getString("message");
                             mHandler.sendMessage(msg);
+                            //Delete
+                            db.deleteTableData(DatabaseHelper.TABLE_PARTIAL_LOAD);
+                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "Connection to server failed", Toast.LENGTH_LONG).show();
                         }

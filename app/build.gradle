@@ -4,7 +4,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 33
 
-
     signingConfigs {
         config {
             keyAlias 'shakti'
@@ -14,10 +13,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.administrator.shaktiTransportApp"
+        applicationId "com.administrator.shaktiTransportApp"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 31
+        versionCode 32
         versionName "3.2"
        // multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -162,6 +162,7 @@ public class AssignedDeliveryListActivity extends AppCompatActivity implements C
     public void click(int index) {
         Intent intentNewDeliveryRequestActivity = new Intent(AssignedDeliveryListActivity.this, AssignedDeliveryDetailActivity.class);
         intentNewDeliveryRequestActivity.putExtra("rfqNoValue", assignedDeliveryResponseArrayList.get(index).getRfqDoc());
+        intentNewDeliveryRequestActivity.putExtra("billNo",assignedDeliveryResponseArrayList.get(index).getBillNo());
         startActivityForResult(intentNewDeliveryRequestActivity, 1000);
     }
 
