@@ -161,6 +161,7 @@ public class PartialLoadListActivity extends AppCompatActivity {
         }.start();
     }
 
+    @SuppressLint("SimpleDateFormat")
     private void setDataOnAdapter() {
         runOnUiThread(() -> {
             try {
@@ -168,20 +169,16 @@ public class PartialLoadListActivity extends AppCompatActivity {
                 ArrayList<PartialLoadResponse> partialLoadResponses = db.getPartialLoadListData();
 
 
-                Collections.sort(partialLoadResponses, new Comparator<PartialLoadResponse>() {
-
-                    @Override
-                    public int compare(PartialLoadResponse o1, PartialLoadResponse o2) {
-                        try {
-                            return new SimpleDateFormat("dd.MM.yyyy").parse(o1.getFkdat()).compareTo(new SimpleDateFormat("dd.MM.yyyy").parse(o2.getFkdat()));
-                        } catch (ParseException e) {
-                            return 0;
-                        } catch (java.text.ParseException e) {
-                            throw new RuntimeException(e);
-                        }
+                Collections.sort(partialLoadResponses, (o1, o2) -> {
+                    try {
+                        return new SimpleDateFormat("dd.MM.yyyy").parse(o1.getFkdat()).compareTo(new SimpleDateFormat("dd.MM.yyyy").parse(o2.getFkdat()));
+                    } catch (ParseException e) {
+                        return 0;
+                    } catch (java.text.ParseException e) {
+                        throw new RuntimeException(e);
                     }
                 });
-                System.out.println(partialLoadResponses.toString());
+                System.out.println(partialLoadResponses);
                 partialLoadAdapter = new PartialLoadAdapter(mContext, partialLoadResponses);
                 inst_list.setAdapter(partialLoadAdapter);
             } catch (Exception exception) {
